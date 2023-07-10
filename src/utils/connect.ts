@@ -1,25 +1,17 @@
 import mongoose from 'mongoose';
+import appConfig from 'config';
+import logger from './logger';
 
-type TInput = {
-  DB: string;
+const connect = async () => {
+  const dbUri = appConfig.get<string>("dbUri");  
+
+  try {
+    await mongoose.connect(dbUri);
+    logger.info("You have connected to db");
+  } catch (error) {
+    logger.error("Could not connect to db");
+    process.exit(1);
+  }
 };
 
-export default ({DB}: TInput) => {
-  
-  const connect = () => {
-    mongoose
-      .connect(
-        DB
-      )
-      .then(() => {
-        return console.info(`Successfully connected to ${DB}`);
-      })
-      .catch(error => {
-        console.error('Error connecting to database: ', error);
-        return process.exit(1);
-      });
-  };
-  connect();
-
-  mongoose.connection.on('disconnected', connect);
-};
+export default connect;
