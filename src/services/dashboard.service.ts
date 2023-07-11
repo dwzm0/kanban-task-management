@@ -1,4 +1,5 @@
 import DashboardModel from "../models/dashboard.model";
+/* import { IDashBoard } from "../types/models"; */
 
 export const getDashboard = async () => {
     try {

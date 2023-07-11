@@ -6,14 +6,14 @@ export interface ISubTask extends Document {
 }
 
 export interface ITask extends Document {
-    title: string,
-    description?: string,
+    title: string
+    description?: string
     status: IColumn['name'] 
     subtasks?: ISubTask[]
 }
 
 export interface IColumn extends Document {
-    name: string,
+    name: string
     tasks?: ITask[]
 }
 
