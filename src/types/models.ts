@@ -9,21 +9,21 @@ export interface ITask extends Document {
     title: string,
     description?: string,
     status: IColumn['name'] 
-    subtasks?: Array<ISubTask>
+    subtasks?: ISubTask[]
 }
 
 export interface IColumn extends Document {
     name: string,
-    tasks?: Array<ITask>
+    tasks?: ITask[]
 }
 
 export interface IBoard extends Document {
     name: string
-    columns?: Array<IColumn>
+    columns?: IColumn[]
 }
 
 export interface IDashBoard extends Document {
-    boards?: Array<IBoard>
+    boards?: IBoard[]
 }
 
 
