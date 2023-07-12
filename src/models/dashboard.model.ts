@@ -1,5 +1,5 @@
 import mongoose, { Schema } from 'mongoose';
-import { IDashBoard, IBoard, IColumn, ITask, ISubTask} from '../types/models';
+import { IBoard, IColumn, ITask, ISubTask} from '../types/models';
 
 const SubTaskSchema: Schema = new Schema<ISubTask>({
     title: {type: String, require: true, unique: true},
@@ -23,11 +23,8 @@ const BoardSchema: Schema = new Schema<IBoard>({
     columns: [ColumnSchema],
 });
 
-const DashboardSchema: Schema = new Schema<IDashBoard>({
-    boards: [BoardSchema]
-});
 
-const DashboardModel = mongoose.model<IDashBoard>('Dashboard', DashboardSchema, 'dashboards');
+const DashboardModel = mongoose.model<IBoard>('Dashboard', BoardSchema);
 
 
 export default DashboardModel;  

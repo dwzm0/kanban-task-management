@@ -1,13 +1,22 @@
+/* eslint-disable @typescript-eslint/no-unsafe-argument */
 import DashboardModel from "../models/dashboard.model";
-/* import { IDashBoard } from "../types/models"; */
+import { IBoard} from "../types/models";
 
-export const getDashboard = async () => {
+
+export const getDashboard = async (): Promise<IBoard[]> => {
     try {
         const dashboard = await DashboardModel.find({});
-        return dashboard[0].boards;
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        return dashboard;
     }catch(error: any){
-        // eslint-disable-next-line @typescript-eslint/no-unsafe-argument
         throw new Error(error);
     }
+};
+
+export const createDashboard = async (input: IBoard) => {
+    try {
+        const newDashboard = await DashboardModel.create(input);
+        return newDashboard;
+    }catch(error: any){
+        throw new Error(error);
+}
 };

@@ -22,9 +22,6 @@ export interface IBoard extends Document {
     columns?: IColumn[]
 }
 
-export interface IDashBoard extends Document {
-    boards?: IBoard[]
-}
 
 
 
