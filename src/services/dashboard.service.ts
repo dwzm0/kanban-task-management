@@ -3,6 +3,8 @@ import DashboardModel from "../models/dashboard.model";
 import { IBoard} from "../types/models";
 
 
+
+
 export const getDashboard = async (): Promise<IBoard[]> => {
     try {
         const dashboard = await DashboardModel.find({});
@@ -19,4 +21,8 @@ export const createDashboard = async (input: IBoard) => {
     }catch(error: any){
         throw new Error(error);
 }
+};
+
+export const deleteDashboard = async (query: string) => {
+    return DashboardModel.findByIdAndDelete(query);
 };

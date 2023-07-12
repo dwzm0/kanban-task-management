@@ -1,6 +1,9 @@
 /* eslint-disable @typescript-eslint/no-unsafe-assignment */
 import { Request, Response } from "express";
-import { getDashboard, createDashboard } from "../services/dashboard.service";
+import { getDashboard, 
+         createDashboard,
+         deleteDashboard,        
+} from "../services/dashboard.service";
 import logger from '../utils/logger';
 import DashboardModel from "../models/dashboard.model";
 
@@ -22,6 +25,16 @@ export const createDashboardHandler = async (req: Request, res: Response) => {
         });
         const newDashboard = await createDashboard(dashboard);
         res.status(200).json(newDashboard);
+    }catch(error: any){
+        logger.error(error);
+        return res.status(409).send(error.message);
+    }
+};
+
+export const deleteDashboardHandler = async (req: Request, res: Response) => {
+    try {
+        await deleteDashboard(req.params.id);
+        res.status(200).end();
     }catch(error: any){
         logger.error(error);
         return res.status(409).send(error.message);
