@@ -1,11 +1,15 @@
+/* eslint-disable @typescript-eslint/no-unsafe-argument */
 /* eslint-disable @typescript-eslint/no-unsafe-assignment */
 import { Request, Response } from "express";
 import { getDashboard, 
          createDashboard,
-         deleteDashboard,        
+         deleteDashboard,
+         findDashboard,
+         findAndUpdateDashboard,       
 } from "../services/dashboard.service";
 import logger from '../utils/logger';
 import DashboardModel from "../models/dashboard.model";
+import { CreateDashboardInput, FindAndUpdateDashboardInput } from "../schema/dashboard.schema";
 
 export const getDashboardHander = async (_req: Request, res: Response) => {
     try {
@@ -17,7 +21,7 @@ export const getDashboardHander = async (_req: Request, res: Response) => {
     }
 };
 
-export const createDashboardHandler = async (req: Request, res: Response) => {
+export const createDashboardHandler = async (req: Request<object, object, CreateDashboardInput['body']>, res: Response) => {
     try {
         const dashboard = new DashboardModel({
             name: req.body.name,
@@ -31,10 +35,37 @@ export const createDashboardHandler = async (req: Request, res: Response) => {
     }
 };
 
-export const deleteDashboardHandler = async (req: Request, res: Response) => {
+export const deleteDashboardHandler = async (req: Request<FindAndUpdateDashboardInput['params']>, res: Response) => {
     try {
-        await deleteDashboard(req.params.id);
-        res.status(200).end();
+        const dashBoardId = req.params.id;
+        const dashboard = await findDashboard(dashBoardId);
+
+        if (!dashboard){
+            return res.sendStatus(404); 
+        }
+
+        const createdDashboard = await deleteDashboard(dashBoardId);
+        res.status(200).send(createdDashboard);
+    }catch(error: any){
+        logger.error(error);
+        return res.status(409).send(error.message);
+    }
+};
+
+export const findAndUpdateDashboardHandler = async (req: Request<FindAndUpdateDashboardInput['params']>, res: Response) => {
+    try {
+        const dashBoardId = req.params.id;
+        const dashboard = await findDashboard(dashBoardId);
+
+        if (!dashboard){
+            return res.sendStatus(404); 
+        }
+        const update = req.body;
+
+        const updatedDashboard = await findAndUpdateDashboard(dashBoardId, update, {
+            new: true, 
+        } );
+        return res.status(200).send(updatedDashboard);
     }catch(error: any){
         logger.error(error);
         return res.status(409).send(error.message);
