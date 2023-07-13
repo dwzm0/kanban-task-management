@@ -1,6 +1,6 @@
 import {array, object, string, TypeOf} from "zod";
 
-const payload = {
+const createPayload = {
     body: object({
        name: string({
             required_error: "Name is required"
@@ -9,20 +9,29 @@ const payload = {
     })
 };
 
+const updatePayload = {
+  body: object({
+     name: string({
+          required_error: "Name is required"
+     }).optional(),
+     columns: array(object({name: string()})).optional(),
+  })
+};
+
 const params = {
     params: object({
         id: string({
-            required_error: "id is required"
-        })
+            required_error: "id is required",
+        }).length(24, { message: "Must be exactly 24 characters long" })
     })
 };
 
 export const createDashboardSchema = object({
-  ...payload,
+  ...createPayload,
 });
 
 export const findAndUpdateDashboardSchema = object({
-  ...payload,
+  ...updatePayload,
   ...params
 });
 

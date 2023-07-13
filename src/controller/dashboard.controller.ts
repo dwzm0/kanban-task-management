@@ -1,5 +1,6 @@
 /* eslint-disable @typescript-eslint/no-unsafe-argument */
 /* eslint-disable @typescript-eslint/no-unsafe-assignment */
+import { Types } from "mongoose";
 import { Request, Response } from "express";
 import { getDashboard, 
          createDashboard,
@@ -38,10 +39,13 @@ export const createDashboardHandler = async (req: Request<object, object, Create
 export const deleteDashboardHandler = async (req: Request<FindAndUpdateDashboardInput['params']>, res: Response) => {
     try {
         const dashBoardId = req.params.id;
-        const dashboard = await findDashboard(dashBoardId);
+        if(!Types.ObjectId.isValid(dashBoardId)){
+            return res.status(404).json({ error: `${dashBoardId} is not valid id` }); 
+        }
 
+        const dashboard = await findDashboard(dashBoardId);
         if (!dashboard){
-            return res.sendStatus(404); 
+            return res.status(404).json({ error: `Blog by ID ${dashBoardId} does not exist` }); 
         }
 
         const createdDashboard = await deleteDashboard(dashBoardId);
@@ -55,11 +59,17 @@ export const deleteDashboardHandler = async (req: Request<FindAndUpdateDashboard
 export const findAndUpdateDashboardHandler = async (req: Request<FindAndUpdateDashboardInput['params']>, res: Response) => {
     try {
         const dashBoardId = req.params.id;
-        const dashboard = await findDashboard(dashBoardId);
-
-        if (!dashboard){
-            return res.sendStatus(404); 
+        if(!Types.ObjectId.isValid(dashBoardId)){
+            return res.status(404).json({ error: `${dashBoardId} is not valid id` }); 
         }
+
+        const dashboard = await findDashboard(dashBoardId);
+        if (!dashboard){
+            return res.status(404).json({ error: `Blog by ID ${dashBoardId} does not exist` });
+        }
+        console.log(dashboard);
+        
+
         const update = req.body;
 
         const updatedDashboard = await findAndUpdateDashboard(dashBoardId, update, {
