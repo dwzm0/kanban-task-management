@@ -35,6 +35,10 @@ export const findAndUpdateDashboardSchema = object({
   ...params
 });
 
+export const getSingleDashboardSchema = object({
+  ...params,
+});
+
 export const deleteDashboardSchema = object({
   ...params,
 });
@@ -42,3 +46,4 @@ export const deleteDashboardSchema = object({
 export type CreateDashboardInput = TypeOf<typeof createDashboardSchema>;
 export type FindAndUpdateDashboardInput = TypeOf<typeof findAndUpdateDashboardSchema>;
 export type DeleteDashboardSchemaInput = TypeOf<typeof deleteDashboardSchema>;
+export type GetSingleDashboardSchemaInput = TypeOf<typeof getSingleDashboardSchema>;

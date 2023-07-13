@@ -12,6 +12,8 @@ export const getDashboard = async (): Promise<IBoard[]> => {
     }
 };
 
+
+
 export const createDashboard = async (input: IBoard) => {
     try {
         const newDashboard = await DashboardModel.create(input);
