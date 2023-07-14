@@ -6,8 +6,10 @@ import {getDashboardsHander,
         deleteDashboardHandler,
         findAndUpdateDashboardHandler,
 } from './controller/dashboard.controller';
+import { getTaskHandler } from "./controller/column.controller";
 import validate from "./middleware/validateResource";
 import { createDashboardSchema, findAndUpdateDashboardSchema, deleteDashboardSchema, getSingleDashboardSchema } from "./schema/dashboard.schema";
+import {getTashSchema} from './schema/column.schema';
 
 const routes = (app: Express) => {
     app.get('/api/dashboards',  getDashboardsHander);
@@ -16,7 +18,7 @@ const routes = (app: Express) => {
     app.delete('/api/dashboards/:id', validate(deleteDashboardSchema), deleteDashboardHandler);
     app.put('/api/dashboards/:id', validate(findAndUpdateDashboardSchema),findAndUpdateDashboardHandler);
 
-/*     app.get('/api/dashboards/:id/columns/:colId', getTaskHandler)
- */};
+    app.get('/api/dashboards/:id/columns/:colId/tasks/:taskId', validate(getTashSchema), getTaskHandler);
+};
 
 export default routes;
