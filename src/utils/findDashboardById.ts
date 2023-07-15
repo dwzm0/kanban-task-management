@@ -1,5 +1,3 @@
-/* eslint-disable @typescript-eslint/no-unsafe-argument */
-/* eslint-disable @typescript-eslint/no-unsafe-assignment */
 import { Types } from "mongoose";
 import { Response } from "express";
 import {findDashboard} from "../services/dashboard.service";

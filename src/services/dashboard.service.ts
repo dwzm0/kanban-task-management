@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-unsafe-argument */
 import DashboardModel from "../models/dashboard.model";
-import { IBoard} from "../types/models";
+import { IBoard, } from "../types/models";
 import { QueryOptions, UpdateQuery } from "mongoose";
 
 export const getDashboard = async (): Promise<IBoard[]> => {
@@ -11,8 +11,6 @@ export const getDashboard = async (): Promise<IBoard[]> => {
         throw new Error(error);
     }
 };
-
-
 
 export const createDashboard = async (input: IBoard) => {
     try {
