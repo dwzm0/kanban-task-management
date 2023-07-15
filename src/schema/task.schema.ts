@@ -13,7 +13,7 @@ const createPayload = {
    })
 };
 
-const paramsGet = {
+const params = {
     params: object({
          id: string({
              required_error: "id is required",
@@ -41,8 +41,13 @@ export const createTaskSchema = object({
   });
 
 export const getTaskSchema = object({
-    ...paramsGet
+    ...params
+});
+
+export const deleteTaskSchema = object({
+    ...params
 });
 
 export type GetTaskInput = TypeOf<typeof getTaskSchema>;
 export type CreateTaskInput = TypeOf<typeof createTaskSchema>;
+export type DeleteTaskInput = TypeOf<typeof deleteTaskSchema>;
