@@ -3,8 +3,8 @@
 import { Request, Response } from "express";
 import logger from '../utils/logger';
 import findDashboardById from "../utils/findDashboardById";
-import { GetTaskInput, CreateTaskInput, DeleteTaskInput } from "../schema/task.schema";
-import { findTaskById, createTask, deleteTaskById } from "../services/task.service";
+import { GetTaskInput, CreateTaskInput, DeleteTaskInput, UpdateTaskInput } from "../schema/task.schema";
+import { findTaskById, createTask, deleteTaskById, updateTaskById } from "../services/task.service";
 import { ITask } from "../types/models";
 
 export const getTaskHandler = async (req: Request<GetTaskInput['params']>, res: Response) => {
@@ -45,6 +45,25 @@ export const deleteTaskHandler = async (req: Request<DeleteTaskInput['params']>,
         const dashboard = await findDashboardById(dashBoardId, res);
         const columns =  await deleteTaskById(dashboard, columnId, taskId);
         res.status(200).json(columns);
+    }catch(error: any){
+        logger.error(error);
+        return res.status(409).send(error.message);
+    }
+};
+
+export const updateTaskHandler = async (req: Request<UpdateTaskInput['params']>, res: Response) => {
+    try{
+        const dashBoardId = req.params.id;
+        const columnId = req.params.colId;
+        const taskId = req.params.taskId;
+        const dashboard = await findDashboardById(dashBoardId, res);
+
+        if (dashboard) {
+            const update: ITask = req.body;
+            const updatedTask = await updateTaskById(dashboard, columnId, taskId, update);
+            return res.status(200).send(updatedTask);
+        }
+
     }catch(error: any){
         logger.error(error);
         return res.status(409).send(error.message);

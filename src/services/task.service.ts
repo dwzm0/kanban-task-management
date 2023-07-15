@@ -31,11 +31,25 @@ export const deleteTaskById = async (dashboard: any, columnId: string, taskId: s
     try{
         const bord = await DashboardModel.findById(dashboard._id);
         const column = bord?.columns?.find(item => item._id == columnId);
-        const taskIndexInArr = column?.tasks?.findIndex(task => task._id === taskId) as number;
+        const taskIndexInArr = column?.tasks?.findIndex(task => task._id == taskId) as number;
         column?.tasks?.splice(taskIndexInArr, 1);
         await bord?.save();
         return bord?.columns;
     }catch(error: any) {
         throw new Error(error);
     }
+};
+
+export const updateTaskById = async (dashboard: any, columnId: string, taskId: string, update: ITask
+    ) => {
+   try{
+       const bord = await DashboardModel.findById(dashboard._id);
+       const column = bord?.columns?.find(item => item._id == columnId);
+       const taskIndexInArr = column?.tasks?.findIndex(task => task._id == taskId) as number;
+       column.tasks[taskIndexInArr] = update;
+       await bord?.save();
+       return bord?.columns;
+   }catch(error: any){
+       throw new Error(error);
+   }
 };

@@ -1,6 +1,6 @@
 import {array, object, string, TypeOf} from "zod";
 
-const createPayload = {
+const payload = {
     body: object({
        title: string({
             required_error: "Title is required"
@@ -36,7 +36,7 @@ const paramsCreate = {
 };
 
 export const createTaskSchema = object({
-    ...createPayload,
+    ...payload,
     ...paramsCreate
   });
 
@@ -48,6 +48,12 @@ export const deleteTaskSchema = object({
     ...params
 });
 
+export const updateTaskSchema = object({
+    ...params,
+    ...payload
+});
+
 export type GetTaskInput = TypeOf<typeof getTaskSchema>;
 export type CreateTaskInput = TypeOf<typeof createTaskSchema>;
 export type DeleteTaskInput = TypeOf<typeof deleteTaskSchema>;
+export type UpdateTaskInput = TypeOf<typeof updateTaskSchema>;
