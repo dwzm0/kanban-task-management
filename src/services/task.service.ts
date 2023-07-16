@@ -46,10 +46,16 @@ export const updateTaskById = async (dashboard: any, columnId: string, taskId: s
        const bord = await DashboardModel.findById(dashboard._id);
        const column = bord?.columns?.find(item => item._id == columnId);
        const taskIndexInArr = column?.tasks?.findIndex(task => task._id == taskId) as number;
-       column.tasks[taskIndexInArr] = update;
+       const taskToUpdate = column.tasks[taskIndexInArr];
+       if (update.status != taskToUpdate.status) {
+          column?.tasks?.splice(taskIndexInArr, 1);
+          const columnToInsert = bord?.columns?.find(item => item.name == update.status);
+          columnToInsert?.tasks?.push(update);
+       }
        await bord?.save();
        return bord?.columns;
    }catch(error: any){
        throw new Error(error);
    }
 };
+

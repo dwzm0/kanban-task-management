@@ -1,4 +1,4 @@
-import {array, object, string, TypeOf} from "zod";
+import {array, boolean, object, string, TypeOf} from "zod";
 
 const payload = {
     body: object({
@@ -9,7 +9,7 @@ const payload = {
        status: string({
         required_error: "Status is required"
        }),
-       subtasks: array(object({title: string()})).optional()
+       subtasks: array(object({title: string(), isComplete: boolean()})).optional()
    })
 };
 
@@ -19,10 +19,10 @@ const params = {
              required_error: "id is required",
          }).length(24, { message: "Must be exactly 24 characters long" }),
          colId: string({
-             required_error: "id is required",
+             required_error: "colId is required",
          }).length(24, { message: "Must be exactly 24 characters long" }),
          taskId: string({
-             required_error: "id is required",
+             required_error: "taskId is required",
          }).length(24, { message: "Must be exactly 24 characters long" }),
     })
 };

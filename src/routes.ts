@@ -6,7 +6,8 @@ import {getDashboardsHander,
         deleteDashboardHandler,
         findAndUpdateDashboardHandler,
 } from './controller/dashboard.controller';
-import { getTaskHandler, createTaskHandler, deleteTaskHandler, updateTaskHandler } from "./controller/task.controller";
+import { getTaskHandler, createTaskHandler, 
+         deleteTaskHandler, updateTaskHandler } from "./controller/task.controller";
 import validate from "./middleware/validateResource";
 import { createDashboardSchema, findAndUpdateDashboardSchema, 
          deleteDashboardSchema, getSingleDashboardSchema } from "./schema/dashboard.schema";
