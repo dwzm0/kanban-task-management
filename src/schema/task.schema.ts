@@ -9,7 +9,7 @@ const payload = {
        status: string({
         required_error: "Status is required"
        }),
-       subtasks: array(object({title: string(), isComplete: boolean()})).optional()
+       subtasks: array(object({title: string(), isCompleted: boolean()})).optional()
    })
 };
 

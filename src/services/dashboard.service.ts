@@ -23,7 +23,8 @@ export const createDashboard = async (input: IBoard) => {
 
 export const findDashboard = async (query: string, 
     options: QueryOptions = {lean: true}) => {
-    return DashboardModel.findById(query, {}, options);
+    const dashboard = await DashboardModel.findById(query, {}, options);
+    return dashboard;
 };
 
 export const findAndUpdateDashboard = async ( query: string,

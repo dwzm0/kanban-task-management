@@ -11,11 +11,15 @@ import DashboardModel from "../models/dashboard.model";
 import { CreateDashboardInput, FindAndUpdateDashboardInput, GetSingleDashboardSchemaInput } from "../schema/dashboard.schema";
 import findDashboardById from "../utils/findDashboardById";
 
-
 export const getDashboardsHander = async (_req: Request, res: Response) => {
     try {
         const dashboards = await getDashboard();
-        res.json(dashboards);
+
+        if (!dashboards) {
+            return res.status(404).json({ error: "Dasboards missing" });
+        }
+
+        return res.json(dashboards);
     }catch(error: any){
         logger.error(error);
         return res.status(409).send(error.message);
@@ -26,7 +30,10 @@ export const getSingleDashboardHandler = async (req: Request<GetSingleDashboardS
     try {
         const dashBoardId = req.params.id;
         const dashboard = await findDashboardById(dashBoardId, res);
-        res.json(dashboard);
+        if (!dashboard){
+            return res.status(404).send({ error: `Blog by ID ${dashBoardId} does not exist` });  
+        }
+        return res.status(200).send(dashboard);
     }catch(error: any){
         logger.error(error);
         return res.status(409).send(error.message);
@@ -40,7 +47,7 @@ export const createDashboardHandler = async (req: Request<object, object, Create
             columns: req.body.columns,
         });
         const newDashboard = await createDashboard(dashboard);
-        res.status(200).json(newDashboard);
+        return res.status(200).json(newDashboard);
     }catch(error: any){
         logger.error(error);
         return res.status(409).send(error.message);
@@ -51,8 +58,11 @@ export const deleteDashboardHandler = async (req: Request<FindAndUpdateDashboard
     try {
         const dashBoardId = req.params.id;
         const dashboard = await findDashboardById(dashBoardId, res);
+        if (!dashboard){
+            return res.status(404).send({ error: `Blog by ID ${dashBoardId} does not exist` });  
+        } 
         await deleteDashboard(dashBoardId);
-        res.status(200).json(dashboard);
+        return res.sendStatus(200);
     }catch(error: any){
         logger.error(error);
         return res.status(409).send(error.message);
@@ -63,14 +73,15 @@ export const findAndUpdateDashboardHandler = async (req: Request<FindAndUpdateDa
     try {
         const dashBoardId = req.params.id;
         const dashboard = await findDashboardById(dashBoardId, res);
-        
-        if (dashboard) {
-            const update = req.body;
-            const updatedDashboard = await findAndUpdateDashboard(dashBoardId, update, {
-                new: true, 
-            } );
-            return res.status(200).send(updatedDashboard);
+        if (!dashboard){
+            return res.status(404).send({ error: `Blog by ID ${dashBoardId} does not exist` });  
         }
+        
+        const update = req.body;
+        const updatedDashboard = await findAndUpdateDashboard(dashBoardId, update, {
+            new: true, 
+        } );
+        return res.status(200).send(updatedDashboard);
     }catch(error: any){
         logger.error(error);
         return res.status(409).send(error.message);

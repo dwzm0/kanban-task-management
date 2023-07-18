@@ -1,15 +1,11 @@
-import express from 'express';
 import  appConfig  from 'config';
 import connect from './utils/connect';
 import logger from './utils/logger';
-import routes from './routes';
-
+import createServer from './utils/server';
 
 const port = appConfig.get<number>("port");
-const app = express();
 
-app.use(express.json());
-
+const app = createServer();
 
 // eslint-disable-next-line @typescript-eslint/no-misused-promises
 app.listen(port, async () => {
@@ -17,7 +13,6 @@ app.listen(port, async () => {
 
   await connect();
  
-  routes(app);
 });
 
 
