@@ -76,7 +76,10 @@ export const findAndUpdateDashboardHandler = async (req: Request<FindAndUpdateDa
         if (!dashboard){
             return res.status(404).send({ error: `Blog by ID ${dashBoardId} does not exist` });  
         }
-        
+        if (Object.keys(req.body).length == 0){
+            return res.status(400).send({ error: `Provide proper payload` });  
+        }
+
         const update = req.body;
         const updatedDashboard = await findAndUpdateDashboard(dashBoardId, update, {
             new: true, 
