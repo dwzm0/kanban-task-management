@@ -75,7 +75,7 @@ export const deleteTaskHandler = async (req: Request<DeleteTaskInput['params']>,
             return res.status(404).send({ error: `Task by ID ${taskId} does not exist`}); 
         }
 
-        res.sendStatus(200);
+        return res.sendStatus(200);
     }catch(error: any){
         logger.error(error);
         return res.status(409).send(error.message);

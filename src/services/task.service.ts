@@ -43,6 +43,8 @@ export const updateTaskById = async (dashboard: IBoard, columnId: string, taskId
        const bord = await DashboardModel.findById(dashboard._id);
        const column = bord?.columns?.find(item => item._id == columnId);
        const taskToUpdate = column.tasks[taskIndexInArr];
+       update = {_id: taskId, ...update} as ITask;
+
        if (update.status != taskToUpdate.status) {
           column?.tasks?.splice(taskIndexInArr, 1);
           const columnToInsert = bord?.columns?.find(item => item.name == update.status);

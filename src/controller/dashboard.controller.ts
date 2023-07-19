@@ -15,11 +15,11 @@ export const getDashboardsHander = async (_req: Request, res: Response) => {
     try {
         const dashboards = await getDashboard();
 
-        if (!dashboards) {
-            return res.status(404).json({ error: "Dasboards missing" });
+        if (dashboards.length === 0) {
+            return res.status(404).send({ error: "Dasboards missing" });
         }
 
-        return res.json(dashboards);
+        return res.status(200).json(dashboards);
     }catch(error: any){
         logger.error(error);
         return res.status(409).send(error.message);

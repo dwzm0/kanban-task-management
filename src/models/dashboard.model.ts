@@ -7,6 +7,7 @@ const SubTaskSchema: Schema = new Schema<ISubTask>({
 });
 
 const TaskSchema: Schema = new Schema<ITask>({
+    _id: {type: String, require: false},
     title: {type: String, require: true, unique: true}, 
     description: {type: String, require: false, unique: false},
     status: {type: String, require: true, unique: false},

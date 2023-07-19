@@ -6,6 +6,7 @@ export interface ISubTask extends Document {
 }
 
 export interface ITask extends Document {
+    _id?: string
     title: string
     description?: string
     status: IColumn['name'] 
