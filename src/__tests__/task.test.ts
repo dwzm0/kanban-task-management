@@ -128,5 +128,14 @@ describe('task', () => {
 
     });
 
-   
+    describe('delete task', () => {
+
+        describe('given task exists', () => {
+            it('should return 200', async() => {
+                const {statusCode} = await supertest(app)
+                .delete(`/api/dashboards/${dashboard._id}/columns/${dashboard.columns[0]._id}/tasks/${dashboard.columns[0].tasks[0]._id}`);
+                expect(statusCode).toBe(200);
+            });
+        });
+    });
 });
