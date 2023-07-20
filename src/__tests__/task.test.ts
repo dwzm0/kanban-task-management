@@ -168,4 +168,102 @@ describe('task', () => {
             });
         });
     });
+
+    describe('update task', () => {
+        describe('given task exists', () => {
+            it('should return 200', async() => {
+                const payload = {
+                    "title": "Test task",
+                    "status": "Todo",
+                    "subtasks": [
+                        {
+                            "title": "with subtask",
+                            "isCompleted": false
+                        }
+                    ]
+                };
+
+                const {statusCode} = await supertest(app)
+                .put(`/api/dashboards/${dashboard._id}/columns/${dashboard.columns[0]._id}/tasks/${dashboard.columns[0].tasks[0]._id}`)
+                .send(payload);
+                expect(statusCode).toBe(200);
+            });
+        });
+
+        describe('given task doesnt exit', () => {
+            it('should return 404', async () => {
+                const payload = {
+                    "title": "Test task",
+                    "status": "Todo",
+                    "subtasks": [
+                        {
+                            "title": "with subtask",
+                            "isCompleted": false
+                        }
+                    ]
+                };
+                const fakeTask = '64ad951d1985a2de99048781';
+                const {statusCode, body} = await supertest(app)
+                .put(`/api/dashboards/${dashboard._id}/columns/${dashboard.columns[0]._id}/tasks/${fakeTask}`).send(payload);
+                expect(statusCode).toBe(404);
+                expect(body.error).toEqual(`Task by ID ${fakeTask} does not exist`);
+            });
+        });
+
+        describe('given column doesnt exit', () => {
+            it('should return 404', async () => {
+                const payload = {
+                    "title": "Test task",
+                    "status": "Todo",
+                    "subtasks": [
+                        {
+                            "title": "with subtask",
+                            "isCompleted": false
+                        }
+                    ]
+                };
+                const fakeCol = '64ad951d1985a2de99048781';
+                const {statusCode, body} = await supertest(app)
+                .put(`/api/dashboards/${dashboard._id}/columns/${fakeCol}/tasks/${dashboard.columns[0].tasks[0]._id}`).send(payload);
+                expect(statusCode).toBe(404);
+                expect(body.error).toEqual(`Column by ID ${fakeCol} does not exist`);
+            });
+        });
+
+        describe('given dashboard doesnt exit', () => {
+            it('should return 404', async () => {
+                const payload = {
+                    "title": "Test task",
+                    "status": "Todo",
+                    "subtasks": [
+                        {
+                            "title": "with subtask",
+                            "isCompleted": false
+                        }
+                    ]
+                };
+                const fakeDashboard = '64ad951d1985a2de99048781';
+                const {statusCode, body} = await supertest(app)
+                .put(`/api/dashboards/${fakeDashboard}/columns/${dashboard.columns[0]._id}/tasks/${dashboard.columns[0].tasks[0]._id}`).send(payload);
+                expect(statusCode).toBe(404);
+                expect(body.error).toEqual(`Blog by ID ${fakeDashboard} does not exist`);
+            });
+        });
+
+        describe('given task exists, new task status changing it column', () => {
+            it('should return 200', async() => {
+                const task = dashboard.columns[0].tasks[0];
+                task.status = "Doing";
+                const payload = {
+                    ...task
+                };
+
+                const {statusCode, body} = await supertest(app)
+                .put(`/api/dashboards/${dashboard._id}/columns/${dashboard.columns[0]._id}/tasks/${dashboard.columns[0].tasks[0]._id}`)
+                .send(payload);
+                expect(statusCode).toBe(200);
+                expect(body[1].tasks[2].title).toEqual(payload.title);
+            });
+        });
+    });
 });
