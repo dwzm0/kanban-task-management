@@ -11,7 +11,6 @@ import { dashboard } from "./mockedDashboard";
 
 const app = createServer();
 
-
 describe('task', () => {
 
     beforeAll(async () => {
@@ -51,7 +50,7 @@ describe('task', () => {
             });
         });
 
-        describe('given task doesnt exit', () => {
+        describe('given column doesnt exit', () => {
             it('should return 404', async () => {
                 const fakeCol = '64ad951d1985a2de99048781';
                 const {statusCode, body} = await supertest(app)
@@ -61,7 +60,7 @@ describe('task', () => {
             });
         });
 
-        describe('given task doesnt exit', () => {
+        describe('given dashboard doesnt exit', () => {
             it('should return 404', async () => {
                 const fakeDashboard = '64ad951d1985a2de99048781';
                 const {statusCode, body} = await supertest(app)
@@ -72,5 +71,62 @@ describe('task', () => {
         });
     });
 
+    describe('create task', () => {
 
+        describe('given dashboard exists and proper req fields', () => {
+            it('should return 200', async () => {
+                const payload = {
+                    "title": "Test task",
+                    "status": "Todo",
+                    "subtasks": [
+                        {
+                            "title": "with subtask",
+                            "isCompleted": false
+                        }
+                    ]
+                };
+                const {statusCode, body} = await supertest(app).post(`/api/dashboards/${dashboard._id}`).send(payload);
+                expect(statusCode).toBe(200);
+                expect(body[2].title).toEqual(payload.title);
+            });
+        });
+
+        describe('given dashboard does not exist and proper req fields', () => {
+            it('should return 404', async () => {
+                const fakeDashboard = '64ad951d1985a2de99048781';
+                const payload = {
+                    "title": "Test task",
+                    "status": "Todo",
+                    "subtasks": [
+                        {
+                            "title": "with subtask",
+                            "isCompleted": false
+                        }
+                    ]
+                };
+                const {statusCode} = await supertest(app).post(`/api/dashboards/${fakeDashboard}`).send(payload);
+                expect(statusCode).toBe(404);
+            });
+        });
+
+        describe('given dashboard exists and not proper req fields', () => {
+            it('should return 400', async () => {
+                const payload = {
+                    "status": "Todo",
+                    "subtasks": [
+                        {
+                            "title": "with subtask",
+                            "isCompleted": false
+                        }
+                    ]
+                };
+                const {statusCode, text} = await supertest(app).post(`/api/dashboards/${dashboard._id}`).send(payload);
+                expect(statusCode).toBe(400);
+                expect(text).toEqual('Title is required');
+            });
+        });
+
+    });
+
+   
 });
