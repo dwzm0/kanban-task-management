@@ -24,7 +24,7 @@ export const getTaskHandler = async (req: Request<GetTaskInput['params']>, res: 
             return res.status(404).send({ error: `Column by ID ${columnId} does not exist`});
         }
 
-        const task = await findTaskById(column, taskId);
+        const task = findTaskById(column, taskId);
         if (!task) {
             return res.status(404).send({ error: `Task by ID ${taskId} does not exist`}); 
         }
@@ -98,7 +98,7 @@ export const updateTaskHandler = async (req: Request<UpdateTaskInput['params']>,
             return res.status(404).send({ error: `Column by ID ${columnId} does not exist`});
         }
 
-        const taskIndexInArr = column?.tasks?.findIndex(task => task._id == taskId) as number;
+        const taskIndexInArr = column?.tasks?.findIndex(task => task._id == taskId);
         if (taskIndexInArr == -1) {
             return res.status(404).send({ error: `Task by ID ${taskId} does not exist`}); 
         }

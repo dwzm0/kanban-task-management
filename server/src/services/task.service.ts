@@ -3,7 +3,7 @@
 import DashboardModel from "../models/dashboard.model";
 import {IBoard, IColumn, ITask } from "../types/models";
 
-export const findTaskById = async (column:IColumn, taskId: string) => {
+export const findTaskById = (column:IColumn, taskId: string) => {
     try{
         const task = column?.tasks?.find(item => item._id == taskId);
         return task;
@@ -15,7 +15,7 @@ export const findTaskById = async (column:IColumn, taskId: string) => {
 export const createTask = async (dashBoardId:string, input: ITask) => {
     try{
         const bord = await DashboardModel.findById(dashBoardId);
-        const column: IColumn[] = bord?.columns?.filter(column => column.name === input.status) as IColumn[];
+        const column: IColumn[] = bord?.columns?.filter(column => column.name === input.status) ;
         column[0]?.tasks?.push(input);
         await bord?.save();
         return column[0]?.tasks;
@@ -28,7 +28,7 @@ export const deleteTaskById = async (dashboard: IBoard, columnId: string, taskId
     try{
         const bord = await DashboardModel.findById(dashboard._id);
         const column = bord?.columns?.find(item => item._id == columnId);
-        const taskIndexInArr = column?.tasks?.findIndex(task => task._id == taskId) as number;
+        const taskIndexInArr = column?.tasks?.findIndex(task => task._id == taskId) ;
         column?.tasks?.splice(taskIndexInArr, 1);
         await bord?.save();
         return taskIndexInArr;

@@ -9,6 +9,7 @@
     "noImplicitReturns": false,
     "noFallthroughCasesInSwitch": true,
     "esModuleInterop": true,
-    "strictNullChecks": false
+    "strictNullChecks": false,
+    "noImplicitAny": false,
   }
 }
