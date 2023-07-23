@@ -1,9 +1,10 @@
 /* eslint-disable @typescript-eslint/no-floating-promises */
 import React, { useEffect } from 'react'
 import { StyledSidebarMenu, StyledSidebarMenuItem, StyledSidebarMenuContainer } from './styled/SidebarMenu.styled'
-import { useAppDispatch, useAppSelector } from '../hooks'
+import { useAppDispatch, useAppSelector } from '../hooks/useReduxHooks'
 import { initializeDashboards } from '../reducers/dashboardReducer'
 import { HeadingM, TextM } from '../globalStyle'
+import Switch from './Switch'
 
 interface Props {
   text: string
@@ -42,6 +43,7 @@ const SidebarMenu = (): JSX.Element => {
                 })}
                 <SidebarMenuItem text='+ Create New Board'/>
             </StyledSidebarMenuContainer>
+            <Switch />
         </StyledSidebarMenu>
     </>
   )
