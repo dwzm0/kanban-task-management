@@ -1,6 +1,6 @@
 import { createSlice, type PayloadAction } from '@reduxjs/toolkit'
 import dashboardService from '../services/dashboards'
-import { type IBoard } from '../types'
+import { type IBoard } from '../types/types'
 
 const initialState: IBoard[] = []
 
