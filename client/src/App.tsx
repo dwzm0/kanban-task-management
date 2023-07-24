@@ -6,7 +6,7 @@ import Sidebar from './components/Sidebar'
 import StyledContainer from './components/styled/Container.styled'
 import { ThemeProvider } from 'styled-components'
 import { ThemeCurrValueContext } from './contexts/themeContext'
-import { useDarkTheme } from './hooks/useDarkMode'
+import { useDarkTheme } from './hooks/useDarkTheme'
 
 const App = (): JSX.Element => {
   const [theme, toggleTheme] = useDarkTheme()

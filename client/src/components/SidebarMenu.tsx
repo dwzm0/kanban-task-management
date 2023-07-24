@@ -6,14 +6,15 @@ import { initializeDashboards } from '../reducers/dashboardReducer'
 import { HeadingM, TextM } from '../globalStyle'
 import Switch from './Switch'
 
-interface Props {
-  text: string
+interface SidebarProps {
+  text?: string
+  close?: boolean
 }
 
-const SidebarMenuItem = ({ text }: Props): JSX.Element => {
+const SidebarMenuItem: React.FC<SidebarProps> = ({ text, close }): JSX.Element => {
   return (
       <>
-        <StyledSidebarMenuItem >
+        <StyledSidebarMenuItem close={close}>
             <img/>
             <HeadingM>{text}</HeadingM>
         </StyledSidebarMenuItem>
@@ -44,6 +45,7 @@ const SidebarMenu = (): JSX.Element => {
                 <SidebarMenuItem text='+ Create New Board'/>
             </StyledSidebarMenuContainer>
             <Switch />
+            <SidebarMenuItem close text='Hide Sidebar' />
         </StyledSidebarMenu>
     </>
   )

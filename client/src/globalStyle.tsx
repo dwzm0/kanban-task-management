@@ -42,11 +42,23 @@ export const TextM = styled.p`
 `
 
 export const lightTheme = {
-  sidebarColour: '#ffffff'
+  sidebarColour: '#ffffff',
+  headerColour: '#ffffff',
+  mainColour: '#E4EBFA',
+  newColumn: '#828FA3',
+  boardTitleText: '#000112',
+  taskBg: '#ffffff',
+  taskHeaderText: '#000112'
 }
 
 export const darkTheme = {
-  sidebarColour: '#2b2c37'
+  sidebarColour: '#2b2c37',
+  headerColour: '#2b2c37',
+  mainColour: '#2B2C37',
+  newColumn: '#2B2C37',
+  boardTitleText: '#ffffff',
+  taskBg: '#000112',
+  taskHeaderText: '#ffffff'
 }
 
 export default GlobalStyle
