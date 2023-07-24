@@ -23,3 +23,8 @@ export interface ISubTask {
   title: string
   isCompleted: boolean
 }
+
+export interface ThemeProps {
+  theme: string
+  toggleTheme: () => void
+}

@@ -1,22 +1,25 @@
+/* eslint-disable @typescript-eslint/strict-boolean-expressions */
 /* eslint-disable @typescript-eslint/no-floating-promises */
 import React from 'react'
 import GlobalStyle, { lightTheme, darkTheme } from './globalStyle'
 import Sidebar from './components/Sidebar'
 import StyledContainer from './components/styled/Container.styled'
 import { ThemeProvider } from 'styled-components'
-import { useDarkMode } from './hooks/useDarkMode'
+import { ThemeCurrValueContext } from './contexts/themeContext'
+import { useDarkTheme } from './hooks/useDarkMode'
 
-function App (): JSX.Element {
-  const [theme] = useDarkMode()
-  const themeMode = JSON.parse(theme as string) === true ? lightTheme : darkTheme
+const App = (): JSX.Element => {
+  const [theme, toggleTheme] = useDarkTheme()
 
   return (
-    <ThemeProvider theme={themeMode}>
-      <GlobalStyle />
-      <StyledContainer>
-        <Sidebar />
-      </StyledContainer>
-    </ThemeProvider>
+    <ThemeCurrValueContext.Provider value={{ theme, toggleTheme }}>
+      <ThemeProvider theme={theme === 'dark' ? darkTheme : lightTheme}>
+        <GlobalStyle />
+        <StyledContainer >
+          <Sidebar />
+        </StyledContainer>
+      </ThemeProvider>
+    </ThemeCurrValueContext.Provider>
   )
 }
 

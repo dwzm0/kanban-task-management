@@ -1,16 +1,25 @@
-import React from 'react'
+/* eslint-disable @typescript-eslint/strict-boolean-expressions */
+/* eslint-disable @typescript-eslint/explicit-function-return-type */
+import React, { useState, useContext } from 'react'
+import { ThemeCurrValueContext } from '../contexts/themeContext'
 import { StyledSwitch } from './styled/Switch.styled'
-import { useDarkMode } from '../hooks/useDarkMode'
 
 const Switch = (): JSX.Element => {
-  const [theme, toggleTheme] = useDarkMode()
-  console.log(theme)
+  const themeContext = useContext(ThemeCurrValueContext)
+  console.log(themeContext)
+  const isDark = themeContext?.theme === 'dark'
+  const [isToggled, setIsToggled] = useState(isDark)
+
+  const onToggle = () => {
+    setIsToggled(!isDark)
+    themeContext?.toggleTheme()
+  }
 
   return (
     <>
         <StyledSwitch>
             <label className="toggle-switch">
-                <input type="checkbox" onChange={toggleTheme as React.ChangeEventHandler<HTMLInputElement>}/>
+                <input type="checkbox" checked={isToggled} onChange={onToggle}/>
                 <span className="switch" />
             </label>
         </StyledSwitch>

@@ -40,16 +40,13 @@ export const TextM = styled.p`
   font-size: .75rem;
   line-height: .9375rem;
 `
+
 export const lightTheme = {
-  body: '#fff',
-  text: '#121212',
-  primary: '#6200ee'
+  sidebarColour: '#ffffff'
 }
 
 export const darkTheme = {
-  body: '#121212',
-  text: '#fff',
-  primary: '#bb86fc'
+  sidebarColour: '#2b2c37'
 }
 
 export default GlobalStyle
