@@ -1,9 +1,11 @@
 import { configureStore } from '@reduxjs/toolkit'
 import dashboardReducer from './reducers/dashboardReducer'
+import currIdReducer from './reducers/currIdReducer'
 
 const store = configureStore({
   reducer: {
-    dashboards: dashboardReducer
+    dashboards: dashboardReducer,
+    currId: currIdReducer
   }
 })
 

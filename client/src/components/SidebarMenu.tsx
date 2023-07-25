@@ -1,20 +1,21 @@
 /* eslint-disable @typescript-eslint/no-floating-promises */
-import React, { useEffect } from 'react'
+import React from 'react'
 import { StyledSidebarMenu, StyledSidebarMenuItem, StyledSidebarMenuContainer } from './styled/SidebarMenu.styled'
-import { useAppDispatch, useAppSelector } from '../hooks/useReduxHooks'
-import { initializeDashboards } from '../reducers/dashboardReducer'
+import { useAppSelector, useAppDispatch } from '../hooks/useReduxHooks'
 import { HeadingM, TextM } from '../globalStyle'
 import Switch from './Switch'
+import { setCurrIdActionCreator } from '../reducers/currIdReducer'
 
 interface SidebarProps {
   text?: string
   close?: boolean
+  handleClick?: () => Promise<void>
 }
 
-const SidebarMenuItem: React.FC<SidebarProps> = ({ text, close }): JSX.Element => {
+const SidebarMenuItem: React.FC<SidebarProps> = ({ text, close, handleClick }): JSX.Element => {
   return (
       <>
-        <StyledSidebarMenuItem close={close}>
+        <StyledSidebarMenuItem close={close} onClick={handleClick}>
             <img/>
             <HeadingM>{text}</HeadingM>
         </StyledSidebarMenuItem>
@@ -24,22 +25,16 @@ const SidebarMenuItem: React.FC<SidebarProps> = ({ text, close }): JSX.Element =
 
 const SidebarMenu = (): JSX.Element => {
   const dispatch = useAppDispatch()
-  const initDashboards = useAppSelector((state) => state.dashboards)
-
-  useEffect(() => {
-    dispatch(initializeDashboards())
-  }, [dispatch])
-
-  console.log(initDashboards)
+  const selectDashboards = useAppSelector((state) => state.dashboards)
 
   return (
     <>
         <StyledSidebarMenu>
             <StyledSidebarMenuContainer>
-                <TextM>ALL BOARDS ({initDashboards.length})</TextM>
-                {initDashboards.map((board) => {
+                <TextM>ALL BOARDS ({selectDashboards.length})</TextM>
+                {selectDashboards.map((board) => {
                   return (
-                        <SidebarMenuItem key={board._id} text={board.name}/>
+                        <SidebarMenuItem key={board._id} text={board.name} handleClick={async () => { await dispatch(setCurrIdActionCreator(board._id)) }}/>
                   )
                 })}
                 <SidebarMenuItem text='+ Create New Board'/>
