@@ -48,7 +48,8 @@ export const lightTheme = {
   newColumn: '#828FA3',
   boardTitleText: '#000112',
   taskBg: '#ffffff',
-  taskHeaderText: '#000112'
+  taskHeaderText: '#000112',
+  switchBg: '#F4F7FD'
 }
 
 export const darkTheme = {
@@ -58,7 +59,8 @@ export const darkTheme = {
   newColumn: '#2B2C37',
   boardTitleText: '#ffffff',
   taskBg: '#000112',
-  taskHeaderText: '#ffffff'
+  taskHeaderText: '#ffffff',
+  switchBg: '#20212C'
 }
 
 export default GlobalStyle

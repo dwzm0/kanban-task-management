@@ -1,11 +1,20 @@
 import { styled } from 'styled-components'
 
 export const StyledSwitch = styled.div`
+    max-width: 251px;
+    height: 48px;
+    background-color: ${props => props.theme.switchBg};
+    border-radius: .5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+
     .toggle-switch {
         position: relative;
         display: inline-block;
-        width: 50px;
-        height: 25px;
+        width: 40px;
+        height: 20px;
         margin: 0 0.75rem;
     }
 
@@ -16,7 +25,7 @@ export const StyledSwitch = styled.div`
     .toggle-switch .switch {
         position: absolute;
         cursor: pointer;
-        background-color: #b6b6b6;
+        background-color: #635ff7;
         border-radius: 25px;
         top: 0;
         right: 0;
@@ -29,20 +38,15 @@ export const StyledSwitch = styled.div`
         position: absolute;
         content: "";
         left: 2px;
-        top: 2px;
-        width: 21px;
-        height: 21px;
-        background-color: #333;
+        top: 3px;
+        width: 14px;
+        height: 14px;
+        background-color: #ffffff;
         border-radius: 50%;
         transition: transform 0.3s ease;
     }
 
     .toggle-switch input[type="checkbox"]:checked + .switch::before {
-        transform: translateX(25px);
-        background-color: #333;
-    }
-
-    .toggle-switch input[type="checkbox"]:checked + .switch {
-        background-color: #2bc6ff;
+        transform: translateX(22px);
     }
 `
