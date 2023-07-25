@@ -7,7 +7,7 @@ import closeImg from '../../assets/icon-hide-sidebar.svg'
 export const StyledSidebarMenu = styled.div`
     display: flex;
     flex-direction: column;
-    height: 85%;
+    height: 91%;
     color: rgb(130, 143, 163);
 `
 export const StyledSidebarMenuContainer = styled.div`
