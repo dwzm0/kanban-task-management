@@ -49,7 +49,8 @@ export const lightTheme = {
   boardTitleText: '#000112',
   taskBg: '#ffffff',
   taskHeaderText: '#000112',
-  switchBg: '#F4F7FD'
+  switchBg: '#F4F7FD',
+  lines: '#E4EBFA'
 }
 
 export const darkTheme = {
@@ -60,7 +61,8 @@ export const darkTheme = {
   boardTitleText: '#ffffff',
   taskBg: '#000112',
   taskHeaderText: '#ffffff',
-  switchBg: '#20212C'
+  switchBg: '#20212C',
+  lines: '#3E3F4E'
 }
 
 export default GlobalStyle

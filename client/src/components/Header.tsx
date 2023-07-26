@@ -1,6 +1,7 @@
 import React from 'react'
 import { StyledHeader } from './styled/Header.styled'
 import { HeadingXL } from '../globalStyle'
+import Button from './Button'
 import { useAppSelector } from '../hooks/useReduxHooks'
 
 const Header = (): JSX.Element => {
@@ -10,6 +11,7 @@ const Header = (): JSX.Element => {
   return (
     <StyledHeader>
         <HeadingXL>{selectDashboardName}</HeadingXL>
+        <Button variant="destructive" disabled={true} >+ Add New Task</Button>
     </StyledHeader>
   )
 }
