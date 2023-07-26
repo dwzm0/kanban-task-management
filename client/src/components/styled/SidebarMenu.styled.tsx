@@ -21,6 +21,10 @@ export const StyledSidebarMenuItem = styled.div<{ close?: boolean }>`
     gap: .75rem;
     padding-block: .9375rem;
 
+    &:hover {
+        cursor: pointer;
+    }
+
     img {
         background-image: ${props => props.close ? `url(${closeImg})` : `url(${boardImg})`};
         width: 16px;

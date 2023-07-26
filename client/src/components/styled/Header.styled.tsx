@@ -11,4 +11,5 @@ export const StyledHeader = styled.div`
     grid-area: header;
     background-color: ${props => props.theme.headerColour};
     border-bottom: 1px solid ${props => props.theme.lines};
+    color: ${props => props.theme.headerTextColor};
 `

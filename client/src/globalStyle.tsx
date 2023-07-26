@@ -26,21 +26,23 @@ export const HeadingM = styled.h3`
   font-size: .9375rem;
   line-height: 1.1875rem;
 `
-export const HeadingS = styled.h4`
+export const HeadingS = styled.h2<{ gray?: boolean }>`
   font-weight: bold;
   font-size: .75rem;
   line-height: .9375rem;
   letter-spacing: 2.4px;
+  color: ${props => props.gray ? '#828FA3' : '#000112'};
 `
 export const TextL = styled.p`
   font-weight: 500;
   font-size: .8125rem;
   line-height: 1.4375rem;
 `
-export const TextM = styled.p`
+export const TextM = styled.p<{ gray?: boolean }>`
   font-weight: bold;
   font-size: .75rem;
   line-height: .9375rem;
+  color: ${props => props.gray ? '#828FA3' : '#000112'};
 `
 export const FlexRow = styled.div`
   display: flex;
@@ -52,7 +54,8 @@ export const FlexRow = styled.div`
 export const lightTheme = {
   sidebarColour: '#ffffff',
   headerColour: '#ffffff',
-  mainColour: '#E4EBFA',
+  mainColour: '#F4F7FD',
+  headerTextColor: '#000112',
   newColumn: '#828FA3',
   boardTitleText: '#000112',
   taskBg: '#ffffff',
@@ -64,10 +67,11 @@ export const lightTheme = {
 export const darkTheme = {
   sidebarColour: '#2b2c37',
   headerColour: '#2b2c37',
-  mainColour: '#2B2C37',
+  mainColour: '#20212C',
+  headerTextColor: '#ffffff',
   newColumn: '#2B2C37',
   boardTitleText: '#ffffff',
-  taskBg: '#000112',
+  taskBg: '#2b2c37',
   taskHeaderText: '#ffffff',
   switchBg: '#20212C',
   lines: '#3E3F4E'

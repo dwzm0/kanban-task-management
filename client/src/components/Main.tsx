@@ -9,6 +9,8 @@ const Main = (): JSX.Element => {
   const selectCurrId = useAppSelector((state) => state.currId)
   const selectColumns = useAppSelector((state) => state.dashboards.filter((dashboard) => dashboard._id === selectCurrId)[0]?.columns)
 
+  const columnColors = ['#49C4E5', '#8471F2', '#67E2AE', '#FDC7AB', '#B7CBC0']
+
   if (selectColumns?.length === 0) {
     return (
       <StyledMainEmpty>
@@ -22,8 +24,8 @@ const Main = (): JSX.Element => {
 
   return (
     <StyledMain>
-        {selectColumns?.map((column) => {
-          return <Column key={column._id} name={column.name} tasks={column.tasks} />
+        {selectColumns?.map((column, i) => {
+          return <Column key={column._id} name={column.name} tasks={column.tasks} colColour={columnColors[i]}/>
         })}
     </StyledMain>
   )

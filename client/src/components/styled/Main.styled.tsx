@@ -6,6 +6,7 @@ export const StyledMain = styled.div`
     flex-direction: row;
     gap: 1.5rem;
     padding: 1.5rem;
+    background-color: ${props => props.theme.mainColour};
 `
 export const StyledMainEmpty = styled.div`
     grid-area: main;
@@ -14,4 +15,5 @@ export const StyledMainEmpty = styled.div`
     align-items: center;
     justify-content: center;
     gap: 2rem;
+    background-color: ${props => props.theme.mainColour};
 `

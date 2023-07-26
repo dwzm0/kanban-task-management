@@ -4,5 +4,6 @@ export const StyledColumn = styled.div`
     display: flex;
     flex-direction: column;
     width: 280px;
-    border: 1px solid black;
+    align-items: flex-start;
+    gap: 1.5rem;
 `
