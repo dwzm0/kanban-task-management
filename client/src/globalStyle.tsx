@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/strict-boolean-expressions */
 import { createGlobalStyle, styled } from 'styled-components'
 
 const GlobalStyle = createGlobalStyle`
@@ -14,10 +15,11 @@ export const HeadingXL = styled.h1`
   font-size: 1.5rem;
   line-height: 1.875rem;
 `
-export const HeadingL = styled.h2`
+export const HeadingL = styled.h2<{ gray?: boolean }>`
   font-weight: bold;
   font-size: 1.125rem;
   line-height: 1.4375rem;
+  color: ${props => props.gray ? '#828FA3' : '#000112'};
 `
 export const HeadingM = styled.h3`
   font-weight: bold;
