@@ -40,6 +40,12 @@ export const TextM = styled.p`
   font-size: .75rem;
   line-height: .9375rem;
 `
+export const FlexRow = styled.div`
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+`
 
 export const lightTheme = {
   sidebarColour: '#ffffff',
