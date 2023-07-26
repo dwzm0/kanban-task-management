@@ -8,6 +8,7 @@ import Main from './components/Main'
 import StyledContainer from './components/styled/Container.styled'
 import { useAppDispatch, useAppSelector } from './hooks/useReduxHooks'
 import { initializeDashboards } from './reducers/dashboardReducer'
+import { setCurrIdActionCreator } from './reducers/currIdReducer'
 import { ThemeProvider } from 'styled-components'
 import { ThemeCurrValueContext } from './contexts/themeContext'
 import { useDarkTheme } from './hooks/useDarkTheme'
@@ -22,8 +23,13 @@ const App = (): JSX.Element => {
     dispatch(initializeDashboards())
   }, [dispatch])
 
-  console.log(selectDashboards)
-  console.log(selectCurrId)
+  if (!selectCurrId) {
+    const savedLocalDashboardId = window.localStorage.getItem('currBlog')
+    dispatch(setCurrIdActionCreator(savedLocalDashboardId as string))
+  } else if (selectCurrId === 'null') {
+    const firstDashboardId = selectDashboards[0]?._id
+    dispatch(setCurrIdActionCreator(firstDashboardId))
+  }
 
   return (
     <ThemeCurrValueContext.Provider value={{ theme, toggleTheme }}>

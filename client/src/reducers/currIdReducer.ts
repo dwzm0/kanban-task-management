@@ -5,6 +5,7 @@ const currIdSlice = createSlice({
   initialState: '',
   reducers: {
     setCurrId (state, action) {
+      localStorage.setItem('currBlog', action.payload)
       return action.payload
     }
   }
