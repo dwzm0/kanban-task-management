@@ -1,8 +1,6 @@
 /* eslint-disable @typescript-eslint/strict-boolean-expressions */
 /* eslint-disable @typescript-eslint/restrict-template-expressions */
 import { styled } from 'styled-components'
-import boardImg from '../../assets/icon-board.svg'
-import closeImg from '../../assets/icon-hide-sidebar.svg'
 
 export const StyledSidebarMenu = styled.div`
     display: flex;
@@ -14,21 +12,24 @@ export const StyledSidebarMenuContainer = styled.div`
     flex: 1;
 `
 
-export const StyledSidebarMenuItem = styled.div<{ close?: boolean }>`
+export const StyledSidebarMenuItem = styled.div<{ purple?: string }>`
     display: flex;
     flex-direction: row;
     align-items: center;
     gap: .75rem;
     padding-block: .9375rem;
+    color: ${props => props.purple ? props.purple : ''};
+
+    &.selected {
+        color: var(--white);
+        background-color: var(--main-purple);
+        border-radius: 0 2rem 2rem 0;
+        margin-left: -2.08rem;
+    }
 
     &:hover {
         cursor: pointer;
     }
 
-    img {
-        background-image: ${props => props.close ? `url(${closeImg})` : `url(${boardImg})`};
-        width: 16px;
-        height: 16px;
-    }
 
 `
