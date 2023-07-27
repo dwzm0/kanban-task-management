@@ -8,7 +8,7 @@ export const StyledSidebarMenu = styled.div`
     display: flex;
     flex-direction: column;
     height: 91%;
-    color: rgb(130, 143, 163);
+    color: var(--medium-grey);
 `
 export const StyledSidebarMenuContainer = styled.div`
     flex: 1;

@@ -25,7 +25,7 @@ export const StyledSwitch = styled.div`
     .toggle-switch .switch {
         position: absolute;
         cursor: pointer;
-        background-color: #635ff7;
+        background-color: var(--main-purple);
         border-radius: 25px;
         top: 0;
         right: 0;
@@ -41,7 +41,7 @@ export const StyledSwitch = styled.div`
         top: 3px;
         width: 14px;
         height: 14px;
-        background-color: #ffffff;
+        background-color: var(--white);
         border-radius: 50%;
         transition: transform 0.3s ease;
     }

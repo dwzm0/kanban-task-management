@@ -13,25 +13,25 @@ const StyledButton = styled.button`
         }
 
     &.primary {
-        background-color: #635FC7;
-        color: #ffffff;
+        background-color: var(--main-purple);
+        color: var(--white);
         
         &:hover {
-           background-color: #A8A4FF;
+           background-color: var(--main-purpleHOV);
         }
     }
 
     &.secondary {
-        background-color: '#f4f7fd';
-        color: #635FC7;
+        background-color: var(--light-grey);
+        color: var(--main-purple);
     }
 
     &.destructive {
-        background-color: #EA5555;
-        color: #ffffff;   
+        background-color: var(--red);
+        color: var(--white);   
 
         &:hover {
-           background-color: #FF9898;
+           background-color: var(--redHOV);
         }
     }
 
