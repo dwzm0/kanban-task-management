@@ -5,14 +5,15 @@ import { useAppSelector, useAppDispatch } from '../hooks/useReduxHooks'
 import { HeadingM, TextM } from '../globalStyle'
 import Switch from './Switch'
 import { setCurrIdActionCreator } from '../reducers/currIdReducer'
+import { setIsShownSidebarActionCreator } from '../reducers/isShownSidebarReducer'
 
-interface SidebarProps {
+interface SidebarMenuItemProps {
   text?: string
   close?: boolean
-  handleClick?: () => Promise<void>
+  handleClick?: (() => Promise<void>) | (() => void)
 }
 
-const SidebarMenuItem: React.FC<SidebarProps> = ({ text, close, handleClick }): JSX.Element => {
+const SidebarMenuItem: React.FC<SidebarMenuItemProps> = ({ text, close, handleClick }): JSX.Element => {
   return (
       <>
         <StyledSidebarMenuItem close={close} onClick={handleClick}>
@@ -26,12 +27,13 @@ const SidebarMenuItem: React.FC<SidebarProps> = ({ text, close, handleClick }): 
 const SidebarMenu = (): JSX.Element => {
   const dispatch = useAppDispatch()
   const selectDashboards = useAppSelector((state) => state.dashboards)
+  const selectIsShownSidebar = useAppSelector((state) => state.isShownSidebar)
 
   return (
     <>
         <StyledSidebarMenu>
             <StyledSidebarMenuContainer>
-                <TextM>ALL BOARDS ({selectDashboards.length})</TextM>
+                <TextM gray>ALL BOARDS ({selectDashboards.length})</TextM>
                 {selectDashboards.map((board) => {
                   return (
                         <SidebarMenuItem key={board._id} text={board.name} handleClick={async () => { await dispatch(setCurrIdActionCreator(board._id)) }}/>
@@ -40,7 +42,7 @@ const SidebarMenu = (): JSX.Element => {
                 <SidebarMenuItem text='+ Create New Board'/>
             </StyledSidebarMenuContainer>
             <Switch />
-            <SidebarMenuItem close text='Hide Sidebar' />
+            <SidebarMenuItem close text='Hide Sidebar' handleClick={async () => { await dispatch(setIsShownSidebarActionCreator(!selectIsShownSidebar)) }}/>
         </StyledSidebarMenu>
     </>
   )

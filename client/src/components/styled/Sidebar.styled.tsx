@@ -7,4 +7,8 @@ export const StyledSidebar = styled.div`
     background-color: ${props => props.theme.sidebarColour};
     grid-area: sidebar;
     border-right: 1px solid ${props => props.theme.lines};
+
+    &.hideSidebar {
+       display: none;
+    }
 `

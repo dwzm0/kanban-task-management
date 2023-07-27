@@ -18,6 +18,7 @@ const App = (): JSX.Element => {
   const [theme, toggleTheme] = useDarkTheme()
   const selectDashboards = useAppSelector((state) => state.dashboards)
   const selectCurrId = useAppSelector((state) => state.currId)
+  const selectIsShownSidebar = useAppSelector((state) => state.isShownSidebar)
 
   useEffect(() => {
     dispatch(initializeDashboards())
@@ -35,7 +36,7 @@ const App = (): JSX.Element => {
     <ThemeCurrValueContext.Provider value={{ theme, toggleTheme }}>
       <ThemeProvider theme={theme === 'dark' ? darkTheme : lightTheme}>
         <GlobalStyle />
-        <StyledContainer >
+        <StyledContainer className={selectIsShownSidebar ? '' : 'hideSidebar'}>
           <Sidebar />
           <Header />
           <Main />

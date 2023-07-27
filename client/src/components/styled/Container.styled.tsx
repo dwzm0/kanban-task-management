@@ -11,6 +11,12 @@ const StyledContainer = styled.div`
     grid-template-areas:
     "sidebar header"
     "sidebar main";
+
+    &.hideSidebar {
+        grid-template-areas:
+        "header header"
+        "main main";
+    }
 `
 
 export default StyledContainer
