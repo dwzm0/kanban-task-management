@@ -1,7 +1,8 @@
+/* eslint-disable @typescript-eslint/strict-boolean-expressions */
 import styled from 'styled-components'
 
-const StyledButton = styled.button`
-    padding-block: 1rem;
+const StyledButton = styled.button<{ sm?: boolean }>`
+    padding-block: ${props => props.sm ? '0.75rem' : '1rem'} ;
     padding-inline: 1.5rem;
     border-radius: 1.5rem;
     font-weight: bold;

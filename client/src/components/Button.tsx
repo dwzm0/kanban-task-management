@@ -5,11 +5,14 @@ interface ButtonProps {
   variant?: string
   disabled?: boolean
   children?: ReactNode
+  handleClick?: () => void
+  type?: 'submit' | 'button' | 'reset' | undefined
+  sm?: boolean
 }
 
-const Button = ({ variant, disabled, children }: ButtonProps): JSX.Element => {
+const Button = ({ variant, disabled, children, handleClick, type, sm }: ButtonProps): JSX.Element => {
   return (
-    <StyledButton className={variant} disabled={disabled}>{children}</StyledButton>
+    <StyledButton type={type} onClick={handleClick} className={variant} disabled={disabled} sm={sm}>{children}</StyledButton>
   )
 }
 

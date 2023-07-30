@@ -16,7 +16,7 @@ const Main = (): JSX.Element => {
   if (selectColumns?.length === 0) {
     return (
       <StyledMainEmpty>
-        <HeadingL gray>This board is empty. Create a new column to get started.</HeadingL>
+        <HeadingL>This board is empty. Create a new column to get started.</HeadingL>
         <Button variant='primary'>
           <HeadingM>+ Add New Column</HeadingM>
         </Button>

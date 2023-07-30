@@ -9,41 +9,42 @@ const GlobalStyle = createGlobalStyle`
   font-family: 'Plus Jakarta Sans', sans-serif;
   transition: all 0.3s linear;
  } 
-`
 
+ body {
+  background-color: ${props => props.theme.bodyColour};;
+}
+`
 export const HeadingXL = styled.h1`
   font-weight: bold;
   font-size: 1.5rem;
   line-height: 1.875rem;
 `
-export const HeadingL = styled.h2<{ gray?: boolean }>`
+export const HeadingL = styled.h2`
   font-weight: bold;
   font-size: 1.125rem;
   line-height: 1.4375rem;
-  color: ${props => props.gray ? 'var(--medium-grey)' : 'var(--black)'};
 `
 export const HeadingM = styled.h3`
   font-weight: bold;
   font-size: .9375rem;
   line-height: 1.1875rem;
 `
-export const HeadingS = styled.h2<{ gray?: boolean }>`
+export const HeadingS = styled.h2`
   font-weight: bold;
   font-size: .75rem;
   line-height: .9375rem;
   letter-spacing: 2.4px;
-  color: ${props => props.gray ? 'var(--medium-grey)' : 'var(--black)'};
+ 
 `
 export const TextL = styled.p`
   font-weight: 500;
   font-size: .8125rem;
   line-height: 1.4375rem;
 `
-export const TextM = styled.p<{ gray?: boolean }>`
+export const TextM = styled.p`
   font-weight: bold;
   font-size: .75rem;
   line-height: .9375rem;
-  color: ${props => props.gray ? 'var(--medium-grey)' : 'var(--black)'};
 `
 export const FlexRow = styled.div`
   display: flex;
@@ -53,6 +54,7 @@ export const FlexRow = styled.div`
 `
 
 export const lightTheme = {
+  bodyColour: 'var(--white)',
   sidebarColour: 'var(--white)',
   headerColour: 'var(--white)',
   mainColour: 'var(--light-grey)',
@@ -62,10 +64,14 @@ export const lightTheme = {
   taskBg: 'var(--white)',
   taskHeaderText: 'var(--black)',
   switchBg: 'var(--light-grey)',
-  lines: 'var(--light-lines)'
+  lines: 'var(--light-lines)',
+  modalBg: 'var(--white)',
+  inputNamesColour: 'var(--medium-grey)',
+  modalHeader: 'var(--black)'
 }
 
 export const darkTheme = {
+  bodyColour: 'var(--dark-grey)',
   sidebarColour: 'var(--dark-grey)',
   headerColour: 'var(--dark-grey)',
   mainColour: 'var(--very-dark-grey)',
@@ -75,7 +81,11 @@ export const darkTheme = {
   taskBg: 'var(--dark-grey)',
   taskHeaderText: 'var(--white)',
   switchBg: 'var(--very-dark-grey)',
-  lines: 'var(--dark-lines)'
+  lines: 'var(--dark-lines)',
+  modalBg: 'var(--dark-grey)',
+  inputNamesColour: 'var(--white)',
+  modalHeader: 'var(--white)'
+
 }
 
 export default GlobalStyle

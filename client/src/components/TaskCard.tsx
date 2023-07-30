@@ -11,7 +11,7 @@ const TaskCard = ({ task }: TaskProps): JSX.Element => {
   return (
     <StyledTaskCard>
         <HeadingM>{task.title}</HeadingM>
-        <TextM gray>{task?.subtasks?.filter((subtask) => subtask.isCompleted).length} of {task?.subtasks?.length} subtasks</TextM>
+        <TextM>{task?.subtasks?.filter((subtask) => subtask.isCompleted).length} of {task?.subtasks?.length} subtasks</TextM>
     </StyledTaskCard>
   )
 }

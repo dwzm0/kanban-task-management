@@ -10,6 +10,11 @@ export const StyledSidebarMenu = styled.div`
 `
 export const StyledSidebarMenuContainer = styled.div`
     flex: 1;
+    > * {
+        &:nth-child(1) {
+        padding-bottom: 1rem;
+    }
+    }
 `
 
 export const StyledSidebarMenuItem = styled.div<{ purple?: string }>`

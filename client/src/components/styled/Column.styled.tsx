@@ -6,4 +6,5 @@ export const StyledColumn = styled.div`
     width: 280px;
     align-items: flex-start;
     gap: 1.5rem;
+    color: var(--medium-grey);
 `

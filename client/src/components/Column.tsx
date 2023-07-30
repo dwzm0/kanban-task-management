@@ -17,7 +17,7 @@ const Column = ({ name, tasks, colColour }: ColumnProps): JSX.Element => {
     <StyledColumn>
         <FlexRow>
             <StyledColumnDot colColour={colColour}/>
-            <HeadingS gray>{name.toUpperCase()} ({tasks?.length})</HeadingS>
+            <HeadingS >{name.toUpperCase()} ({tasks?.length})</HeadingS>
         </FlexRow>
         {tasks?.map((task) => {
           return <TaskCard key={task._id} task={task} />
