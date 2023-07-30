@@ -1,10 +1,10 @@
 import styled from 'styled-components'
+import { FlexCol } from '../../globalStyle'
 
 export const StyledFormWrapper = styled.form`
     fieldset {
         border: none;
-        display: flex;
-        flex-direction: column;
+        ${FlexCol}
 
     legend {
         padding-bottom: 1.5rem;

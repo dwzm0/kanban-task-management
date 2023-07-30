@@ -1,6 +1,7 @@
 /* eslint-disable @typescript-eslint/strict-boolean-expressions */
 /* eslint-disable @typescript-eslint/restrict-template-expressions */
 import { styled } from 'styled-components'
+import { FlexRow } from '../../globalStyle'
 
 export const StyledSidebarMenu = styled.div`
     display: flex;
@@ -18,8 +19,7 @@ export const StyledSidebarMenuContainer = styled.div`
 `
 
 export const StyledSidebarMenuItem = styled.div<{ purple?: string }>`
-    display: flex;
-    flex-direction: row;
+    ${FlexRow}
     align-items: center;
     gap: .75rem;
     padding-block: .9375rem;

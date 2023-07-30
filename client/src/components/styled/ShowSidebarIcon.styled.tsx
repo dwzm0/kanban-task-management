@@ -1,11 +1,11 @@
 import styled from 'styled-components'
+import { FlexCenter } from '../../globalStyle'
 
 export const StyledShowSidebarIcon = styled.div`
     width: 56px;
     height: 48px;
     display: flex;
-    justify-content: center;
-    align-items: center;
+    ${FlexCenter}
     background-color: var(--main-purple);
     position: sticky;
     top: 870px;

@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/strict-boolean-expressions */
-import { createGlobalStyle, styled } from 'styled-components'
+import { createGlobalStyle, css, styled } from 'styled-components'
 
 const GlobalStyle = createGlobalStyle`
   * {
@@ -11,7 +11,7 @@ const GlobalStyle = createGlobalStyle`
  } 
 
  body {
-  background-color: ${props => props.theme.bodyColour};;
+  background-color: ${props => props.theme.bodyColour};
 }
 `
 export const HeadingXL = styled.h1`
@@ -46,9 +46,23 @@ export const TextM = styled.p`
   font-size: .75rem;
   line-height: .9375rem;
 `
-export const FlexRow = styled.div`
+export const FlexRowContainer = styled.div`
   display: flex;
   flex-direction: row;
+`
+export const FlexColContainer = styled.div`
+  display : flex;
+  flex-direction: column;
+`
+export const FlexRow = css`
+  display: flex;
+  flex-direction: row;
+`
+export const FlexCol = css`
+  display : flex;
+  flex-direction: column;
+`
+export const FlexCenter = css`
   align-items: center;
   justify-content: center;
 `
@@ -67,7 +81,9 @@ export const lightTheme = {
   lines: 'var(--light-lines)',
   modalBg: 'var(--white)',
   inputNamesColour: 'var(--medium-grey)',
-  modalHeader: 'var(--black)'
+  modalHeader: 'var(--black)',
+  inputColour: 'var(--white)',
+  inputTextColour: 'var(--black)'
 }
 
 export const darkTheme = {
@@ -84,8 +100,9 @@ export const darkTheme = {
   lines: 'var(--dark-lines)',
   modalBg: 'var(--dark-grey)',
   inputNamesColour: 'var(--white)',
-  modalHeader: 'var(--white)'
-
+  modalHeader: 'var(--white)',
+  inputColour: 'var(--dark-grey)',
+  inputTextColour: 'var(--white)'
 }
 
 export default GlobalStyle

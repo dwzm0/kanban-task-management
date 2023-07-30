@@ -1,4 +1,5 @@
 import { styled } from 'styled-components'
+import { FlexCenter } from '../../globalStyle'
 
 export const StyledSwitch = styled.div`
     max-width: 251px;
@@ -6,8 +7,7 @@ export const StyledSwitch = styled.div`
     background-color: ${props => props.theme.switchBg};
     border-radius: .5rem;
     display: flex;
-    align-items: center;
-    justify-content: center;
+    ${FlexCenter}
 
 
     .toggle-switch {

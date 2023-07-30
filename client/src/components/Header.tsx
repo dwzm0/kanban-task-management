@@ -1,6 +1,6 @@
 import React from 'react'
 import { StyledHeader } from './styled/Header.styled'
-import { HeadingXL, HeadingM, FlexRow } from '../globalStyle'
+import { HeadingXL, HeadingM, FlexRowContainer } from '../globalStyle'
 import EditBoardMenuIcon from './icons/EditBoardMenuIcon'
 import Button from './Button'
 import { useAppSelector } from '../hooks/useReduxHooks'
@@ -12,12 +12,12 @@ const Header = (): JSX.Element => {
   return (
     <StyledHeader>
         <HeadingXL>{selectDashboardName}</HeadingXL>
-        <FlexRow>
-          <Button variant="primary" disabled={true}>
-              <HeadingM>+ Add New Task</HeadingM>
-          </Button>
-        <EditBoardMenuIcon/>
-        </FlexRow>
+        <FlexRowContainer>
+            <Button variant="primary" disabled={true}>
+                <HeadingM>+ Add New Task</HeadingM>
+            </Button>
+            <EditBoardMenuIcon />
+        </FlexRowContainer>
     </StyledHeader>
   )
 }

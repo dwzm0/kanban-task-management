@@ -1,8 +1,8 @@
 import styled from 'styled-components'
+import { FlexCol } from '../../globalStyle'
 
 export const StyledTaskCard = styled.div`
-    display: flex;
-    flex-direction: column;
+    ${FlexCol}
     gap: 0.5rem;
     width: 100%;
     height: fit-content;
