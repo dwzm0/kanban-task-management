@@ -74,7 +74,7 @@ const SidebarMenu = (): JSX.Element => {
             <Switch />
             <SidebarMenuItem close text='Hide Sidebar' handleClick={async () => { await dispatch(setIsShownSidebarActionCreator(!selectIsShownSidebar)) }}/>
         </StyledSidebarMenu>
-        <CreateBoard addBoardModal={addBoardModal}/>
+        <CreateBoard addBoardModal={addBoardModal} handleClick={ToggleBoardModal}/>
     </>
   )
 }

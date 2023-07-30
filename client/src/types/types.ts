@@ -28,3 +28,6 @@ export interface ThemeProps {
   theme: string
   toggleTheme: () => void
 }
+
+export type IBoardWithoutId = Omit<IBoard, '_id'>
+export type IColumnWithoutId = Omit<IColumn, '_id'>

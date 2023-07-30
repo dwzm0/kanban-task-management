@@ -1,18 +1,24 @@
+/* eslint-disable @typescript-eslint/no-misused-promises */
 /* eslint-disable @typescript-eslint/explicit-function-return-type */
 import React, { type FormEvent, useState } from 'react'
 import { StyledModalContainer, StyledCreateBoard } from '../styled/CreateBoard.styled'
 import { StyledInputGroupContainer } from '../styled/InputGroupContainer.styled'
+import { TextM } from '../../globalStyle'
 import FormWrapper from '../FormWrapper'
 import InputField from '../InputField'
 import Input from '../Input'
 import Button from '../Button'
-import { TextM } from '../../globalStyle'
+import { useAppDispatch } from '../../hooks/useReduxHooks'
+import { createBoard } from '../../reducers/dashboardReducer'
+import { type IBoardWithoutId, type IColumn } from '../../types/types'
 
 interface CreateBoardProps {
   addBoardModal: boolean
+  handleClick: () => void
 }
 
-const CreateBoard = ({ addBoardModal }: CreateBoardProps): JSX.Element => {
+const CreateBoard = ({ addBoardModal, handleClick }: CreateBoardProps): JSX.Element => {
+  const dispatch = useAppDispatch()
   const [defaultCol, setDefaultCol] = useState<string[]>(['Todo', 'Doing'])
 
   const handleInputDelete = (index: number) => {
@@ -27,7 +33,7 @@ const CreateBoard = ({ addBoardModal }: CreateBoardProps): JSX.Element => {
     setDefaultCol(newDefaultColState)
   }
 
-  const handleOnSubmit = (e: FormEvent<HTMLFormElement>) => {
+  const handleOnSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault()
     const data = new FormData(e.currentTarget)
     const entries = data.entries()
@@ -41,21 +47,25 @@ const CreateBoard = ({ addBoardModal }: CreateBoardProps): JSX.Element => {
         name.push(value)
       }
     }
+
     const formatedColumns = columns.map(col => {
       return { name: col }
     })
-    const addBoardObj = {
+
+    const addBoardObj: IBoardWithoutId = {
       name: name.join(''),
-      columns: formatedColumns
+      columns: formatedColumns as IColumn[]
     }
-    console.log(addBoardObj)
+
+    await dispatch(createBoard(addBoardObj))
+    handleClick()
   }
 
   return (
     <>
     {addBoardModal
-      ? <StyledModalContainer>
-            <StyledCreateBoard>
+      ? <StyledModalContainer onClick={handleClick}>
+            <StyledCreateBoard onClick={(e) => { e.stopPropagation() }}>
                 <FormWrapper title="Add New Board" onSubmit={handleOnSubmit} >
                         <StyledInputGroupContainer>
                             <TextM>Name</TextM>

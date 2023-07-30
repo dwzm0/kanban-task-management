@@ -4,7 +4,7 @@ const createPayload = {
     body: object({
        name: string({
             required_error: "Name is required"
-       }),
+       }).min(3),
        columns: array(object({name: string()})).optional(),
     })
 };
@@ -13,7 +13,7 @@ const updatePayload = {
   body: object({
      name: string({
           required_error: "Name is required"
-     }).optional(),
+     }).min(3).optional(),
      columns: array(object({name: string()})).optional(),
   })
 };
