@@ -83,7 +83,8 @@ export const lightTheme = {
   inputNamesColour: 'var(--medium-grey)',
   modalHeader: 'var(--black)',
   inputColour: 'var(--white)',
-  inputTextColour: 'var(--black)'
+  inputTextColour: 'var(--black)',
+  boardMenuColor: 'var(--white)'
 }
 
 export const darkTheme = {
@@ -102,7 +103,8 @@ export const darkTheme = {
   inputNamesColour: 'var(--white)',
   modalHeader: 'var(--white)',
   inputColour: 'var(--dark-grey)',
-  inputTextColour: 'var(--white)'
+  inputTextColour: 'var(--white)',
+  boardMenuColor: 'var(--black)'
 }
 
 export default GlobalStyle
