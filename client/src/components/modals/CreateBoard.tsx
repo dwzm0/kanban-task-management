@@ -1,9 +1,9 @@
 /* eslint-disable @typescript-eslint/no-misused-promises */
 /* eslint-disable @typescript-eslint/explicit-function-return-type */
 import React, { type FormEvent, useState } from 'react'
-import { StyledModalContainer, StyledCreateBoard } from '../styled/StyledModals/CreateBoard.styled'
+import { StyledCreateBoard } from '../styled/StyledModals/CreateBoard.styled'
 import { StyledInputGroupContainer } from '../styled/InputGroupContainer.styled'
-import { TextM } from '../../globalStyle'
+import { TextM, StyledModalContainer } from '../../globalStyle'
 import FormWrapper from '../FormWrapper'
 import InputField from '../InputField'
 import Input from '../Input'

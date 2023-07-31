@@ -9,7 +9,7 @@ const getAll = async () => {
 }
 
 const getSingle = async (id: string) => {
-  const resp = await axios.get(`baseUrl/${id}`)
+  const resp = await axios.get(`${baseUrl}/${id}`)
   return resp.data
 }
 
@@ -18,4 +18,8 @@ const createBoard = async (board: IBoardWithoutId) => {
   return resp.data
 }
 
-export default { getAll, getSingle, createBoard }
+const deleteBoard = async (id: string) => {
+  await axios.delete(`${baseUrl}/${id}`)
+}
+
+export default { getAll, getSingle, createBoard, deleteBoard }

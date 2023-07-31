@@ -66,6 +66,19 @@ export const FlexCenter = css`
   align-items: center;
   justify-content: center;
 `
+export const StyledModalContainer = styled.div`
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    display: flex;
+    ${FlexCenter}
+    background-color: #828FA340;
+    opacity: 1;
+    visibility: visible;
+    transition: all 0.2s ease;
+`
 
 export const lightTheme = {
   bodyColour: 'var(--white)',
@@ -84,7 +97,8 @@ export const lightTheme = {
   modalHeader: 'var(--black)',
   inputColour: 'var(--white)',
   inputTextColour: 'var(--black)',
-  boardMenuColor: 'var(--white)'
+  boardMenuColor: 'var(--white)',
+  deleteModalBG: 'var(--white)'
 }
 
 export const darkTheme = {
@@ -104,7 +118,8 @@ export const darkTheme = {
   modalHeader: 'var(--white)',
   inputColour: 'var(--dark-grey)',
   inputTextColour: 'var(--white)',
-  boardMenuColor: 'var(--black)'
+  boardMenuColor: 'var(--black)',
+  deleteModalBG: 'var(--dark-grey)'
 }
 
 export default GlobalStyle

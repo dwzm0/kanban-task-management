@@ -13,6 +13,9 @@ export const StyledBoardMenu = styled.div`
     height: min-content;
     top: 90px;
     
+    * {
+        cursor: pointer;
+    }
 
     > * {
         &:nth-child(2) {
