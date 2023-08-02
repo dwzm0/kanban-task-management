@@ -4,7 +4,7 @@ import { HeadingXL, HeadingM, FlexRowContainer } from '../globalStyle'
 import EditBoardMenuIcon from './icons/EditBoardMenuIcon'
 import Button from './Button'
 import { useAppSelector } from '../hooks/useReduxHooks'
-import BoardMenu from './modals/BoardMenu'
+import BoardMenuModal from './modals/BoardMenuModal'
 
 const Header = (): JSX.Element => {
   const [boardMenu, setBoardMenu] = useState<boolean>(false)
@@ -20,7 +20,7 @@ const Header = (): JSX.Element => {
                 <HeadingM>+ Add New Task</HeadingM>
             </Button>
             <EditBoardMenuIcon handleBoardMenu={() => { setBoardMenu(!boardMenu) }}/>
-            {boardMenu ? <BoardMenu /> : null}
+            {boardMenu ? <BoardMenuModal boardMenu={boardMenu} setBoardMenu={setBoardMenu}/> : null}
         </FlexRowContainer>
     </StyledHeader>
     </>

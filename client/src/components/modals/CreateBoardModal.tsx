@@ -1,9 +1,8 @@
 /* eslint-disable @typescript-eslint/no-misused-promises */
 /* eslint-disable @typescript-eslint/explicit-function-return-type */
 import React, { type FormEvent, useState } from 'react'
-import { StyledCreateBoard } from '../styled/StyledModals/CreateBoard.styled'
 import { StyledInputGroupContainer } from '../styled/InputGroupContainer.styled'
-import { TextM, StyledModalContainer } from '../../globalStyle'
+import { TextM, StyledModalContainer, StyledModal } from '../../globalStyle'
 import FormWrapper from '../FormWrapper'
 import InputField from '../InputField'
 import Input from '../Input'
@@ -17,7 +16,7 @@ interface CreateBoardProps {
   handleClick: () => void
 }
 
-const CreateBoard = ({ addBoardModal, handleClick }: CreateBoardProps): JSX.Element => {
+const CreateBoardModal = ({ addBoardModal, handleClick }: CreateBoardProps): JSX.Element => {
   const dispatch = useAppDispatch()
   const [defaultCol, setDefaultCol] = useState<string[]>(['Todo', 'Doing'])
 
@@ -65,14 +64,15 @@ const CreateBoard = ({ addBoardModal, handleClick }: CreateBoardProps): JSX.Elem
     <>
     {addBoardModal
       ? <StyledModalContainer onClick={handleClick}>
-            <StyledCreateBoard onClick={(e) => { e.stopPropagation() }}>
+            <StyledModal onClick={(e) => { e.stopPropagation() }}>
                 <FormWrapper title="Add New Board" onSubmit={handleOnSubmit} >
                         <StyledInputGroupContainer>
                             <TextM>Name</TextM>
                             <Input inputType='text' inputName='Name' placeholder='e.g Web Design'/>
                             <TextM>Columns</TextM>
                             {defaultCol.map((col, i) => {
-                              return <InputField key={i} index={i} inputType='text' inputName='Columns' defaultValue={col} handelInputDelete={handleInputDelete}/>
+                              return <InputField key={i} index={i} inputType='text'
+                              inputName='Columns' defaultValue={col} handelInputDelete={handleInputDelete}/>
                             })}
                             <Button sm type='button' variant='secondary' handleClick={handleInputAdd}>
                                 <TextM>+ Add New Column</TextM>
@@ -82,7 +82,7 @@ const CreateBoard = ({ addBoardModal, handleClick }: CreateBoardProps): JSX.Elem
                         <TextM>Create New Bord</TextM>
                     </Button>
                 </FormWrapper>
-            </StyledCreateBoard>
+            </StyledModal>
         </StyledModalContainer>
       : null
     }
@@ -90,4 +90,4 @@ const CreateBoard = ({ addBoardModal, handleClick }: CreateBoardProps): JSX.Elem
   )
 }
 
-export default CreateBoard
+export default CreateBoardModal

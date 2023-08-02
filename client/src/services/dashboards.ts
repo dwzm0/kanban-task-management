@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/explicit-function-return-type */
 import axios from 'axios'
-import { type IBoardWithoutId } from '../types/types'
+import { type IBoard, type IBoardWithoutId } from '../types/types'
 const baseUrl = 'http://localhost:3001/api/dashboards'
 
 const getAll = async () => {
@@ -22,4 +22,9 @@ const deleteBoard = async (id: string) => {
   await axios.delete(`${baseUrl}/${id}`)
 }
 
-export default { getAll, getSingle, createBoard, deleteBoard }
+const updateBoard = async (board: IBoard) => {
+  const resp = await axios.put(`${baseUrl}/${board._id}`, board)
+  return resp.data
+}
+
+export default { getAll, getSingle, createBoard, deleteBoard, updateBoard }

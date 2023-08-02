@@ -17,11 +17,20 @@ const dashboardSlice = createSlice({
     deleteBoard (state, action) {
       const id = action.payload.id
       return state.filter((board) => board._id !== id)
+    },
+    updateboard (state, action) {
+      const id = action.payload._id
+      return state.map((board) => {
+        if (board._id === id) {
+          board = action.payload
+        }
+        return board
+      })
     }
   }
 })
 
-export const { setDashboards, appendBoard, deleteBoard } = dashboardSlice.actions
+export const { setDashboards, appendBoard, deleteBoard, updateboard } = dashboardSlice.actions
 
 export const initializeDashboards = () => {
   return async (dispatch: any) => {
@@ -41,6 +50,13 @@ export const delBoard = (id: string) => {
   return async (dispatch: any) => {
     await dashboardService.deleteBoard(id)
     dispatch(deleteBoard(id))
+  }
+}
+
+export const updBoard = (board: IBoard) => {
+  return async (dispatch: any) => {
+    const newUpdatedBoard = await dashboardService.updateBoard(board)
+    dispatch(updateboard(newUpdatedBoard))
   }
 }
 

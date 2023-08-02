@@ -8,7 +8,7 @@ import { HeadingM, TextM } from '../globalStyle'
 import Switch from './Switch'
 import { setCurrIdActionCreator } from '../reducers/currIdReducer'
 import { setIsShownSidebarActionCreator } from '../reducers/isShownSidebarReducer'
-import CreateBoard from './modals/CreateBoard'
+import CreateBoardModal from './modals/CreateBoardModal'
 
 interface SidebarMenuItemProps {
   id?: string
@@ -66,15 +66,17 @@ const SidebarMenu = (): JSX.Element => {
                 <TextM>ALL BOARDS ({selectDashboards.length})</TextM>
                 {selectDashboards.map((board) => {
                   return (
-                        <SidebarMenuItem key={board._id} id={board._id} text={board.name} handleClick={async () => { await dispatch(setCurrIdActionCreator(board._id)) }}/>
+                        <SidebarMenuItem key={board._id} id={board._id} text={board.name}
+                        handleClick={async () => { await dispatch(setCurrIdActionCreator(board._id)) }}/>
                   )
                 })}
                 <SidebarMenuItem handleClick={ToggleBoardModal} purple='#635fc7' text='+ Create New Board'/>
             </StyledSidebarMenuContainer>
             <Switch />
-            <SidebarMenuItem close text='Hide Sidebar' handleClick={async () => { await dispatch(setIsShownSidebarActionCreator(!selectIsShownSidebar)) }}/>
+            <SidebarMenuItem close text='Hide Sidebar'
+            handleClick={async () => { await dispatch(setIsShownSidebarActionCreator(!selectIsShownSidebar)) }}/>
         </StyledSidebarMenu>
-        <CreateBoard addBoardModal={addBoardModal} handleClick={ToggleBoardModal}/>
+        <CreateBoardModal addBoardModal={addBoardModal} handleClick={ToggleBoardModal}/>
     </>
   )
 }

@@ -79,7 +79,13 @@ export const StyledModalContainer = styled.div`
     visibility: visible;
     transition: all 0.2s ease;
 `
-
+export const StyledModal = styled.div`
+    ${FlexCol}
+    width: 480px;
+    height: min-content;
+    padding: 2rem;
+    background-color: ${props => props.theme.modalBg};
+`
 export const lightTheme = {
   bodyColour: 'var(--white)',
   sidebarColour: 'var(--white)',
@@ -100,7 +106,6 @@ export const lightTheme = {
   boardMenuColor: 'var(--white)',
   deleteModalBG: 'var(--white)'
 }
-
 export const darkTheme = {
   bodyColour: 'var(--dark-grey)',
   sidebarColour: 'var(--dark-grey)',
