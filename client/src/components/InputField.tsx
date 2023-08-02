@@ -6,17 +6,17 @@ import CrossIcon from './icons/CrossIcon'
 
 interface InputFieldProps {
   inputType: string
-  handelInputDelete: (index: number) => void
+  handelInputDelete: (id: string) => void
   defaultValue: string
   inputName: string
-  index: number
+  id: string
 }
 
-const InputField = ({ inputType, defaultValue, handelInputDelete, inputName, index }: InputFieldProps): JSX.Element => {
+const InputField = ({ inputType, defaultValue, handelInputDelete, inputName, id }: InputFieldProps): JSX.Element => {
   return (
     <StyledInputField>
         <Input inputName={inputName} inputType={inputType} defaultValue={defaultValue} />
-        <CrossIcon index={index} handelInputDelete={handelInputDelete}/>
+        <CrossIcon id={id} handelInputDelete={handelInputDelete}/>
     </StyledInputField>
   )
 }

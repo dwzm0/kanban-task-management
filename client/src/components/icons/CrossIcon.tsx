@@ -2,14 +2,14 @@ import React from 'react'
 import img from '../../assets/icon-cross.svg'
 
 interface CrossIconProps {
-  handelInputDelete: (index: number) => void
-  index: number
+  handelInputDelete: (id: string) => void
+  id: string
 }
 
-const CrossIcon = ({ handelInputDelete, index }: CrossIconProps): JSX.Element => {
+const CrossIcon = ({ handelInputDelete, id }: CrossIconProps): JSX.Element => {
   return (
         <>
-            <img style={{ cursor: 'pointer' }} src={img} onClick={() => { handelInputDelete(index) }}/>
+            <img style={{ cursor: 'pointer' }} src={img} onClick={() => { handelInputDelete(id) }}/>
         </>
   )
 }

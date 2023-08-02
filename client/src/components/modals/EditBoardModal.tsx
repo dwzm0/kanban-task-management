@@ -13,6 +13,7 @@ import { useAppDispatch, useAppSelector } from '../../hooks/useReduxHooks'
 import { type IBoard, type IColumn, type IColumnWithoutId } from '../../types/types'
 import { updBoard } from '../../reducers/dashboardReducer'
 import { useImmer } from 'use-immer'
+import { ObjectId } from 'bson'
 
 interface CreateBoardProps {
   editBoardModal: boolean
@@ -27,14 +28,15 @@ const EditBoardModal = ({ editBoardModal, handleClick }: CreateBoardProps): JSX.
 
   useEffect(() => setCols(selectDashboard.columns as IColumn[]), [])
 
-  const handleInputDelete = (index: number) => {
-    const newDefaultColState = cols?.filter((_col, i) => i !== index)
+  const handleInputDelete = (id: string) => {
+    console.log(cols)
+    const newDefaultColState = cols?.filter((col) => col._id !== id)
     console.log(newDefaultColState)
     setCols(newDefaultColState)
   }
 
   const handleInputAdd = () => {
-    const newDefaultColState = [...cols as any[], '']
+    const newDefaultColState = [...cols as any[], { name: '', _id: String(new ObjectId()) }]
     setCols(newDefaultColState as unknown as IColumn[])
   }
 
@@ -91,7 +93,7 @@ const EditBoardModal = ({ editBoardModal, handleClick }: CreateBoardProps): JSX.
                             <Input inputType='text' inputName='Name' defaultValue={selectDashboard.name} placeholder='e.g Web Design'/>
                             <TextM>Columns</TextM>
                             {cols?.map((col, i) => {
-                              return <InputField key={i} index={i} inputType='text'
+                              return <InputField key={col._id} id={col._id} inputType='text'
                               inputName='Columns' defaultValue={col.name} handelInputDelete={handleInputDelete}/>
                             })}
                             <Button sm type='button' variant='secondary' handleClick={handleInputAdd}>

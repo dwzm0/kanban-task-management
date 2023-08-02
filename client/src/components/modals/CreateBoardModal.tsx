@@ -10,6 +10,7 @@ import Button from '../Button'
 import { useAppDispatch } from '../../hooks/useReduxHooks'
 import { createBoard } from '../../reducers/dashboardReducer'
 import { type IBoardWithoutId, type IColumn } from '../../types/types'
+import { ObjectId } from 'bson'
 
 interface CreateBoardProps {
   addBoardModal: boolean
@@ -18,17 +19,15 @@ interface CreateBoardProps {
 
 const CreateBoardModal = ({ addBoardModal, handleClick }: CreateBoardProps): JSX.Element => {
   const dispatch = useAppDispatch()
-  const [defaultCol, setDefaultCol] = useState<string[]>(['Todo', 'Doing'])
+  const [defaultCol, setDefaultCol] = useState<IColumn[]>([{ name: 'Todo', _id: String(new ObjectId()) }, { name: 'Doing', _id: String(new ObjectId()) }])
 
-  const handleInputDelete = (index: number) => {
-    console.log(index)
-    const newDefaultColState = defaultCol.filter((_col, i) => i !== index)
-    console.log(newDefaultColState)
+  const handleInputDelete = (id: string) => {
+    const newDefaultColState = defaultCol.filter((col) => col._id !== id)
     setDefaultCol(newDefaultColState)
   }
 
   const handleInputAdd = () => {
-    const newDefaultColState = [...defaultCol, '']
+    const newDefaultColState = [...defaultCol, { name: '', _id: String(new ObjectId()) }]
     setDefaultCol(newDefaultColState)
   }
 
@@ -71,8 +70,8 @@ const CreateBoardModal = ({ addBoardModal, handleClick }: CreateBoardProps): JSX
                             <Input inputType='text' inputName='Name' placeholder='e.g Web Design'/>
                             <TextM>Columns</TextM>
                             {defaultCol.map((col, i) => {
-                              return <InputField key={i} index={i} inputType='text'
-                              inputName='Columns' defaultValue={col} handelInputDelete={handleInputDelete}/>
+                              return <InputField key={col._id} id={col._id} inputType='text'
+                              inputName='Columns' defaultValue={col.name} handelInputDelete={handleInputDelete}/>
                             })}
                             <Button sm type='button' variant='secondary' handleClick={handleInputAdd}>
                                 <TextM>+ Add New Column</TextM>
