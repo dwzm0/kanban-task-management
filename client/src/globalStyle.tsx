@@ -7,7 +7,7 @@ const GlobalStyle = createGlobalStyle`
   margin: 0;
   padding: 0;
   font-family: 'Plus Jakarta Sans', sans-serif;
-  transition: all 0.3s linear;
+  transition: all 0.15s linear;
  } 
 
  body {
@@ -104,7 +104,12 @@ export const lightTheme = {
   inputColour: 'var(--white)',
   inputTextColour: 'var(--black)',
   boardMenuColor: 'var(--white)',
-  deleteModalBG: 'var(--white)'
+  deleteModalBG: 'var(--white)',
+  checkMarkBG: 'var(--white)',
+  subTaskFieldBG: 'var(--light-grey)',
+  subTaskText: 'var(--black)',
+  selectText: 'var(--black)',
+  selectBG: 'var(--white)'
 }
 export const darkTheme = {
   bodyColour: 'var(--dark-grey)',
@@ -124,7 +129,12 @@ export const darkTheme = {
   inputColour: 'var(--dark-grey)',
   inputTextColour: 'var(--white)',
   boardMenuColor: 'var(--black)',
-  deleteModalBG: 'var(--dark-grey)'
+  deleteModalBG: 'var(--dark-grey)',
+  checkMarkBG: 'var(--dark-grey)',
+  subTaskFieldBG: 'var(--very-dark-grey)',
+  subTaskText: 'var(--white)',
+  selectText: 'var(--white)',
+  selectBG: 'var(--very-dark-grey)'
 }
 
 export default GlobalStyle

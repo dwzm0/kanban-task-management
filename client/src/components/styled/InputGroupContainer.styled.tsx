@@ -7,9 +7,9 @@ export const StyledInputGroupContainer = styled.div`
     padding-bottom: 1.5rem;
     color: ${props => props.theme.inputNamesColour};
 
-    > * {
-        &:nth-child(2) {
-        margin-bottom: .675rem;
-    }
-    }
+        > * {
+            &:nth-child(2) {
+            margin-bottom: .675rem;
+        }
+        }
 `

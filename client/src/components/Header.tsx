@@ -28,3 +28,6 @@ const Header = (): JSX.Element => {
 }
 
 export default Header
+
+/* mongoimport --uri "mongodb+srv://dwzm00:SmScqkQU5OAWfvwd@cluster0.ii6blwz.mongodb.net/Dashboard?retryWrites=true&w=majority" --collection dashboards --jsonArray --type json --file data.json
+ */
