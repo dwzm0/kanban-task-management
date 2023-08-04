@@ -4,7 +4,6 @@ import { FlexCol } from '../../globalStyle'
 export const StyledInputGroupContainer = styled.div`
     ${FlexCol}
     gap: .75rem;
-    padding-bottom: 1.5rem;
     color: ${props => props.theme.inputNamesColour};
 
         > * {

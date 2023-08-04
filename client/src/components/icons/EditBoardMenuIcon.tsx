@@ -7,7 +7,7 @@ interface EditBoardMenuIconProps {
 
 const EditBoardMenuIcon = ({ handleBoardMenu }: EditBoardMenuIconProps): JSX.Element => {
   return (
-        <div style={{ paddingLeft: '1.5rem', height: '18px', cursor: 'pointer' }} onClick={handleBoardMenu}>
+        <div style={{ height: '20px', minWidth: '5px', cursor: 'pointer' }} onClick={handleBoardMenu}>
             <img style={{ height: '100%', width: '100%' }} src={img} />
         </div>
   )

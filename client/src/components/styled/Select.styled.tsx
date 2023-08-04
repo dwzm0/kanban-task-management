@@ -28,6 +28,7 @@ export const StyledSelectOption = styled.div`
 `
 
 export const StyledSelectHeader = styled.div`
+    margin-top: .5rem;
     padding: .5rem;
     border: 1px solid ${props => props.theme.lines};
     color: ${props => props.theme.selectText};

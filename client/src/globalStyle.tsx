@@ -50,6 +50,13 @@ export const FlexRowContainer = styled.div`
   display: flex;
   flex-direction: row;
 `
+export const FlexRowSB = styled.div`
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+`
+
 export const FlexColContainer = styled.div`
   display : flex;
   flex-direction: column;

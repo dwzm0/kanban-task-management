@@ -11,7 +11,12 @@ export const StyledSubTaskLabel = styled.label`
     background-color: ${props => props.theme.subTaskFieldBG};
     padding: .7rem;
     align-items: center;
-    color: ${props => props.theme.subTaskText}
+    color: ${props => props.theme.subTaskText};
+    border-radius: .5rem;
+
+    &:hover {
+        background-color: var(--main-purpleHOV);
+    }
 `
 export const StyledCheckMark = styled.div`
     display:flex;
@@ -33,6 +38,7 @@ export const StyledCheckMark = styled.div`
     }
     &:before {
         border: 1px solid var(--medium-grey);
+        background-color: ${props => props.theme.subTaskFieldBG};
     }
     &:after {
         position:absolute;
@@ -50,6 +56,7 @@ export const StyledCheckMarkInput = styled.input`
     clip: rect(0, 0, 0, 0);
     white-space: nowrap;
     border-width: 0;
+    
 
     &:checked + ${StyledSubTaskLabel}{
         color: var(--medium-grey);

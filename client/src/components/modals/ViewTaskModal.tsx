@@ -1,7 +1,6 @@
 import React from 'react'
-import { StyledModalContainer, StyledModal, FlexRowContainer, HeadingL, TextL, TextM } from '../../globalStyle'
+import { StyledModalContainer, StyledModal, TextL, TextM } from '../../globalStyle'
 import { StyledInputGroupContainer } from '../styled/InputGroupContainer.styled'
-import EditBoardMenuIcon from '../icons/EditBoardMenuIcon'
 import FormWrapper from '../FormWrapper'
 import { type ITask } from '../../types/types'
 import SubtaskField from '../SubtaskField'
@@ -21,12 +20,8 @@ const ViewTaskModal = ({ task, toggleTaskModal }: ViewTaskModalProps): JSX.Eleme
   return (
     <StyledModalContainer onClick={toggleTaskModal}>
         <StyledModal onClick={(e) => { e.stopPropagation() }}>
-            <FormWrapper >
+            <FormWrapper title={task.title} menuIcon={true} handleBoardMenu={() => { console.log('WORKIGN') }}>
                 <StyledInputGroupContainer>
-                    <FlexRowContainer>
-                        <HeadingL>{task.title}</HeadingL>
-                        <EditBoardMenuIcon handleBoardMenu={() => { console.log('ASDASD') }}/>
-                    </FlexRowContainer>
                     <TextL>{task?.description}</TextL>
                     <TextM>Subtasks  ({task?.subtasks?.filter((subtask) => subtask.isCompleted).length} of {task?.subtasks?.length} )</TextM>
                     {task.subtasks?.map((subtask) => {

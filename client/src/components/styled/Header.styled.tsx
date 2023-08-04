@@ -16,6 +16,7 @@ export const StyledHeader = styled.div`
     > * {
         &:nth-child(2) {
             align-items: center;
+            gap: 2rem;
         }
     }
 `
