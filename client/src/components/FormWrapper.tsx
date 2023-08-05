@@ -1,5 +1,9 @@
+/* eslint-disable react/display-name */
 /* eslint-disable @typescript-eslint/strict-boolean-expressions */
-import React, { type MouseEventHandler, type FormEvent, type ReactNode } from 'react'
+import React, {
+  type MouseEventHandler, type FormEvent, type ReactNode,
+  forwardRef
+} from 'react'
 import { StyledFormWrapper } from './styled/FormWrapper.styled'
 import { HeadingL } from '../globalStyle'
 import EditBoardMenuIcon from './icons/EditBoardMenuIcon'
@@ -13,9 +17,11 @@ interface FromWrapperProps {
   handleBoardMenu?: MouseEventHandler<HTMLDivElement>
 }
 
-const FormWrapper = (props: FromWrapperProps): JSX.Element => {
+const FormWrapper = forwardRef((
+  props: FromWrapperProps,
+  ref): JSX.Element => {
   return (
-        <StyledFormWrapper onSubmit={ event => { props?.onSubmit?.(event) } }>
+        <StyledFormWrapper ref={ref as React.RefObject<HTMLFormElement>} onSubmit={ event => { props?.onSubmit?.(event) } }>
           <fieldset>
             <legend>
               <HeadingL>{props?.title}</HeadingL>
@@ -25,6 +31,6 @@ const FormWrapper = (props: FromWrapperProps): JSX.Element => {
           </fieldset>
         </StyledFormWrapper>
   )
-}
+})
 
 export default FormWrapper

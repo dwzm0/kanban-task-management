@@ -47,7 +47,6 @@ const EditBoardModal = ({ editBoardModal, handleClick }: CreateBoardProps): JSX.
     const name = []
     const columns = []
     for (const [key, value] of entries) {
-      console.log(key)
       if (key === 'Columns') {
         columns.push(value)
       } else if (key === 'Name') {

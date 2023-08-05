@@ -42,9 +42,8 @@ const Select = ({ cols, status }: SelectProps): JSX.Element => {
   const [currStatus, setCurrStatus] = useState<string>(status)
   const toggleStatus = (optionStatus: string) => {
     setCurrStatus(optionStatus)
+    toggleSelect(!select)
   }
-
-  console.log(currStatus)
 
   return (
     <StyledSelectContainer>
