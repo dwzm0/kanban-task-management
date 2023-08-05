@@ -6,7 +6,8 @@ import img from '../assets/icon-chevron-down.svg'
 
 interface SelectProps {
   cols: string[] | undefined
-  status: string
+  currStatus: string
+  setCurrStatus: React.Dispatch<React.SetStateAction<string>>
 }
 
 interface SelectOptionProps {
@@ -37,9 +38,9 @@ const SelectHeader = ({ col, handelClick, select }: SelectHeaderProps): JSX.Elem
   )
 }
 
-const Select = ({ cols, status }: SelectProps): JSX.Element => {
+const Select = ({ cols, currStatus, setCurrStatus }: SelectProps): JSX.Element => {
   const [select, toggleSelect] = useState<boolean>(false)
-  const [currStatus, setCurrStatus] = useState<string>(status)
+
   const toggleStatus = (optionStatus: string) => {
     setCurrStatus(optionStatus)
     toggleSelect(!select)

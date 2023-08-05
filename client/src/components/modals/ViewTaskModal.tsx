@@ -1,7 +1,7 @@
 /* eslint-disable no-lone-blocks */
 /* eslint-disable @typescript-eslint/no-misused-promises */
 /* eslint-disable @typescript-eslint/explicit-function-return-type */
-import React, { useRef } from 'react'
+import React, { useRef, useState } from 'react'
 import { useForm, type SubmitHandler } from 'react-hook-form'
 import { StyledModalContainer, StyledModal, TextL, TextM } from '../../globalStyle'
 import { StyledInputGroupContainer } from '../styled/InputGroupContainer.styled'
@@ -25,13 +25,15 @@ const ViewTaskModal = ({ task, toggleTaskModal }: ViewTaskModalProps): JSX.Eleme
   const selectCurrId = useAppSelector((state) => state.currId)
   const selectDashboard = useAppSelector((state) => state.dashboards.filter((dashboard) => dashboard._id === selectCurrId)[0])
   const cols = selectDashboard?.columns?.map((cols) => cols.name)
+  const [currStatus, setCurrStatus] = useState<string>(task?.status)
   const formRef = useRef<HTMLFormElement>(null)
 
-  const { handleSubmit, register } = useForm<ITask>({ defaultValues: {} })
+  const { handleSubmit, register } = useForm<ITask>({ defaultValues: task })
   const onSubmit: SubmitHandler<ITask> = data => { console.log(data) }
 
   const closeAndSave = async () => {
     formRef.current?.requestSubmit()
+    console.log(currStatus)
     toggleTaskModal()
   }
 
@@ -45,7 +47,7 @@ const ViewTaskModal = ({ task, toggleTaskModal }: ViewTaskModalProps): JSX.Eleme
                     {task.subtasks?.map((subtask, i) => {
                       return <SubtaskField register={register} key={i} arrKey={i} id={subtask._id} title={subtask.title} completeStatus={subtask.isCompleted} />
                     })}
-                    <Select cols={cols} status={task?.status}/>
+                    <Select currStatus={currStatus} setCurrStatus={setCurrStatus} cols={cols} />
 
                 </StyledInputGroupContainer>
             </FormWrapper>
