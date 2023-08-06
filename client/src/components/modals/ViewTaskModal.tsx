@@ -1,6 +1,12 @@
+/* eslint-disable no-return-assign */
+/* eslint-disable eqeqeq */
+/* eslint-disable @typescript-eslint/no-non-null-assertion */
+/* eslint-disable @typescript-eslint/no-unnecessary-boolean-literal-compare */
+/* eslint-disable no-unneeded-ternary */
 /* eslint-disable no-lone-blocks */
 /* eslint-disable @typescript-eslint/no-misused-promises */
 /* eslint-disable @typescript-eslint/explicit-function-return-type */
+// eslint-disable-next-line @typescript-eslint/no-unnecessary-boolean-literal-compare
 import React, { useRef, useState } from 'react'
 import { useForm, type SubmitHandler } from 'react-hook-form'
 import { StyledModalContainer, StyledModal, TextL, TextM } from '../../globalStyle'
@@ -8,8 +14,9 @@ import { StyledInputGroupContainer } from '../styled/InputGroupContainer.styled'
 import FormWrapper from '../FormWrapper'
 import { type ITask } from '../../types/types'
 import SubtaskField from '../SubtaskField'
-import { useAppSelector } from '../../hooks/useReduxHooks'
+import { useAppDispatch, useAppSelector } from '../../hooks/useReduxHooks'
 import Select from '../Select'
+import { updTask, initializeDashboards } from 'src/reducers/dashboardReducer'
 
 interface ViewTaskModalProps {
   task: ITask
@@ -22,18 +29,25 @@ export interface IFormInput {
 }
 
 const ViewTaskModal = ({ task, toggleTaskModal }: ViewTaskModalProps): JSX.Element => {
+  const dispatch = useAppDispatch()
   const selectCurrId = useAppSelector((state) => state.currId)
   const selectDashboard = useAppSelector((state) => state.dashboards.filter((dashboard) => dashboard._id === selectCurrId)[0])
   const cols = selectDashboard?.columns?.map((cols) => cols.name)
+  const currColumn = selectDashboard?.columns?.find(column => column.tasks?.includes(task))
   const [currStatus, setCurrStatus] = useState<string>(task?.status)
   const formRef = useRef<HTMLFormElement>(null)
 
   const { handleSubmit, register } = useForm<ITask>({ defaultValues: task })
-  const onSubmit: SubmitHandler<ITask> = data => { console.log(data) }
+
+  const onSubmit: SubmitHandler<ITask> = async (data) => {
+    data.status = currStatus
+    data?.subtasks?.map((subtask) => subtask.isCompleted = !!subtask.isCompleted)
+    await dispatch(updTask(selectDashboard._id, currColumn!._id, data))
+    await dispatch(initializeDashboards())
+  }
 
   const closeAndSave = async () => {
     formRef.current?.requestSubmit()
-    console.log(currStatus)
     toggleTaskModal()
   }
 

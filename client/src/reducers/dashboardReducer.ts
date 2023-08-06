@@ -1,6 +1,7 @@
+/* eslint-disable @typescript-eslint/no-non-null-assertion */
 import { createSlice, type PayloadAction } from '@reduxjs/toolkit'
 import dashboardService from '../services/dashboards'
-import { type IBoard, type IBoardWithoutId } from '../types/types'
+import { type ITask, type IBoard, type IBoardWithoutId } from '../types/types'
 
 const initialState: IBoard[] = []
 
@@ -26,11 +27,32 @@ const dashboardSlice = createSlice({
         }
         return board
       })
+    },
+    updateTask (state, action) {
+      const boardId = action.payload.boardId
+      const columnId = action.payload.columnId
+      const task = action.payload.task
+      const taskId = task._id
+
+      const board = state.find((board) => board._id === boardId)
+      const column = board?.columns?.find((column) => column._id === columnId)
+      const taskIndexInArr = column?.tasks?.findIndex((task) => task._id === taskId) as number
+      const taskToUpdate = column!.tasks![taskIndexInArr]
+
+      if (task.status !== taskToUpdate.status) {
+        column?.tasks?.splice(taskIndexInArr, 1)
+        const columnToInsert = board?.columns?.find(column => column.name === task.status)
+        columnToInsert?.tasks?.push(task)
+      } else {
+        column!.tasks![taskIndexInArr] = task
+      }
+
+      return board?.columns
     }
   }
 })
 
-export const { setDashboards, appendBoard, deleteBoard, updateboard } = dashboardSlice.actions
+export const { setDashboards, appendBoard, deleteBoard, updateboard, updateTask } = dashboardSlice.actions
 
 export const initializeDashboards = () => {
   return async (dispatch: any) => {
@@ -56,6 +78,13 @@ export const delBoard = (id: string) => {
 export const updBoard = (board: IBoard) => {
   return async (dispatch: any) => {
     const newUpdatedBoard = await dashboardService.updateBoard(board)
+    dispatch(updateboard(newUpdatedBoard))
+  }
+}
+
+export const updTask = (boardId: string, columnId: string, task: ITask) => {
+  return async (dispatch: any) => {
+    const newUpdatedBoard = await dashboardService.updateTask(boardId, columnId, task)
     dispatch(updateboard(newUpdatedBoard))
   }
 }

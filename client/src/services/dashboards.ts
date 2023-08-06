@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/explicit-function-return-type */
 import axios from 'axios'
-import { type IBoard, type IBoardWithoutId } from '../types/types'
+import { type ITask, type IBoard, type IBoardWithoutId } from '../types/types'
 const baseUrl = 'http://localhost:3001/api/dashboards'
 
 const getAll = async () => {
@@ -27,4 +27,10 @@ const updateBoard = async (board: IBoard) => {
   return resp.data
 }
 
-export default { getAll, getSingle, createBoard, deleteBoard, updateBoard }
+const updateTask = async (boardId: string, columnId: string, task: ITask) => {
+  const resp = await axios.put(`${baseUrl}/${boardId}/columns/${columnId}/tasks/${task._id}`,
+    task)
+  return resp.data
+}
+
+export default { getAll, getSingle, createBoard, deleteBoard, updateBoard, updateTask }
