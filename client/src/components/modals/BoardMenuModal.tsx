@@ -6,22 +6,21 @@ import EditBoardModal from './EditBoardModal'
 import DeleteModal from './DeleteModal'
 
 interface BoardMenuProps {
-  boardMenu: boolean
-  setBoardMenu: React.Dispatch<React.SetStateAction<boolean>>
+  toggleBoardMenu: () => void
 }
 
-const BoardMenuModal = ({ boardMenu, setBoardMenu }: BoardMenuProps): JSX.Element => {
+const BoardMenuModal = ({ toggleBoardMenu }: BoardMenuProps): JSX.Element => {
   const [deleteBoard, setDeleteBoard] = useState<boolean>(false)
   const [editBoard, setEditBoard] = useState<boolean>(false)
 
   const handelCancelDelete = () => {
     setDeleteBoard(!deleteBoard)
-    setBoardMenu(!boardMenu)
+    toggleBoardMenu()
   }
 
   const handelEdit = () => {
     setEditBoard(!editBoard)
-    setBoardMenu(!boardMenu)
+    toggleBoardMenu()
   }
 
   return (

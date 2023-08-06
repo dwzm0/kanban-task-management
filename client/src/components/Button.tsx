@@ -10,9 +10,17 @@ interface ButtonProps {
   sm?: boolean
 }
 
-const Button = ({ variant, disabled, children, handleClick, type, sm }: ButtonProps): JSX.Element => {
+const Button = ({
+  variant,
+  disabled,
+  children,
+  handleClick,
+  type,
+  sm
+}: ButtonProps): JSX.Element => {
   return (
-    <StyledButton type={type} onClick={handleClick} className={variant} disabled={disabled} sm={sm}>{children}</StyledButton>
+    <StyledButton type={type} onClick={handleClick}
+    className={variant} disabled={disabled} sm={sm}>{children}</StyledButton>
   )
 }
 
