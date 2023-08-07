@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/strict-boolean-expressions */
 import styled from 'styled-components'
 
 export const StyledInput = styled.input`
@@ -7,6 +8,7 @@ export const StyledInput = styled.input`
     border: 1px solid ${props => props.theme.lines};
     background-color: ${props => props.theme.inputColour};
     color: ${props => props.theme.inputTextColour};
+    text-align: left;
 
     &:focus {
         outline: none;

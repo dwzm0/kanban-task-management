@@ -8,9 +8,10 @@ interface InputProps {
   placeholder?: string
   defaultValue?: string
   inputName: string
+  height?: string
 }
 
-const Input = ({ inputType, placeholder, defaultValue, inputName }: InputProps): JSX.Element => {
+const Input = ({ inputType, placeholder, defaultValue, inputName, height }: InputProps): JSX.Element => {
   const [inputValue, setInputValue] = useState('')
 
   useEffect(() => {
