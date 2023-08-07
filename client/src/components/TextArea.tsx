@@ -1,5 +1,4 @@
 /* eslint-disable @typescript-eslint/prefer-optional-chain */
-/* eslint-disable @typescript-eslint/no-unused-vars */
 import React from 'react'
 import { TextM } from 'src/globalStyle'
 import { StyledTextArea } from './styled/TextArea.styled'

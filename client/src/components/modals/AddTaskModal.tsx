@@ -33,6 +33,7 @@ const AddTaskModal = ({ toggleAddTaskModal }: AddTaskModalProps): JSX.Element =>
 
   const { handleSubmit, register } = useForm<Record<string, unknown>>({})
   const onSubmit: SubmitHandler<Record<string, unknown>> = (data) => {
+    data.status = currStatus
     console.log(data)
     toggleAddTaskModal()
   }
@@ -41,6 +42,8 @@ const AddTaskModal = ({ toggleAddTaskModal }: AddTaskModalProps): JSX.Element =>
     const newDefaultSubTaskState = defaultSubTask.filter((subtask) => subtask._id !== id)
     setDefaultSubTask(newDefaultSubTaskState)
   }
+
+  console.log(currStatus)
 
   const handleInputAdd = () => {
     const newDefaultSubTaskState = [...defaultSubTask, { title: '', isCompleted: false, _id: String(new ObjectId()) }]
@@ -52,7 +55,8 @@ const AddTaskModal = ({ toggleAddTaskModal }: AddTaskModalProps): JSX.Element =>
         <StyledModal onClick={(e) => { e.stopPropagation() }}>
             <FormWrapper title="Add New Task" onSubmit={handleSubmit(onSubmit)}>
               <StyledInputGroupContainer>
-                <Input {...register('title')} label='Title' name='title' type='text'
+
+                <Input register={register} label='Title' name='title' type='text'
                        placeholder='e.g Take coffee break'
                 />
                 <TextArea register={register} label='Description' name='description'

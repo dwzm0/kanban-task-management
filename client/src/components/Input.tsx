@@ -1,8 +1,11 @@
 /* eslint-disable @typescript-eslint/strict-boolean-expressions */
 /* eslint-disable @typescript-eslint/explicit-function-return-type */
-import React, { useEffect, useState } from 'react'
+/* eslint-disable @typescript-eslint/prefer-optional-chain */
+import React from 'react'
 import { StyledInput } from './styled/Input.styled'
 import { TextM } from 'src/globalStyle'
+import { type UseFormRegister } from 'react-hook-form/dist/types/form'
+import { type Path, type FieldValues } from 'react-hook-form'
 
 interface InputProps {
   label?: string
@@ -12,23 +15,19 @@ interface InputProps {
   defaultValue?: string
 }
 
-const Input = ({
+export type FormInputProps<TFormValues extends FieldValues> = {
+  name: Path<TFormValues>
+  register?: UseFormRegister<TFormValues>
+} & Omit<InputProps, 'name'>
+
+const Input = <TFormValues extends Record<string, unknown>>({
   label,
   type,
   name,
   placeholder,
-  defaultValue
-}: InputProps): JSX.Element => {
-  const [inputValue, setInputValue] = useState('')
-  useEffect(() => {
-    if (defaultValue) setInputValue(defaultValue)
-  }, [])
 
-  const handleChange = (event: any) => {
-    const newValue = event.target.value
-    setInputValue(newValue)
-  }
-
+  register
+}: FormInputProps<TFormValues>): JSX.Element => {
   return (
         <StyledInput>
           {label
@@ -37,9 +36,10 @@ const Input = ({
             </label>
             : null
           }
-          <input type={type} value={inputValue}
-                 name={name} onChange={handleChange}
-                 placeholder={placeholder}/>
+          <input type={type}
+                 name={name} placeholder={placeholder}
+                 {...((register != null) && register(name))}
+                 />
         </StyledInput>
   )
 }
