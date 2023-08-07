@@ -55,7 +55,7 @@ const ViewTaskModal = ({ task, toggleTaskModal }: ViewTaskModalProps): JSX.Eleme
                       return <SubtaskField register={register} key={i} arrKey={i}
                                            id={subtask._id} title={subtask.title} completeStatus={subtask.isCompleted} />
                     })}
-                    <Select currStatus={currStatus} setCurrStatus={setCurrStatus} cols={cols} />
+                    <Select text='Current Status' currStatus={currStatus} setCurrStatus={setCurrStatus} cols={cols} />
                 </StyledInputGroupContainer>
             </FormWrapper>
         </StyledModal>

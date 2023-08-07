@@ -8,6 +8,7 @@ interface SelectProps {
   cols: string[] | undefined
   currStatus: string
   setCurrStatus: React.Dispatch<React.SetStateAction<string>>
+  text: string
 }
 
 interface SelectOptionProps {
@@ -38,7 +39,7 @@ const SelectHeader = ({ col, handelClick, select }: SelectHeaderProps): JSX.Elem
   )
 }
 
-const Select = ({ cols, currStatus, setCurrStatus }: SelectProps): JSX.Element => {
+const Select = ({ cols, currStatus, setCurrStatus, text }: SelectProps): JSX.Element => {
   const [select, toggleSelect] = useState<boolean>(false)
 
   const toggleStatus = (optionStatus: string) => {
@@ -48,7 +49,7 @@ const Select = ({ cols, currStatus, setCurrStatus }: SelectProps): JSX.Element =
 
   return (
     <StyledSelectContainer>
-      <TextM>Current Status</TextM>
+      <TextM>{text}</TextM>
       <SelectHeader col={currStatus} select={select} handelClick={() => { toggleSelect(!select) }} />
       {select
         ? <StyledSelect>

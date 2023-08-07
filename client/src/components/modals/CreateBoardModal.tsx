@@ -66,13 +66,18 @@ const CreateBoardModal = ({ addBoardModal, handleClick }: CreateBoardProps): JSX
             <StyledModal onClick={(e) => { e.stopPropagation() }}>
                 <FormWrapper title="Add New Board" onSubmit={handleOnSubmit} >
                         <StyledInputGroupContainer>
-                            <TextM>Name</TextM>
-                            <Input inputType='text' inputName='Name' placeholder='e.g Web Design'/>
+
+                            <Input label='Name' name='name' type='text'
+                                   placeholder='e.g Web Design'/>
+
                             <TextM>Columns</TextM>
-                            {defaultCol.map((col, i) => {
-                              return <InputField key={col._id} id={col._id} inputType='text'
-                              inputName='Columns' defaultValue={col.name} handelInputDelete={handleInputDelete}/>
+                            {defaultCol.map((col) => {
+                              return <InputField key={col._id} id={col._id} type='text'
+                              name='Columns' defaultValue={col.name}
+                              handelInputDelete={handleInputDelete}
+                              />
                             })}
+
                             <Button sm type='button' variant='secondary' handleClick={handleInputAdd}>
                                 <TextM>+ Add New Column</TextM>
                             </Button>

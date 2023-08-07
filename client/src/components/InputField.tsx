@@ -5,17 +5,27 @@ import Input from './Input'
 import CrossIcon from './icons/CrossIcon'
 
 interface InputFieldProps {
-  inputType: string
-  handelInputDelete: (id: string) => void
-  defaultValue: string
-  inputName: string
+  type: string
+  name: string
+  defaultValue?: string
   id: string
+  placeholder?: string
+  handelInputDelete: (id: string) => void
 }
 
-const InputField = ({ inputType, defaultValue, handelInputDelete, inputName, id }: InputFieldProps): JSX.Element => {
+const InputField = ({
+  type,
+  defaultValue,
+  handelInputDelete,
+  name,
+  id,
+  placeholder
+}: InputFieldProps): JSX.Element => {
   return (
     <StyledInputField>
-        <Input inputName={inputName} inputType={inputType} defaultValue={defaultValue} />
+        <Input name={name} type={type}
+               defaultValue={defaultValue}
+               placeholder={placeholder} />
         <CrossIcon id={id} handelInputDelete={handelInputDelete}/>
     </StyledInputField>
   )

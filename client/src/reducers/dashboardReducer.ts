@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-non-null-assertion */
-import { createSlice, type PayloadAction } from '@reduxjs/toolkit'
+import { createSlice } from '@reduxjs/toolkit'
 import dashboardService from '../services/dashboards'
 import { type ITask, type IBoard, type IBoardWithoutId } from '../types/types'
 
@@ -9,7 +9,7 @@ const dashboardSlice = createSlice({
   name: 'dashboards',
   initialState,
   reducers: {
-    setDashboards (_state, action: PayloadAction<[]>) {
+    setDashboards (_state, action) {
       return action.payload
     },
     appendBoard (state, action) {
@@ -57,7 +57,7 @@ export const { setDashboards, appendBoard, deleteBoard, updateboard, updateTask 
 export const initializeDashboards = () => {
   return async (dispatch: any) => {
     const dashboards = await dashboardService.getAll()
-    dispatch(setDashboards(dashboards))
+    dispatch(setDashboards(dashboards as IBoard[]))
   }
 }
 

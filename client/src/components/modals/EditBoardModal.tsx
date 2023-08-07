@@ -59,14 +59,10 @@ const EditBoardModal = ({ editBoardModal, handleClick }: CreateBoardProps): JSX.
     })
 
     const changedCols = cols?.slice().map((col, i) => {
-      console.log(formatedColumns[i].name)
-
       const changedCol = {
         ...col,
         name: formatedColumns[i].name
       }
-      console.log(changedCol)
-
       return changedCol
     })
 
@@ -76,6 +72,7 @@ const EditBoardModal = ({ editBoardModal, handleClick }: CreateBoardProps): JSX.
       name: name.join(''),
       columns: changedCols
     }
+    console.log(editBoardObj)
 
     await dispatch(updBoard(editBoardObj))
     handleClick()
@@ -88,12 +85,15 @@ const EditBoardModal = ({ editBoardModal, handleClick }: CreateBoardProps): JSX.
             <StyledModal onClick={(e) => { e.stopPropagation() }}>
                 <FormWrapper title="Edit Board" onSubmit={handleOnSubmit} >
                         <StyledInputGroupContainer>
-                            <TextM>Name</TextM>
-                            <Input inputType='text' inputName='Name' defaultValue={selectDashboard.name} placeholder='e.g Web Design'/>
+
+                        <Input label='Name' name='name' type='text'
+                               defaultValue={selectDashboard.name}
+                               placeholder='e.g Web Design'/>
+
                             <TextM>Columns</TextM>
                             {cols?.map((col, i) => {
-                              return <InputField key={col._id} id={col._id} inputType='text'
-                              inputName='Columns' defaultValue={col.name} handelInputDelete={handleInputDelete}/>
+                              return <InputField key={col._id} id={col._id} type='text'
+                              name='Columns' defaultValue={col.name} handelInputDelete={handleInputDelete}/>
                             })}
                             <Button sm type='button' variant='secondary' handleClick={handleInputAdd}>
                                 <TextM>+ Add New Column</TextM>

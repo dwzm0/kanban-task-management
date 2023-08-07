@@ -2,18 +2,24 @@
 /* eslint-disable @typescript-eslint/explicit-function-return-type */
 import React, { useEffect, useState } from 'react'
 import { StyledInput } from './styled/Input.styled'
+import { TextM } from 'src/globalStyle'
 
 interface InputProps {
-  inputType: string
+  label?: string
+  type: string
+  name: string
   placeholder?: string
   defaultValue?: string
-  inputName: string
-  height?: string
 }
 
-const Input = ({ inputType, placeholder, defaultValue, inputName, height }: InputProps): JSX.Element => {
+const Input = ({
+  label,
+  type,
+  name,
+  placeholder,
+  defaultValue
+}: InputProps): JSX.Element => {
   const [inputValue, setInputValue] = useState('')
-
   useEffect(() => {
     if (defaultValue) setInputValue(defaultValue)
   }, [])
@@ -24,9 +30,17 @@ const Input = ({ inputType, placeholder, defaultValue, inputName, height }: Inpu
   }
 
   return (
-        <StyledInput type={inputType} value={inputValue} name={inputName} onChange={handleChange}
-                    placeholder={placeholder}
-        />
+        <StyledInput>
+          {label
+            ? <label htmlFor={name}>
+              <TextM>{label}</TextM>
+            </label>
+            : null
+          }
+          <input type={type} value={inputValue}
+                 name={name} onChange={handleChange}
+                 placeholder={placeholder}/>
+        </StyledInput>
   )
 }
 
