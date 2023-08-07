@@ -2,6 +2,8 @@
 import React, { useState } from 'react'
 import { StyledModalContainer, StyledModal, TextM } from 'src/globalStyle'
 import { StyledInputGroupContainer } from '../styled/InputGroupContainer.styled'
+import { useForm, type SubmitHandler } from 'react-hook-form'
+
 import FormWrapper from '../FormWrapper'
 import Input from '../Input'
 import TextArea from '../TextArea'
@@ -27,8 +29,13 @@ const AddTaskModal = ({ toggleAddTaskModal }: AddTaskModalProps): JSX.Element =>
   const selectDashboard = useAppSelector((state) => state.dashboards.filter((dashboard) => dashboard._id === selectCurrId)[0])
   const cols = selectDashboard?.columns?.map((cols) => cols.name)
   const [currStatus, setCurrStatus] = useState<string>(cols![0])
-
   const subtaskPlaceholders = ['e.g. Make coffee', 'e.g. Drink coffee & smile']
+
+  const { handleSubmit, register } = useForm<Record<string, unknown>>({})
+  const onSubmit: SubmitHandler<Record<string, unknown>> = (data) => {
+    console.log(data)
+    toggleAddTaskModal()
+  }
 
   const handleInputDelete = (id: string) => {
     const newDefaultSubTaskState = defaultSubTask.filter((subtask) => subtask._id !== id)
@@ -43,12 +50,12 @@ const AddTaskModal = ({ toggleAddTaskModal }: AddTaskModalProps): JSX.Element =>
   return (
     <StyledModalContainer onClick={toggleAddTaskModal}>
         <StyledModal onClick={(e) => { e.stopPropagation() }}>
-            <FormWrapper title="Add New Task">
+            <FormWrapper title="Add New Task" onSubmit={handleSubmit(onSubmit)}>
               <StyledInputGroupContainer>
-                <Input label='Title' name='title' type='text'
+                <Input {...register('title')} label='Title' name='title' type='text'
                        placeholder='e.g Take coffee break'
                 />
-                <TextArea label='Description' name='description'
+                <TextArea register={register} label='Description' name='description'
                           placeholder={`e.g. It's always good to take a break. This 15 minute break will 
                           recharge the batteries a little.`} rows={7} cols={30}
                 />

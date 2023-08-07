@@ -1,6 +1,10 @@
+/* eslint-disable @typescript-eslint/prefer-optional-chain */
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import React from 'react'
 import { TextM } from 'src/globalStyle'
 import { StyledTextArea } from './styled/TextArea.styled'
+import { type UseFormRegister } from 'react-hook-form/dist/types/form'
+import { type Path, type FieldValues } from 'react-hook-form'
 
 interface TextAreaProps {
   label: string
@@ -10,13 +14,19 @@ interface TextAreaProps {
   placeholder: string
 }
 
-const TextArea = ({
+export type FormTextAreaProps<TFormValues extends FieldValues> = {
+  name: Path<TFormValues>
+  register?: UseFormRegister<TFormValues>
+} & Omit<TextAreaProps, 'name'>
+
+const TextArea = <TFormValues extends Record<string, unknown>>({
   label,
   name,
   rows,
   cols,
-  placeholder
-}: TextAreaProps): JSX.Element => {
+  placeholder,
+  register
+}: FormTextAreaProps<TFormValues>): JSX.Element => {
   return (
     <StyledTextArea>
         <label htmlFor={name}>
@@ -27,6 +37,7 @@ const TextArea = ({
                   rows={rows}
                   cols={cols}
                   placeholder={placeholder}
+                  {...((register != null) && register(name))}
                   />
     </StyledTextArea>
   )
