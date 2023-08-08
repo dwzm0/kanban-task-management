@@ -3,6 +3,7 @@ import React from 'react'
 import { StyledInputField } from './styled/InputField.styled'
 import Input from './Input'
 import CrossIcon from './icons/CrossIcon'
+import { type UseFormRegister } from 'react-hook-form/dist/types'
 
 interface InputFieldProps {
   type: string
@@ -11,6 +12,7 @@ interface InputFieldProps {
   id: string
   placeholder?: string
   handelInputDelete: (id: string) => void
+  register?: UseFormRegister<Record<string, unknown>>
 }
 
 const InputField = ({
@@ -19,13 +21,14 @@ const InputField = ({
   handelInputDelete,
   name,
   id,
-  placeholder
+  placeholder,
+  register
 }: InputFieldProps): JSX.Element => {
   return (
     <StyledInputField>
         <Input name={name} type={type}
                defaultValue={defaultValue}
-               placeholder={placeholder} />
+               placeholder={placeholder} register={register} />
         <CrossIcon id={id} handelInputDelete={handelInputDelete}/>
     </StyledInputField>
   )

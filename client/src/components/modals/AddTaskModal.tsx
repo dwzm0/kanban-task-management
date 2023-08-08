@@ -2,7 +2,7 @@
 import React, { useState } from 'react'
 import { StyledModalContainer, StyledModal, TextM } from 'src/globalStyle'
 import { StyledInputGroupContainer } from '../styled/InputGroupContainer.styled'
-import { useForm, type SubmitHandler } from 'react-hook-form'
+import { useForm, type SubmitHandler, useFieldArray } from 'react-hook-form'
 
 import FormWrapper from '../FormWrapper'
 import Input from '../Input'
@@ -31,7 +31,28 @@ const AddTaskModal = ({ toggleAddTaskModal }: AddTaskModalProps): JSX.Element =>
   const [currStatus, setCurrStatus] = useState<string>(cols![0])
   const subtaskPlaceholders = ['e.g. Make coffee', 'e.g. Drink coffee & smile']
 
-  const { handleSubmit, register } = useForm<Record<string, unknown>>({})
+  const { handleSubmit, register, control } = useForm<Record<string, unknown>>({
+    defaultValues: {
+      title: '',
+      description: '',
+      status: '',
+      subtasks: [
+        {
+          title: '',
+          isCompleted: false
+        },
+        {
+          title: '',
+          isCompleted: false
+        }
+      ]
+    }
+  })
+  const { fields } = useFieldArray({
+    control,
+    name: 'subtasks' as never
+  })
+
   const onSubmit: SubmitHandler<Record<string, unknown>> = (data) => {
     data.status = currStatus
     console.log(data)
@@ -42,8 +63,6 @@ const AddTaskModal = ({ toggleAddTaskModal }: AddTaskModalProps): JSX.Element =>
     const newDefaultSubTaskState = defaultSubTask.filter((subtask) => subtask._id !== id)
     setDefaultSubTask(newDefaultSubTaskState)
   }
-
-  console.log(currStatus)
 
   const handleInputAdd = () => {
     const newDefaultSubTaskState = [...defaultSubTask, { title: '', isCompleted: false, _id: String(new ObjectId()) }]
@@ -63,12 +82,15 @@ const AddTaskModal = ({ toggleAddTaskModal }: AddTaskModalProps): JSX.Element =>
                           placeholder={`e.g. It's always good to take a break. This 15 minute break will 
                           recharge the batteries a little.`} rows={7} cols={30}
                 />
+
                 <TextM>Subtasks</TextM>
-                {defaultSubTask.map((subtask, i) => {
-                  return <InputField key={subtask._id} id={subtask._id} type='text'
-                  name='Subtask' placeholder={subtaskPlaceholders[i]}
-                  handelInputDelete={handleInputDelete}
-                  />
+                {fields.map((field, index) => {
+                  return <InputField key={field.id} id={field.id} type='text'
+                    placeholder={subtaskPlaceholders[index]}
+                    handelInputDelete={handleInputDelete}
+                    name={`subtasks.${index}.title`}
+                    register={register}
+                    />
                 })}
 
               <Button sm type='button' variant='secondary'
