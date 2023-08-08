@@ -48,7 +48,7 @@ const AddTaskModal = ({ toggleAddTaskModal }: AddTaskModalProps): JSX.Element =>
       ]
     }
   })
-  const { fields } = useFieldArray({
+  const { fields, append } = useFieldArray({
     control,
     name: 'subtasks' as never
   })
@@ -64,9 +64,11 @@ const AddTaskModal = ({ toggleAddTaskModal }: AddTaskModalProps): JSX.Element =>
     setDefaultSubTask(newDefaultSubTaskState)
   }
 
-  const handleInputAdd = () => {
-    const newDefaultSubTaskState = [...defaultSubTask, { title: '', isCompleted: false, _id: String(new ObjectId()) }]
-    setDefaultSubTask(newDefaultSubTaskState)
+  const appendInput = () => {
+    append({
+      title: '',
+      isCompleted: false
+    })
   }
 
   return (
@@ -94,7 +96,7 @@ const AddTaskModal = ({ toggleAddTaskModal }: AddTaskModalProps): JSX.Element =>
                 })}
 
               <Button sm type='button' variant='secondary'
-                      handleClick={handleInputAdd}>
+                      handleClick={appendInput}>
                     <TextM>+ Add New Subtask</TextM>
               </Button>
 
