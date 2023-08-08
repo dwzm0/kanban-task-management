@@ -87,7 +87,6 @@ const EditBoardModal = ({ editBoardModal, handleClick }: CreateBoardProps): JSX.
                         <StyledInputGroupContainer>
 
                         <Input label='Name' name='name' type='text'
-                               defaultValue={selectDashboard.name}
                                placeholder='e.g Web Design'/>
 
                             <TextM>Columns</TextM>

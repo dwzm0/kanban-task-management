@@ -12,7 +12,6 @@ interface InputProps {
   type: string
   name: string
   placeholder?: string
-  defaultValue?: string
 }
 
 export type FormInputProps<TFormValues extends FieldValues> = {
@@ -25,7 +24,6 @@ const Input = <TFormValues extends Record<string, unknown>>({
   type,
   name,
   placeholder,
-
   register
 }: FormInputProps<TFormValues>): JSX.Element => {
   return (

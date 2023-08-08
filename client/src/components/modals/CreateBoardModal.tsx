@@ -1,16 +1,18 @@
 /* eslint-disable @typescript-eslint/no-misused-promises */
 /* eslint-disable @typescript-eslint/explicit-function-return-type */
-import React, { type FormEvent, useState } from 'react'
+import React from 'react'
+import { useForm, type SubmitHandler, useFieldArray } from 'react-hook-form'
+
 import { StyledInputGroupContainer } from '../styled/InputGroupContainer.styled'
 import { TextM, StyledModalContainer, StyledModal } from '../../globalStyle'
 import FormWrapper from '../FormWrapper'
-/* import InputField from '../InputField' */
+import InputField from '../InputField'
 import Input from '../Input'
 import Button from '../Button'
+
 import { useAppDispatch } from '../../hooks/useReduxHooks'
 import { createBoard } from '../../reducers/dashboardReducer'
-import { type IBoardWithoutId, type IColumn } from '../../types/types'
-import { ObjectId } from 'bson'
+import { type IBoardWithoutId } from '../../types/types'
 
 interface CreateBoardProps {
   addBoardModal: boolean
@@ -19,44 +21,40 @@ interface CreateBoardProps {
 
 const CreateBoardModal = ({ addBoardModal, handleClick }: CreateBoardProps): JSX.Element => {
   const dispatch = useAppDispatch()
-  const [defaultCol, setDefaultCol] = useState<IColumn[]>([{ name: 'Todo', _id: String(new ObjectId()) }, { name: 'Doing', _id: String(new ObjectId()) }])
+  const { handleSubmit, register, control } = useForm<Record<string, unknown>>({
+    defaultValues: {
+      name: '',
+      columns: [
+        {
+          name: 'Todo'
+        },
+        {
+          name: 'Doing'
+        }
+      ]
 
-  /*  const handleInputDelete = (id: string) => {
-    const newDefaultColState = defaultCol.filter((col) => col._id !== id)
-    setDefaultCol(newDefaultColState)
-  } */
+    }
+  })
 
-  const handleInputAdd = () => {
-    const newDefaultColState = [...defaultCol, { name: '', _id: String(new ObjectId()) }]
-    setDefaultCol(newDefaultColState)
+  const { fields, append, remove } = useFieldArray({
+    control,
+    name: 'columns' as never
+  })
+
+  const onSubmit: SubmitHandler<Record<string, unknown>> = async (data) => {
+    console.log(data)
+    await dispatch(createBoard(data as IBoardWithoutId))
+    handleClick()
   }
 
-  const handleOnSubmit = async (e: FormEvent<HTMLFormElement>) => {
-    e.preventDefault()
-    const data = new FormData(e.currentTarget)
-    const entries = data.entries()
-    const name = []
-    const columns = []
-    for (const [key, value] of entries) {
-      console.log(key)
-      if (key === 'Columns') {
-        columns.push(value)
-      } else if (key === 'Name') {
-        name.push(value)
-      }
-    }
+  const removeInput = (index: number) => {
+    remove(index)
+  }
 
-    const formatedColumns = columns.map(col => {
-      return { name: col }
+  const appendInput = () => {
+    append({
+      name: ''
     })
-
-    const addBoardObj: IBoardWithoutId = {
-      name: name.join(''),
-      columns: formatedColumns as IColumn[]
-    }
-
-    await dispatch(createBoard(addBoardObj))
-    handleClick()
   }
 
   return (
@@ -64,21 +62,22 @@ const CreateBoardModal = ({ addBoardModal, handleClick }: CreateBoardProps): JSX
     {addBoardModal
       ? <StyledModalContainer onClick={handleClick}>
             <StyledModal onClick={(e) => { e.stopPropagation() }}>
-                <FormWrapper title="Add New Board" onSubmit={handleOnSubmit} >
+                <FormWrapper title="Add New Board" onSubmit={handleSubmit(onSubmit)} >
                         <StyledInputGroupContainer>
 
-                            <Input label='Name' name='name' type='text'
+                            <Input register={register} label='Name' name='name' type='text'
                                    placeholder='e.g Web Design'/>
 
                             <TextM>Columns</TextM>
-                         {/*    {defaultCol.map((col) => {
-                              return <InputField key={col._id} id={col._id} type='text'
-                              name='Columns' defaultValue={col.name}
-                              handelInputDelete={handleInputDelete}
-                              />
-                            })} */}
+                            {fields.map((field, index) => {
+                              return <InputField key={field.id} index={index} type='text'
+                                handelInputDelete={removeInput}
+                                name={`columns.${index}.name`}
+                                register={register}
+                                />
+                            })}
 
-                            <Button sm type='button' variant='secondary' handleClick={handleInputAdd}>
+                            <Button sm type='button' variant='secondary' handleClick={appendInput}>
                                 <TextM>+ Add New Column</TextM>
                             </Button>
                         </StyledInputGroupContainer>

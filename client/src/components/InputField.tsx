@@ -8,7 +8,6 @@ import { type UseFormRegister } from 'react-hook-form/dist/types'
 interface InputFieldProps {
   type: string
   name: string
-  defaultValue?: string
   index: number
   placeholder?: string
   handelInputDelete: (index: number) => void
@@ -17,7 +16,6 @@ interface InputFieldProps {
 
 const InputField = ({
   type,
-  defaultValue,
   handelInputDelete,
   name,
   index,
@@ -27,7 +25,6 @@ const InputField = ({
   return (
     <StyledInputField>
         <Input name={name} type={type}
-               defaultValue={defaultValue}
                placeholder={placeholder} register={register} />
         <CrossIcon index={index} handelInputDelete={handelInputDelete}/>
     </StyledInputField>
