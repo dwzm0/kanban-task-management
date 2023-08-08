@@ -40,7 +40,6 @@ const ViewTaskModal = ({ task, toggleTaskModal }: ViewTaskModalProps): JSX.Eleme
     formRef.current?.requestSubmit()
     toggleTaskModal()
   }
-  console.log(formRef)
 
   return (
     <StyledModalContainer onClick={formRef === null ? toggleTaskModal : closeAndSave}>
