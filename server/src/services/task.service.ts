@@ -15,7 +15,7 @@ export const findTaskById = (column:IColumn, taskId: string) => {
 export const createTask = async (dashBoardId:string, input: ITask) => {
     try{
         const bord = await DashboardModel.findById(dashBoardId);
-        const column: IColumn[] = bord?.columns?.filter(column => column.name === input.status) ;
+        const column: IColumn[] = bord?.columns?.filter(column => column.name === input.status);
         column[0]?.tasks?.push(input);
         await bord?.save();
         return column[0]?.tasks;

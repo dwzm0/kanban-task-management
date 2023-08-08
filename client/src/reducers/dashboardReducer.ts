@@ -48,11 +48,20 @@ const dashboardSlice = createSlice({
       }
 
       return board?.columns
+    },
+    createTask (state, action) {
+      const boardId = action.payload.boardId
+      const task = action.payload.task
+
+      const board = state.find((board) => board._id === boardId)
+      const column = board?.columns?.find((column) => column.name === task.status)
+      column?.tasks?.push(task)
+      return task
     }
   }
 })
 
-export const { setDashboards, appendBoard, deleteBoard, updateboard, updateTask } = dashboardSlice.actions
+export const { setDashboards, appendBoard, deleteBoard, updateboard, updateTask, createTask } = dashboardSlice.actions
 
 export const initializeDashboards = () => {
   return async (dispatch: any) => {
@@ -86,6 +95,13 @@ export const updTask = (boardId: string, columnId: string, task: ITask) => {
   return async (dispatch: any) => {
     const newUpdatedBoard = await dashboardService.updateTask(boardId, columnId, task)
     dispatch(updateboard(newUpdatedBoard))
+  }
+}
+
+export const crtTask = (boardId: string, task: ITask) => {
+  return async (dispatch: any) => {
+    const newTask = await dashboardService.createTask(boardId, task)
+    dispatch(createTask(newTask))
   }
 }
 

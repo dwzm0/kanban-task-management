@@ -31,3 +31,4 @@ export interface ThemeProps {
 
 export type IBoardWithoutId = Omit<IBoard, '_id'>
 export type IColumnWithoutId = Omit<IColumn, '_id'>
+export type ITaskWithoutId = Omit<ITask, '_id'>

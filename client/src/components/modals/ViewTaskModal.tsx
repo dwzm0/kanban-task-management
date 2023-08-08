@@ -40,9 +40,10 @@ const ViewTaskModal = ({ task, toggleTaskModal }: ViewTaskModalProps): JSX.Eleme
     formRef.current?.requestSubmit()
     toggleTaskModal()
   }
+  console.log(formRef)
 
   return (
-    <StyledModalContainer onClick={closeAndSave}>
+    <StyledModalContainer onClick={formRef === null ? toggleTaskModal : closeAndSave}>
         <StyledModal onClick={(e) => { e.stopPropagation() }}>
             <FormWrapper onSubmit={handleSubmit(onSubmit)} ref={formRef} title={task.title}
                          menuIcon={true} handleBoardMenu={() => { console.log('WORKIGN') }}>

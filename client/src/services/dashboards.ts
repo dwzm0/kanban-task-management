@@ -33,4 +33,18 @@ const updateTask = async (boardId: string, columnId: string, task: ITask) => {
   return resp.data
 }
 
-export default { getAll, getSingle, createBoard, deleteBoard, updateBoard, updateTask }
+const createTask = async (boardId: string, task: ITask) => {
+  const resp = await axios.post(`${baseUrl}/${boardId}`,
+    task)
+  return resp.data
+}
+
+export default {
+  getAll,
+  getSingle,
+  createBoard,
+  deleteBoard,
+  updateBoard,
+  updateTask,
+  createTask
+}

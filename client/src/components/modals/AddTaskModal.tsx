@@ -3,6 +3,7 @@ import React, { useState } from 'react'
 import { StyledModalContainer, StyledModal, TextM } from 'src/globalStyle'
 import { StyledInputGroupContainer } from '../styled/InputGroupContainer.styled'
 import { useForm, type SubmitHandler, useFieldArray } from 'react-hook-form'
+import { ObjectId } from 'bson'
 
 import FormWrapper from '../FormWrapper'
 import Input from '../Input'
@@ -10,13 +11,17 @@ import TextArea from '../TextArea'
 import Button from '../Button'
 import InputField from '../InputField'
 import Select from '../Select'
-import { useAppSelector } from 'src/hooks/useReduxHooks'
+
+import { useAppDispatch, useAppSelector } from 'src/hooks/useReduxHooks'
+import { crtTask, initializeDashboards } from 'src/reducers/dashboardReducer'
+import { type ITask } from 'src/types/types'
 
 interface AddTaskModalProps {
   toggleAddTaskModal: () => void
 }
 
 const AddTaskModal = ({ toggleAddTaskModal }: AddTaskModalProps): JSX.Element => {
+  const dispatch = useAppDispatch()
   const selectCurrId = useAppSelector((state) => state.currId)
   const selectDashboard = useAppSelector((state) => state.dashboards.filter((dashboard) => dashboard._id === selectCurrId)[0])
   const cols = selectDashboard?.columns?.map((cols) => cols.name)
@@ -45,9 +50,12 @@ const AddTaskModal = ({ toggleAddTaskModal }: AddTaskModalProps): JSX.Element =>
     name: 'subtasks' as never
   })
 
-  const onSubmit: SubmitHandler<Record<string, unknown>> = (data) => {
+  const onSubmit: SubmitHandler<Record<string, unknown>> = async (data) => {
     data.status = currStatus
-    console.log(data)
+    data._id = new ObjectId()
+    const task = data
+    await dispatch(crtTask(selectCurrId, task as unknown as ITask))
+    await dispatch(initializeDashboards())
     toggleAddTaskModal()
   }
 
