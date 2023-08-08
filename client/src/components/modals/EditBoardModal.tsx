@@ -6,7 +6,7 @@ import React, { type FormEvent, useEffect } from 'react'
 import { StyledInputGroupContainer } from '../styled/InputGroupContainer.styled'
 import { TextM, StyledModalContainer, StyledModal } from '../../globalStyle'
 import FormWrapper from '../FormWrapper'
-import InputField from '../InputField'
+/* import InputField from '../InputField' */
 import Input from '../Input'
 import Button from '../Button'
 import { useAppDispatch, useAppSelector } from '../../hooks/useReduxHooks'
@@ -28,12 +28,12 @@ const EditBoardModal = ({ editBoardModal, handleClick }: CreateBoardProps): JSX.
 
   useEffect(() => setCols(selectDashboard.columns as IColumn[]), [])
 
-  const handleInputDelete = (id: string) => {
+  /*  const handleInputDelete = (id: string) => {
     console.log(cols)
     const newDefaultColState = cols?.filter((col) => col._id !== id)
     console.log(newDefaultColState)
     setCols(newDefaultColState)
-  }
+  } */
 
   const handleInputAdd = () => {
     const newDefaultColState = [...cols as any[], { name: '', _id: String(new ObjectId()) }]
@@ -91,10 +91,10 @@ const EditBoardModal = ({ editBoardModal, handleClick }: CreateBoardProps): JSX.
                                placeholder='e.g Web Design'/>
 
                             <TextM>Columns</TextM>
-                            {cols?.map((col, i) => {
+                          {/*   {cols?.map((col, i) => {
                               return <InputField key={col._id} id={col._id} type='text'
                               name='Columns' defaultValue={col.name} handelInputDelete={handleInputDelete}/>
-                            })}
+                            })} */}
                             <Button sm type='button' variant='secondary' handleClick={handleInputAdd}>
                                 <TextM>+ Add New Column</TextM>
                             </Button>

@@ -9,9 +9,9 @@ interface InputFieldProps {
   type: string
   name: string
   defaultValue?: string
-  id: string
+  index: number
   placeholder?: string
-  handelInputDelete: (id: string) => void
+  handelInputDelete: (index: number) => void
   register?: UseFormRegister<Record<string, unknown>>
 }
 
@@ -20,7 +20,7 @@ const InputField = ({
   defaultValue,
   handelInputDelete,
   name,
-  id,
+  index,
   placeholder,
   register
 }: InputFieldProps): JSX.Element => {
@@ -29,7 +29,7 @@ const InputField = ({
         <Input name={name} type={type}
                defaultValue={defaultValue}
                placeholder={placeholder} register={register} />
-        <CrossIcon id={id} handelInputDelete={handelInputDelete}/>
+        <CrossIcon index={index} handelInputDelete={handelInputDelete}/>
     </StyledInputField>
   )
 }

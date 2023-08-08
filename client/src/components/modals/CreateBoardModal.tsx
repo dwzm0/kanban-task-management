@@ -4,7 +4,7 @@ import React, { type FormEvent, useState } from 'react'
 import { StyledInputGroupContainer } from '../styled/InputGroupContainer.styled'
 import { TextM, StyledModalContainer, StyledModal } from '../../globalStyle'
 import FormWrapper from '../FormWrapper'
-import InputField from '../InputField'
+/* import InputField from '../InputField' */
 import Input from '../Input'
 import Button from '../Button'
 import { useAppDispatch } from '../../hooks/useReduxHooks'
@@ -21,10 +21,10 @@ const CreateBoardModal = ({ addBoardModal, handleClick }: CreateBoardProps): JSX
   const dispatch = useAppDispatch()
   const [defaultCol, setDefaultCol] = useState<IColumn[]>([{ name: 'Todo', _id: String(new ObjectId()) }, { name: 'Doing', _id: String(new ObjectId()) }])
 
-  const handleInputDelete = (id: string) => {
+  /*  const handleInputDelete = (id: string) => {
     const newDefaultColState = defaultCol.filter((col) => col._id !== id)
     setDefaultCol(newDefaultColState)
-  }
+  } */
 
   const handleInputAdd = () => {
     const newDefaultColState = [...defaultCol, { name: '', _id: String(new ObjectId()) }]
@@ -71,12 +71,12 @@ const CreateBoardModal = ({ addBoardModal, handleClick }: CreateBoardProps): JSX
                                    placeholder='e.g Web Design'/>
 
                             <TextM>Columns</TextM>
-                            {defaultCol.map((col) => {
+                         {/*    {defaultCol.map((col) => {
                               return <InputField key={col._id} id={col._id} type='text'
                               name='Columns' defaultValue={col.name}
                               handelInputDelete={handleInputDelete}
                               />
-                            })}
+                            })} */}
 
                             <Button sm type='button' variant='secondary' handleClick={handleInputAdd}>
                                 <TextM>+ Add New Column</TextM>

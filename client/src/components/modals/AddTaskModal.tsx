@@ -10,9 +10,6 @@ import TextArea from '../TextArea'
 import Button from '../Button'
 import InputField from '../InputField'
 import Select from '../Select'
-
-import { type ISubTask } from 'src/types/types'
-import { ObjectId } from 'bson'
 import { useAppSelector } from 'src/hooks/useReduxHooks'
 
 interface AddTaskModalProps {
@@ -20,11 +17,6 @@ interface AddTaskModalProps {
 }
 
 const AddTaskModal = ({ toggleAddTaskModal }: AddTaskModalProps): JSX.Element => {
-  const [defaultSubTask, setDefaultSubTask] = useState<ISubTask[]>(
-    [
-      { title: '', isCompleted: false, _id: String(new ObjectId()) },
-      { title: '', isCompleted: false, _id: String(new ObjectId()) }]
-  )
   const selectCurrId = useAppSelector((state) => state.currId)
   const selectDashboard = useAppSelector((state) => state.dashboards.filter((dashboard) => dashboard._id === selectCurrId)[0])
   const cols = selectDashboard?.columns?.map((cols) => cols.name)
@@ -48,7 +40,7 @@ const AddTaskModal = ({ toggleAddTaskModal }: AddTaskModalProps): JSX.Element =>
       ]
     }
   })
-  const { fields, append } = useFieldArray({
+  const { fields, append, remove } = useFieldArray({
     control,
     name: 'subtasks' as never
   })
@@ -59,9 +51,8 @@ const AddTaskModal = ({ toggleAddTaskModal }: AddTaskModalProps): JSX.Element =>
     toggleAddTaskModal()
   }
 
-  const handleInputDelete = (id: string) => {
-    const newDefaultSubTaskState = defaultSubTask.filter((subtask) => subtask._id !== id)
-    setDefaultSubTask(newDefaultSubTaskState)
+  const removeInput = (index: number) => {
+    remove(index)
   }
 
   const appendInput = () => {
@@ -87,9 +78,9 @@ const AddTaskModal = ({ toggleAddTaskModal }: AddTaskModalProps): JSX.Element =>
 
                 <TextM>Subtasks</TextM>
                 {fields.map((field, index) => {
-                  return <InputField key={field.id} id={field.id} type='text'
+                  return <InputField key={field.id} index={index} type='text'
                     placeholder={subtaskPlaceholders[index]}
-                    handelInputDelete={handleInputDelete}
+                    handelInputDelete={removeInput}
                     name={`subtasks.${index}.title`}
                     register={register}
                     />
