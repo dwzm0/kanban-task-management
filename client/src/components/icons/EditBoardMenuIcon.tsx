@@ -1,16 +1,19 @@
-import React, { type MouseEventHandler } from 'react'
+import React from 'react'
+import { StyledEditMenuIcon } from '../styled/StyledIcons/EditMenuIcon'
 import img from '../../assets/icon-vertical-ellipsis.svg'
 
 interface EditBoardMenuIconProps {
-  handleBoardMenu: MouseEventHandler<HTMLDivElement>
+  handleMenuToggle: () => void
 }
 
-const EditBoardMenuIcon = ({ handleBoardMenu }: EditBoardMenuIconProps): JSX.Element => {
+const EditMenuIcon = ({ handleMenuToggle }: EditBoardMenuIconProps): JSX.Element => {
   return (
-        <div style={{ height: '20px', minWidth: '5px', cursor: 'pointer' }} onClick={handleBoardMenu}>
+    <>
+        <StyledEditMenuIcon onClick={handleMenuToggle}>
             <img style={{ height: '100%', width: '100%' }} src={img} />
-        </div>
+        </StyledEditMenuIcon>
+    </>
   )
 }
 
-export default EditBoardMenuIcon
+export default EditMenuIcon

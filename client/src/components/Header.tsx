@@ -1,12 +1,11 @@
-/* eslint-disable @typescript-eslint/explicit-function-return-type */
 import React, { useState } from 'react'
 import { StyledHeader } from './styled/Header.styled'
 import { HeadingXL, HeadingM, FlexRowContainer } from '../globalStyle'
-import EditBoardMenuIcon from './icons/EditBoardMenuIcon'
+import EditMenuIcon from './icons/EditBoardMenuIcon'
 import Button from './Button'
 import { useAppSelector } from '../hooks/useReduxHooks'
-import BoardMenuModal from './modals/BoardMenuModal'
-import AddTaskModal from './modals/AddTaskModal'
+import BoardMenuModal from './modals/Board/BoardMenuModal'
+import AddTaskModal from './modals/Task/AddTaskModal'
 
 const Header = (): JSX.Element => {
   const [boardMenu, setBoardMenu] = useState<boolean>(false)
@@ -25,12 +24,13 @@ const Header = (): JSX.Element => {
   return (
     <>
     <StyledHeader>
+
         <HeadingXL>{selectDashboardName}</HeadingXL>
         <FlexRowContainer>
             <Button variant="primary" type='button' handleClick={toggleAddTaskModal}>
                 <HeadingM>+ Add New Task</HeadingM>
             </Button>
-            <EditBoardMenuIcon handleBoardMenu={toggleBoardMenu}/>
+            <EditMenuIcon handleMenuToggle={toggleBoardMenu}/>
             {boardMenu ? <BoardMenuModal toggleBoardMenu={toggleBoardMenu}/> : null}
         </FlexRowContainer>
         {addTaskModal ? <AddTaskModal toggleAddTaskModal={toggleAddTaskModal}/> : null}

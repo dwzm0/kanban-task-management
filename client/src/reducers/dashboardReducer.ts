@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-non-null-assertion */
 import { createSlice } from '@reduxjs/toolkit'
 import dashboardService from '../services/dashboards'
 import { type ITask, type IBoard, type IBoardWithoutId } from '../types/types'
@@ -57,11 +56,21 @@ const dashboardSlice = createSlice({
       const column = board?.columns?.find((column) => column.name === task.status)
       column?.tasks?.push(task)
       return task
+    },
+    deleteTask (state, action) {
+      const boardId = action.payload.boardId
+      const columnId = action.payload.columnId
+      const taskId = action.payload.taskId
+
+      const board = state.find((board) => board._id === boardId)
+      const column = board?.columns?.find((column) => column._id === columnId)
+      const taskIndexInArr = column?.tasks?.findIndex(task => task._id === taskId)
+      column?.tasks?.splice(taskIndexInArr as number, 1)
     }
   }
 })
 
-export const { setDashboards, appendBoard, deleteBoard, updateboard, updateTask, createTask } = dashboardSlice.actions
+export const { setDashboards, appendBoard, deleteBoard, updateboard, updateTask, createTask, deleteTask } = dashboardSlice.actions
 
 export const initializeDashboards = () => {
   return async (dispatch: any) => {
@@ -94,7 +103,7 @@ export const updBoard = (board: IBoard) => {
 export const updTask = (boardId: string, columnId: string, task: ITask) => {
   return async (dispatch: any) => {
     const newUpdatedBoard = await dashboardService.updateTask(boardId, columnId, task)
-    dispatch(updateboard(newUpdatedBoard))
+    dispatch(updateTask(newUpdatedBoard))
   }
 }
 
@@ -102,6 +111,13 @@ export const crtTask = (boardId: string, task: ITask) => {
   return async (dispatch: any) => {
     const newTask = await dashboardService.createTask(boardId, task)
     dispatch(createTask(newTask))
+  }
+}
+
+export const delTask = (boardId: string, columnId: string, taskId: string) => {
+  return async (dispatch: any) => {
+    await dashboardService.deleteTask(boardId, columnId, taskId)
+    dispatch(deleteTask({ boardId, columnId, taskId }))
   }
 }
 

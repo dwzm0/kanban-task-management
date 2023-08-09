@@ -1,5 +1,5 @@
 import React, { useContext } from 'react'
-import { StyledLogo } from './styled/Logo.styled'
+import { StyledLogo } from './styled/StyledIcons/Logo.styled'
 import darkLogoImg from '../assets/logo-dark.svg'
 import lightLogoImg from '../assets/logo-light.svg'
 import { ThemeCurrValueContext } from '../contexts/themeContext'

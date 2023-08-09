@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/explicit-function-return-type */
 import React, { useState } from 'react'
-import { StyledBoardMenu } from '../styled/StyledModals/BoardMenu.styled'
-import { TextL } from '../../globalStyle'
+import { StyledBoardMenu } from '../../styled/StyledModals/MenuModal.styled'
+import { TextL } from '../../../globalStyle'
 import EditBoardModal from './EditBoardModal'
 import DeleteModal from './DeleteModal'
 

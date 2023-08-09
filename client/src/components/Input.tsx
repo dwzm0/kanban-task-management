@@ -1,6 +1,4 @@
 /* eslint-disable @typescript-eslint/strict-boolean-expressions */
-/* eslint-disable @typescript-eslint/explicit-function-return-type */
-/* eslint-disable @typescript-eslint/prefer-optional-chain */
 import React from 'react'
 import { StyledInput } from './styled/Input.styled'
 import { TextM } from 'src/globalStyle'
@@ -36,7 +34,7 @@ const Input = <TFormValues extends Record<string, unknown>>({
           }
           <input type={type}
                  name={name} placeholder={placeholder}
-                 {...((register != null) && register(name))}
+                 {...(register?.(name))}
                  />
         </StyledInput>
   )

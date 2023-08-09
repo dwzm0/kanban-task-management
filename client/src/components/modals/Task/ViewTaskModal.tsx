@@ -1,13 +1,13 @@
 import React, { useRef, useState } from 'react'
 import { useForm, type SubmitHandler } from 'react-hook-form'
-import { type ITask } from '../../types/types'
-import { StyledModalContainer, StyledModal, TextL, TextM } from '../../globalStyle'
-import { StyledInputGroupContainer } from '../styled/InputGroupContainer.styled'
-import { useAppDispatch, useAppSelector } from '../../hooks/useReduxHooks'
+import { type ITask } from '../../../types/types'
+import { StyledModalContainer, StyledModal, TextL, TextM } from '../../../globalStyle'
+import { StyledInputGroupContainer } from '../../styled/InputGroupContainer.styled'
+import { useAppDispatch, useAppSelector } from '../../../hooks/useReduxHooks'
 import { updTask, initializeDashboards } from 'src/reducers/dashboardReducer'
-import FormWrapper from '../FormWrapper'
-import SubtaskField from '../SubtaskField'
-import Select from '../Select'
+import FormWrapper from '../../FormWrapper'
+import SubtaskField from '../../SubtaskField'
+import Select from '../../Select'
 
 interface ViewTaskModalProps {
   task: ITask
@@ -21,13 +21,20 @@ export interface IFormInput {
 
 const ViewTaskModal = ({ task, toggleTaskModal }: ViewTaskModalProps): JSX.Element => {
   const dispatch = useAppDispatch()
+  const [taskMenu, setTaskMenu] = useState<boolean>(false)
+  const [currStatus, setCurrStatus] = useState<string>(task?.status)
+  const formRef = useRef<HTMLFormElement>(null)
+
   const selectCurrId = useAppSelector((state) => state.currId)
   const selectDashboard = useAppSelector((state) => state.dashboards.filter((dashboard) => dashboard._id === selectCurrId)[0])
   const cols = selectDashboard?.columns?.map((cols) => cols.name)
   const currColumn = selectDashboard?.columns?.find(column => column.tasks?.includes(task))
-  const [currStatus, setCurrStatus] = useState<string>(task?.status)
-  const formRef = useRef<HTMLFormElement>(null)
+
   const { handleSubmit, register } = useForm<ITask>({ defaultValues: task })
+
+  const toggleTaskMenu = () => {
+    setTaskMenu(!taskMenu)
+  }
 
   const onSubmit: SubmitHandler<ITask> = async (data) => {
     data.status = currStatus
@@ -41,15 +48,18 @@ const ViewTaskModal = ({ task, toggleTaskModal }: ViewTaskModalProps): JSX.Eleme
     toggleTaskModal()
   }
 
+  const completedTasks = task?.subtasks?.filter((subtask) => subtask.isCompleted).length
+  const totalTasks = task?.subtasks?.length
+
   return (
-    <StyledModalContainer onClick={formRef === null ? toggleTaskModal : closeAndSave}>
+    <StyledModalContainer onClick={formRef.current === null ? toggleTaskModal : closeAndSave}>
         <StyledModal onClick={(e) => { e.stopPropagation() }}>
             <FormWrapper onSubmit={handleSubmit(onSubmit)} ref={formRef} title={task.title}
-                         menuIcon={true} handleBoardMenu={() => { console.log('WORKIGN') }}>
+                         menuIcon={true} handleMenuToggle={toggleTaskMenu}
+                         >
                 <StyledInputGroupContainer>
                     <TextL>{task?.description}</TextL>
-                    <TextM>Subtasks  ({task?.subtasks?.filter((subtask) => subtask.isCompleted).length}
-                                     of {task?.subtasks?.length} )</TextM>
+                    <TextM>Subtasks ({completedTasks} of {totalTasks})</TextM>
 
                     {task.subtasks?.map((subtask, i) => {
                       return <SubtaskField register={register} key={i} arrKey={i}

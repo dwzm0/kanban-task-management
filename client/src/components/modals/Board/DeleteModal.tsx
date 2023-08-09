@@ -1,12 +1,12 @@
 /* eslint-disable @typescript-eslint/explicit-function-return-type */
 /* eslint-disable @typescript-eslint/no-misused-promises */
 import React from 'react'
-import { HeadingL, TextL, TextM, FlexRowContainer, StyledModalContainer } from '../../globalStyle'
-import Button from '../Button'
-import { useAppDispatch, useAppSelector } from '../../hooks/useReduxHooks'
-import { StyledDeleteModal } from '../styled/StyledModals/DeleteModal.styled'
-import { delBoard, initializeDashboards } from '../../reducers/dashboardReducer'
-import { setCurrIdActionCreator } from '../../reducers/currIdReducer'
+import { HeadingL, TextL, TextM, FlexRowContainer, StyledModalContainer } from '../../../globalStyle'
+import Button from '../../Button'
+import { useAppDispatch, useAppSelector } from '../../../hooks/useReduxHooks'
+import { StyledDeleteModal } from '../../styled/StyledModals/DeleteModal.styled'
+import { delBoard, initializeDashboards } from '../../../reducers/dashboardReducer'
+import { setCurrIdActionCreator } from '../../../reducers/currIdReducer'
 
 interface DeleteModalProps {
   handleCancel: () => void

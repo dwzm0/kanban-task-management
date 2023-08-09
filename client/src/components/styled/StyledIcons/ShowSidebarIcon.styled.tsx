@@ -1,5 +1,5 @@
 import styled from 'styled-components'
-import { FlexCenter } from '../../globalStyle'
+import { FlexCenter } from '../../../globalStyle'
 
 export const StyledShowSidebarIcon = styled.div`
     width: 56px;

@@ -1,16 +1,15 @@
-/* eslint-disable @typescript-eslint/explicit-function-return-type */
 import React, { useState } from 'react'
 import { StyledModalContainer, StyledModal, TextM } from 'src/globalStyle'
-import { StyledInputGroupContainer } from '../styled/InputGroupContainer.styled'
+import { StyledInputGroupContainer } from '../../styled/InputGroupContainer.styled'
 import { useForm, type SubmitHandler, useFieldArray } from 'react-hook-form'
 import { ObjectId } from 'bson'
 
-import FormWrapper from '../FormWrapper'
-import Input from '../Input'
-import TextArea from '../TextArea'
-import Button from '../Button'
-import InputField from '../InputField'
-import Select from '../Select'
+import FormWrapper from '../../FormWrapper'
+import Input from '../../Input'
+import TextArea from '../../TextArea'
+import Button from '../../Button'
+import InputField from '../../InputField'
+import Select from '../../Select'
 
 import { useAppDispatch, useAppSelector } from 'src/hooks/useReduxHooks'
 import { crtTask, initializeDashboards } from 'src/reducers/dashboardReducer'

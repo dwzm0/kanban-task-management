@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-confusing-void-expression */
 import React from 'react'
 import { StyledInputField } from './styled/InputField.styled'
 import Input from './Input'

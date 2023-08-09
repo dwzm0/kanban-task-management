@@ -1,30 +1,36 @@
-/* eslint-disable @typescript-eslint/explicit-function-return-type */
 import React from 'react'
 import { useForm, type SubmitHandler, useFieldArray } from 'react-hook-form'
-import { StyledInputGroupContainer } from '../styled/InputGroupContainer.styled'
-import { TextM, StyledModalContainer, StyledModal } from '../../globalStyle'
-import FormWrapper from '../FormWrapper'
-import InputField from '../InputField'
-import Input from '../Input'
-import Button from '../Button'
 
-import { useAppDispatch, useAppSelector } from '../../hooks/useReduxHooks'
-import { updBoard } from '../../reducers/dashboardReducer'
-import { type IBoard } from 'src/types/types'
+import { StyledInputGroupContainer } from '../../styled/InputGroupContainer.styled'
+import { TextM, StyledModalContainer, StyledModal } from '../../../globalStyle'
+import FormWrapper from '../../FormWrapper'
+import InputField from '../../InputField'
+import Input from '../../Input'
+import Button from '../../Button'
+
+import { useAppDispatch } from '../../../hooks/useReduxHooks'
+import { createBoard } from '../../../reducers/dashboardReducer'
+import { type IBoardWithoutId } from '../../../types/types'
 
 interface CreateBoardProps {
-  editBoardModal: boolean
+  addBoardModal: boolean
   handleClick: () => void
 }
 
-const EditBoardModal = ({ editBoardModal, handleClick }: CreateBoardProps): JSX.Element => {
+const CreateBoardModal = ({ addBoardModal, handleClick }: CreateBoardProps): JSX.Element => {
   const dispatch = useAppDispatch()
-  const selectCurrId = useAppSelector((state) => state.currId)
-  const selectDashboard = useAppSelector((state) => state.dashboards.filter((dashboard) => dashboard._id === selectCurrId)[0])
-
   const { handleSubmit, register, control } = useForm<Record<string, unknown>>({
     defaultValues: {
-      ...selectDashboard
+      name: '',
+      columns: [
+        {
+          name: 'Todo'
+        },
+        {
+          name: 'Doing'
+        }
+      ]
+
     }
   })
 
@@ -32,6 +38,12 @@ const EditBoardModal = ({ editBoardModal, handleClick }: CreateBoardProps): JSX.
     control,
     name: 'columns' as never
   })
+
+  const onSubmit: SubmitHandler<Record<string, unknown>> = async (data) => {
+    console.log(data)
+    await dispatch(createBoard(data as IBoardWithoutId))
+    handleClick()
+  }
 
   const removeInput = (index: number) => {
     remove(index)
@@ -43,21 +55,16 @@ const EditBoardModal = ({ editBoardModal, handleClick }: CreateBoardProps): JSX.
     })
   }
 
-  const onSubmit: SubmitHandler<Record<string, unknown>> = async (data) => {
-    await dispatch(updBoard(data as unknown as IBoard))
-    handleClick()
-  }
-
   return (
     <>
-    {editBoardModal
+    {addBoardModal
       ? <StyledModalContainer onClick={handleClick}>
             <StyledModal onClick={(e) => { e.stopPropagation() }}>
-                <FormWrapper title="Edit Board" onSubmit={handleSubmit(onSubmit)} >
+                <FormWrapper title="Add New Board" onSubmit={handleSubmit(onSubmit)} >
                         <StyledInputGroupContainer>
 
-                        <Input register={register} label='Name' name='name' type='text'
-                               placeholder='e.g Web Design'/>
+                            <Input register={register} label='Name' name='name' type='text'
+                                   placeholder='e.g Web Design'/>
 
                             <TextM>Columns</TextM>
                             {fields.map((field, index) => {
@@ -67,12 +74,13 @@ const EditBoardModal = ({ editBoardModal, handleClick }: CreateBoardProps): JSX.
                                 register={register}
                                 />
                             })}
+
                             <Button sm type='button' variant='secondary' handleClick={appendInput}>
                                 <TextM>+ Add New Column</TextM>
                             </Button>
                         </StyledInputGroupContainer>
                     <Button sm type='submit' variant='primary'>
-                        <TextM>Save Changes</TextM>
+                        <TextM>Create New Bord</TextM>
                     </Button>
                 </FormWrapper>
             </StyledModal>
@@ -83,4 +91,4 @@ const EditBoardModal = ({ editBoardModal, handleClick }: CreateBoardProps): JSX.
   )
 }
 
-export default EditBoardModal
+export default CreateBoardModal

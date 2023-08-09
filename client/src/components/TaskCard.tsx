@@ -1,9 +1,8 @@
-/* eslint-disable @typescript-eslint/explicit-function-return-type */
 import React, { useState } from 'react'
 import { StyledTaskCard } from './styled/TaskCard.styled'
 import { type ITask } from '../types/types'
 import { HeadingM, TextM } from '../globalStyle'
-import ViewTaskModal from './modals/ViewTaskModal'
+import ViewTaskModal from './modals/Task/ViewTaskModal'
 
 interface TaskProps {
   task: ITask
@@ -16,11 +15,14 @@ const TaskCard = ({ task }: TaskProps): JSX.Element => {
     setTaskModal(!taskModal)
   }
 
+  const completedSubTasks = task?.subtasks?.filter((subtask) => subtask.isCompleted).length
+  const totalSubTasks = task?.subtasks?.length
+
   return (
     <>
       <StyledTaskCard onClick={toggleTaskModal}>
           <HeadingM>{task.title}</HeadingM>
-          <TextM>{task?.subtasks?.filter((subtask) => subtask.isCompleted).length} of {task?.subtasks?.length} subtasks</TextM>
+          <TextM>{completedSubTasks} of {totalSubTasks} subtasks</TextM>
       </StyledTaskCard>
       {taskModal ? <ViewTaskModal task={task} toggleTaskModal={toggleTaskModal}/> : null}
     </>

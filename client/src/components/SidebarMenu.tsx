@@ -8,7 +8,7 @@ import { HeadingM, TextM } from '../globalStyle'
 import Switch from './Switch'
 import { setCurrIdActionCreator } from '../reducers/currIdReducer'
 import { setIsShownSidebarActionCreator } from '../reducers/isShownSidebarReducer'
-import CreateBoardModal from './modals/CreateBoardModal'
+import CreateBoardModal from './modals/Board/CreateBoardModal'
 
 interface SidebarMenuItemProps {
   id?: string

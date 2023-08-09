@@ -1,7 +1,5 @@
-/* eslint-disable react/display-name */
-/* eslint-disable @typescript-eslint/strict-boolean-expressions */
 import React, {
-  type MouseEventHandler, type FormEvent, type ReactNode,
+  type FormEvent, type ReactNode,
   forwardRef
 } from 'react'
 import { StyledFormWrapper } from './styled/FormWrapper.styled'
@@ -14,7 +12,7 @@ interface FromWrapperProps {
   children?: ReactNode
   event?: React.FormEvent<HTMLFormElement>
   menuIcon?: boolean
-  handleBoardMenu?: MouseEventHandler<HTMLDivElement>
+  handleMenuToggle?: () => void
 }
 
 const FormWrapper = forwardRef((
@@ -25,7 +23,9 @@ const FormWrapper = forwardRef((
           <fieldset>
             <legend>
               <HeadingL>{props?.title}</HeadingL>
-              {props?.menuIcon ? <EditBoardMenuIcon handleBoardMenu={props?.handleBoardMenu as MouseEventHandler<HTMLDivElement>}/> : null}
+              {props?.menuIcon
+                ? <EditBoardMenuIcon handleMenuToggle={props?.handleMenuToggle as () => void}/>
+                : null}
             </legend>
             {props?.children}
           </fieldset>

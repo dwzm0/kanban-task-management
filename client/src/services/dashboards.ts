@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/explicit-function-return-type */
 import axios from 'axios'
 import { type ITask, type IBoard, type IBoardWithoutId } from '../types/types'
 const baseUrl = 'http://localhost:3001/api/dashboards'
@@ -39,6 +38,10 @@ const createTask = async (boardId: string, task: ITask) => {
   return resp.data
 }
 
+const deleteTask = async (boardId: string, columnId: string, taskId: string) => {
+  await axios.delete(`${baseUrl}/${boardId}/columns/${columnId}/tasks/${taskId}`)
+}
+
 export default {
   getAll,
   getSingle,
@@ -46,5 +49,6 @@ export default {
   deleteBoard,
   updateBoard,
   updateTask,
-  createTask
+  createTask,
+  deleteTask
 }
