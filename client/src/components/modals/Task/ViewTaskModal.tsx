@@ -45,15 +45,15 @@ const ViewTaskModal = ({ task, toggleTaskModal }: ViewTaskModalProps): JSX.Eleme
 
   const closeAndSave = async (): Promise<void> => {
     formRef.current?.requestSubmit()
+    console.log(formRef.current)
     toggleTaskModal()
   }
 
   const completedTasks = task?.subtasks?.filter((subtask) => subtask.isCompleted).length
   const totalTasks = task?.subtasks?.length
-  console.log(taskMenu)
 
   return (
-    <StyledModalContainer onClick={formRef.current === null ? toggleTaskModal : closeAndSave}>
+    <StyledModalContainer onClick={taskMenu ? toggleTaskModal : closeAndSave}>
         <StyledModal onClick={(e) => { e.stopPropagation() }}>
             <FormWrapper onSubmit={handleSubmit(onSubmit)} ref={formRef} title={task.title}
                          menuIcon={true} handleMenuToggle={toggleTaskMenu} taskMenu={taskMenu}

@@ -31,6 +31,7 @@ const dashboardSlice = createSlice({
       const boardId = action.payload.boardId
       const columnId = action.payload.columnId
       const task = action.payload.task
+      console.log(action)
       const taskId = task._id
 
       const board = state.find((board) => board._id === boardId)
@@ -45,8 +46,6 @@ const dashboardSlice = createSlice({
       } else {
         column!.tasks![taskIndexInArr] = task
       }
-
-      return board?.columns
     },
     createTask (state, action) {
       const boardId = action.payload.boardId
@@ -102,8 +101,8 @@ export const updBoard = (board: IBoard) => {
 
 export const updTask = (boardId: string, columnId: string, task: ITask) => {
   return async (dispatch: any) => {
-    const newUpdatedBoard = await dashboardService.updateTask(boardId, columnId, task)
-    dispatch(updateTask(newUpdatedBoard))
+    await dashboardService.updateTask(boardId, columnId, task)
+    dispatch(updateTask({ boardId, columnId, task }))
   }
 }
 

@@ -27,6 +27,7 @@ const updateBoard = async (board: IBoard) => {
 }
 
 const updateTask = async (boardId: string, columnId: string, task: ITask) => {
+  console.log(task)
   const resp = await axios.put(`${baseUrl}/${boardId}/columns/${columnId}/tasks/${task._id}`,
     task)
   return resp.data

@@ -85,6 +85,7 @@ export const StyledModalContainer = styled.div`
     opacity: 1;
     visibility: visible;
     transition: all 0.2s ease;
+    z-index: 9;
 `
 export const StyledModal = styled.div`
     ${FlexCol}
