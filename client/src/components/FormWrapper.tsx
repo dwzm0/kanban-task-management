@@ -4,7 +4,8 @@ import React, {
 } from 'react'
 import { StyledFormWrapper } from './styled/FormWrapper.styled'
 import { HeadingL } from '../globalStyle'
-import EditBoardMenuIcon from './icons/EditBoardMenuIcon'
+import EditTaskIcon from './icons/EditTaskMenuIcon'
+import { type ITask } from 'src/types/types'
 
 interface FromWrapperProps {
   onSubmit?: (event: FormEvent<HTMLFormElement>) => void
@@ -13,18 +14,27 @@ interface FromWrapperProps {
   event?: React.FormEvent<HTMLFormElement>
   menuIcon?: boolean
   handleMenuToggle?: () => void
+  task?: ITask
+  taskMenu?: boolean
+  toggleTaskModal?: () => void
 }
 
 const FormWrapper = forwardRef((
   props: FromWrapperProps,
   ref): JSX.Element => {
   return (
-        <StyledFormWrapper ref={ref as React.RefObject<HTMLFormElement>} onSubmit={ event => { props?.onSubmit?.(event) } }>
+        <StyledFormWrapper ref={ref as React.RefObject<HTMLFormElement>}
+                           onSubmit={ event => { props?.onSubmit?.(event) }}
+                           >
           <fieldset>
             <legend>
               <HeadingL>{props?.title}</HeadingL>
               {props?.menuIcon
-                ? <EditBoardMenuIcon handleMenuToggle={props?.handleMenuToggle as () => void}/>
+                ? <EditTaskIcon handleMenuToggle={props?.handleMenuToggle as () => void}
+                task={props?.task as ITask}
+                taskMenu={props?.taskMenu}
+                toggleTaskModal={props?.toggleTaskModal as () => void}
+                />
                 : null}
             </legend>
             {props?.children}

@@ -8,6 +8,7 @@ export const StyledDeleteModal = styled.div`
     background-color: ${props => props.theme.deleteModalBG};
     width: 480px;
     height: fit-content;
+    z-index: 999;
 
     h2 {
         color: var(--red);

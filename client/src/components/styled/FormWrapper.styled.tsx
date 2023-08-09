@@ -14,6 +14,7 @@ export const StyledFormWrapper = styled.form`
         justify-content: space-between;
         align-items: center;
         gap: 2rem;
+        position: relative;
     }
 }
 `
