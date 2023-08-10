@@ -39,8 +39,10 @@ const ViewTaskModal = ({ task, toggleTaskModal }: ViewTaskModalProps): JSX.Eleme
   const onSubmit: SubmitHandler<ITask> = async (data) => {
     data.status = currStatus
     data?.subtasks?.map((subtask) => subtask.isCompleted = !!subtask.isCompleted)
+    console.log('CURRENT COL FROM VIEW' + currColumn!._id)
     await dispatch(updTask(selectDashboard._id, currColumn!._id, data))
     await dispatch(initializeDashboards())
+    console.log('HERE')
   }
 
   const closeAndSave = async (): Promise<void> => {
@@ -48,6 +50,8 @@ const ViewTaskModal = ({ task, toggleTaskModal }: ViewTaskModalProps): JSX.Eleme
     console.log(formRef.current)
     toggleTaskModal()
   }
+
+  console.log(taskMenu)
 
   const completedTasks = task?.subtasks?.filter((subtask) => subtask.isCompleted).length
   const totalTasks = task?.subtasks?.length

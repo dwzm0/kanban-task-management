@@ -3,15 +3,15 @@ import { StyledTaskMenu } from 'src/components/styled/StyledModals/TaskMenuModal
 import { TextL } from '../../../globalStyle'
 import DeleteTaskModal from './DeleteTaskModal'
 import { type ITask } from 'src/types/types'
+import EditTaskModal from './EditTaskModal'
 
 interface TaskMenuModalProps {
   handleMenuToggle: () => void
   task: ITask
   taskMenu: boolean
-  toggleTaskModal: () => void
 }
 
-const TaskMenuModal = ({ task, handleMenuToggle, taskMenu, toggleTaskModal }: TaskMenuModalProps): JSX.Element => {
+const TaskMenuModal = ({ task, handleMenuToggle, taskMenu }: TaskMenuModalProps): JSX.Element => {
   const [deleteTask, setDeleteTask] = useState<boolean>(false)
   const [editTask, setEditTask] = useState<boolean>(false)
 
@@ -19,11 +19,10 @@ const TaskMenuModal = ({ task, handleMenuToggle, taskMenu, toggleTaskModal }: Ta
     setDeleteTask(!deleteTask)
     handleMenuToggle()
   }
-  /*
-  const handelEdit = () => {
+
+  const toggleEditTask = () => {
     setEditTask(!editTask)
-    toggleTaskMenu()
-  } */
+  }
 
   const openDeleteModal = () => {
     setDeleteTask(!deleteTask)
@@ -32,11 +31,12 @@ const TaskMenuModal = ({ task, handleMenuToggle, taskMenu, toggleTaskModal }: Ta
   return (
     <>{taskMenu
       ? <StyledTaskMenu>
-          <TextL onClick={() => { setEditTask(!editTask) }}>Edit Task</TextL>
+          <TextL onClick={toggleEditTask}>Edit Task</TextL>
           <TextL onClick={openDeleteModal}>Delete Task</TextL>
       </StyledTaskMenu>
       : null}
       {deleteTask ? <DeleteTaskModal task={task} handleCancel={handelCancelDelete}/> : null}
+      {editTask ? <EditTaskModal task={task} toggleEditTask={toggleEditTask}/> : null}
     </>
   )
 }
