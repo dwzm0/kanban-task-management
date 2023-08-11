@@ -117,7 +117,8 @@ export const lightTheme = {
   subTaskFieldBG: 'var(--light-grey)',
   subTaskText: 'var(--black)',
   selectText: 'var(--black)',
-  selectBG: 'var(--white)'
+  selectBG: 'var(--white)',
+  newColBarBg: 'var(--light-lines)'
 }
 export const darkTheme = {
   bodyColour: 'var(--dark-grey)',
@@ -142,7 +143,8 @@ export const darkTheme = {
   subTaskFieldBG: 'var(--very-dark-grey)',
   subTaskText: 'var(--white)',
   selectText: 'var(--white)',
-  selectBG: 'var(--very-dark-grey)'
+  selectBG: 'var(--very-dark-grey)',
+  newColBarBg: 'var(--dark-grey)'
 }
 
 export default GlobalStyle

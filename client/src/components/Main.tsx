@@ -6,6 +6,7 @@ import Column from './Column'
 import AddNewColumnModal from './modals/Column/AddNewColumnModal'
 import { useAppSelector } from '../hooks/useReduxHooks'
 import ShowSidebarIcon from './icons/ShowSidebarIcon'
+import NewColBar from './NewColBar'
 
 const Main = (): JSX.Element => {
   const [columnModal, setColumnModal] = useState<boolean>(false)
@@ -38,6 +39,7 @@ const Main = (): JSX.Element => {
         {selectColumns?.map((column, i) => {
           return <Column key={column._id} name={column.name} tasks={column.tasks} colColour={columnColors[i]}/>
         })}
+        <NewColBar toggleColumnModal={toggleColumnModal} columnModal={columnModal}/>
       {selectIsShownSidebar ? null : <ShowSidebarIcon />}
     </StyledMain>
   )
