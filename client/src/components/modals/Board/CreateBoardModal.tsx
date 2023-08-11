@@ -1,5 +1,5 @@
 import React from 'react'
-import { useForm, type SubmitHandler, useFieldArray } from 'react-hook-form'
+import { useForm, type SubmitHandler, useFieldArray, type FieldError } from 'react-hook-form'
 
 import { StyledInputGroupContainer } from '../../styled/InputGroupContainer.styled'
 import { TextM, StyledModalContainer, StyledModal } from '../../../globalStyle'
@@ -19,7 +19,7 @@ interface CreateBoardProps {
 
 const CreateBoardModal = ({ addBoardModal, handleClick }: CreateBoardProps): JSX.Element => {
   const dispatch = useAppDispatch()
-  const { handleSubmit, register, control } = useForm<Record<string, unknown>>({
+  const { handleSubmit, register, control, formState: { errors } } = useForm<Record<string, unknown>>({
     defaultValues: {
       name: '',
       columns: [
@@ -63,8 +63,10 @@ const CreateBoardModal = ({ addBoardModal, handleClick }: CreateBoardProps): JSX
                         <StyledInputGroupContainer>
 
                             <Input register={register} label='Name' name='name' type='text'
-                                   placeholder='e.g Web Design'/>
-
+                                   placeholder='e.g Web Design'
+                                   rules={{ required: 'Can\'t be empty' }}
+                                   errors={errors as Partial<Record<string, FieldError>>}
+                                   />
                             <TextM>Columns</TextM>
                             {fields.map((field, index) => {
                               return <InputField key={field.id} index={index} type='text'

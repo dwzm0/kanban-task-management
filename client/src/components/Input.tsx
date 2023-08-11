@@ -3,7 +3,15 @@ import React from 'react'
 import { StyledInput } from './styled/Input.styled'
 import { TextM } from 'src/globalStyle'
 import { type UseFormRegister } from 'react-hook-form/dist/types/form'
-import { type Path, type FieldValues } from 'react-hook-form'
+import {
+  type Path,
+  type FieldValues,
+  type DeepMap,
+  type FieldError,
+  type RegisterOptions
+} from 'react-hook-form'
+import { get } from 'lodash'
+import { ErrorMessage } from '@hookform/error-message'
 
 interface InputProps {
   label?: string
@@ -15,6 +23,8 @@ interface InputProps {
 export type FormInputProps<TFormValues extends FieldValues> = {
   name: Path<TFormValues>
   register?: UseFormRegister<TFormValues>
+  rules?: RegisterOptions
+  errors?: Partial<DeepMap<TFormValues, FieldError>>
 } & Omit<InputProps, 'name'>
 
 const Input = <TFormValues extends Record<string, unknown>>({
@@ -22,10 +32,15 @@ const Input = <TFormValues extends Record<string, unknown>>({
   type,
   name,
   placeholder,
-  register
+  register,
+  errors,
+  rules
 }: FormInputProps<TFormValues>): JSX.Element => {
+  const errorMessages = get(errors, name)
+  console.log(ErrorMessage)
+  const hasError = !!(errors && errorMessages)
   return (
-        <StyledInput>
+        <StyledInput redBorder={!!hasError}>
           {label
             ? <label htmlFor={name}>
               <TextM>{label}</TextM>
@@ -34,8 +49,19 @@ const Input = <TFormValues extends Record<string, unknown>>({
           }
           <input type={type}
                  name={name} placeholder={placeholder}
-                 {...(register?.(name))}
+                 {...(register?.(name, rules))}
                  />
+
+          {hasError && <ErrorMessage
+              errors={errors}
+              name={name as any}
+              render={({ message }) => (
+                <TextM>
+                  {message}
+                </TextM>
+              )}
+      />}
+
         </StyledInput>
   )
 }
