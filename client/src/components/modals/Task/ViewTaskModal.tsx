@@ -39,19 +39,17 @@ const ViewTaskModal = ({ task, toggleTaskModal }: ViewTaskModalProps): JSX.Eleme
   const onSubmit: SubmitHandler<ITask> = async (data) => {
     data.status = currStatus
     data?.subtasks?.map((subtask) => subtask.isCompleted = !!subtask.isCompleted)
-    console.log('CURRENT COL FROM VIEW' + currColumn!._id)
     await dispatch(updTask(selectDashboard._id, currColumn!._id, data))
     await dispatch(initializeDashboards())
-    console.log('HERE')
   }
 
   const closeAndSave = async (): Promise<void> => {
-    formRef.current?.requestSubmit()
-    console.log(formRef.current)
-    toggleTaskModal()
+    const recheckedColumn = selectDashboard?.columns?.find(column => column.tasks?.includes(task))
+    if (recheckedColumn?._id === currColumn!._id) {
+      formRef.current?.requestSubmit()
+      toggleTaskModal()
+    }
   }
-
-  console.log(taskMenu)
 
   const completedTasks = task?.subtasks?.filter((subtask) => subtask.isCompleted).length
   const totalTasks = task?.subtasks?.length
@@ -69,9 +67,11 @@ const ViewTaskModal = ({ task, toggleTaskModal }: ViewTaskModalProps): JSX.Eleme
 
                     {task.subtasks?.map((subtask, i) => {
                       return <SubtaskField register={register} key={i} arrKey={i}
-                                           id={subtask._id} title={subtask.title} completeStatus={subtask.isCompleted} />
+                                           id={subtask._id} title={subtask.title}
+                                           completeStatus={subtask.isCompleted} />
                     })}
-                    <Select text='Current Status' currStatus={currStatus} setCurrStatus={setCurrStatus} cols={cols} />
+                    <Select text='Current Status' currStatus={currStatus}
+                            setCurrStatus={setCurrStatus} cols={cols} />
                 </StyledInputGroupContainer>
             </FormWrapper>
         </StyledModal>

@@ -5,6 +5,7 @@ export const StyledInputGroupContainer = styled.div`
     ${FlexCol}
     gap: .75rem;
     color: ${props => props.theme.inputNamesColour};
+    padding-bottom: 1.5rem;
 
         > * {
             &:nth-child(2) {

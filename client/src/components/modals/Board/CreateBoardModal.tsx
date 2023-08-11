@@ -40,7 +40,6 @@ const CreateBoardModal = ({ addBoardModal, handleClick }: CreateBoardProps): JSX
   })
 
   const onSubmit: SubmitHandler<Record<string, unknown>> = async (data) => {
-    console.log(data)
     await dispatch(createBoard(data as IBoardWithoutId))
     handleClick()
   }

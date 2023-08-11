@@ -39,12 +39,9 @@ const EditTaskModal = ({ task, toggleEditTask }: EditTaskModalProps): JSX.Elemen
 
   const onSubmit: SubmitHandler<Record<string, unknown>> = async (data) => {
     data.status = currStatus
-    console.log(selectDashboard._id)
-    console.log('CURRENT COL FROM EDIT' + currColumn!._id)
-    console.log(data)
+    toggleEditTask()
     await dispatch(updTask(selectDashboard._id, currColumn!._id, data as unknown as ITask))
     await dispatch(initializeDashboards())
-    toggleEditTask()
   }
 
   const removeInput = (index: number) => {

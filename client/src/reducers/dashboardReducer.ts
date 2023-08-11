@@ -31,7 +31,6 @@ const dashboardSlice = createSlice({
       const boardId = action.payload.boardId
       const columnId = action.payload.columnId
       const task = action.payload.task
-      console.log(action)
       const taskId = task._id
 
       const board = state.find((board) => board._id === boardId)
