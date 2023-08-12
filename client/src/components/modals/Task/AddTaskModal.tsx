@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { StyledModalContainer, StyledModal, TextM } from 'src/globalStyle'
 import { StyledInputGroupContainer } from '../../styled/InputGroupContainer.styled'
-import { useForm, type SubmitHandler, useFieldArray } from 'react-hook-form'
+import { useForm, type SubmitHandler, useFieldArray, type FieldError } from 'react-hook-form'
 import { ObjectId } from 'bson'
 
 import FormWrapper from '../../FormWrapper'
@@ -27,7 +27,7 @@ const AddTaskModal = ({ toggleAddTaskModal }: AddTaskModalProps): JSX.Element =>
   const [currStatus, setCurrStatus] = useState<string>(cols![0])
   const subtaskPlaceholders = ['e.g. Make coffee', 'e.g. Drink coffee & smile']
 
-  const { handleSubmit, register, control } = useForm<Record<string, unknown>>({
+  const { handleSubmit, register, control, formState: { errors } } = useForm<Record<string, unknown>>({
     defaultValues: {
       title: '',
       description: '',
@@ -77,6 +77,9 @@ const AddTaskModal = ({ toggleAddTaskModal }: AddTaskModalProps): JSX.Element =>
 
                 <Input register={register} label='Title' name='title' type='text'
                        placeholder='e.g Take coffee break'
+                       errors={errors as Partial<Record<string, FieldError>>}
+                       rules={{ required: 'Can\'t be empty' }}
+
                 />
                 <TextArea register={register} label='Description' name='description'
                           placeholder={`e.g. It's always good to take a break. This 15 minute break will 
@@ -90,6 +93,8 @@ const AddTaskModal = ({ toggleAddTaskModal }: AddTaskModalProps): JSX.Element =>
                     handelInputDelete={removeInput}
                     name={`subtasks.${index}.title`}
                     register={register}
+                    errors={errors as Partial<Record<string, FieldError>>}
+                    rules={{ required: 'Can\'t be empty' }}
                     />
                 })}
 

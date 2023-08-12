@@ -64,7 +64,13 @@ const CreateBoardModal = ({ addBoardModal, handleClick }: CreateBoardProps): JSX
 
                             <Input register={register} label='Name' name='name' type='text'
                                    placeholder='e.g Web Design'
-                                   rules={{ required: 'Can\'t be empty' }}
+                                   rules={{
+                                     required: 'Can\'t be empty',
+                                     minLength: {
+                                       value: 3,
+                                       message: 'To short'
+                                     }
+                                   }}
                                    errors={errors as Partial<Record<string, FieldError>>}
                                    />
                             <TextM>Columns</TextM>
@@ -73,6 +79,8 @@ const CreateBoardModal = ({ addBoardModal, handleClick }: CreateBoardProps): JSX
                                 handelInputDelete={removeInput}
                                 name={`columns.${index}.name`}
                                 register={register}
+                                rules={{ required: 'Can\'t be empty' }}
+                                errors={errors as Partial<Record<string, FieldError>>}
                                 />
                             })}
 

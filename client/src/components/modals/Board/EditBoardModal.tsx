@@ -1,5 +1,5 @@
 import React from 'react'
-import { useForm, type SubmitHandler, useFieldArray } from 'react-hook-form'
+import { useForm, type SubmitHandler, useFieldArray, type FieldError } from 'react-hook-form'
 import { StyledInputGroupContainer } from '../../styled/InputGroupContainer.styled'
 import { TextM, StyledModalContainer, StyledModal } from '../../../globalStyle'
 import FormWrapper from '../../FormWrapper'
@@ -21,7 +21,7 @@ const EditBoardModal = ({ editBoardModal, handleClick }: CreateBoardProps): JSX.
   const selectCurrId = useAppSelector((state) => state.currId)
   const selectDashboard = useAppSelector((state) => state.dashboards.filter((dashboard) => dashboard._id === selectCurrId)[0])
 
-  const { handleSubmit, register, control } = useForm<Record<string, unknown>>({
+  const { handleSubmit, register, control, formState: { errors } } = useForm<Record<string, unknown>>({
     defaultValues: {
       ...selectDashboard
     }
@@ -56,7 +56,10 @@ const EditBoardModal = ({ editBoardModal, handleClick }: CreateBoardProps): JSX.
                         <StyledInputGroupContainer>
 
                         <Input register={register} label='Name' name='name' type='text'
-                               placeholder='e.g Web Design'/>
+                               placeholder='e.g Web Design'
+                               errors={errors as Partial<Record<string, FieldError>>}
+                               rules={{ required: 'Can\'t be empty' }}
+                               />
 
                             <TextM>Columns</TextM>
                             {fields.map((field, index) => {
@@ -64,6 +67,14 @@ const EditBoardModal = ({ editBoardModal, handleClick }: CreateBoardProps): JSX.
                                 handelInputDelete={removeInput}
                                 name={`columns.${index}.name`}
                                 register={register}
+                                rules={{
+                                  required: 'Can\'t be empty',
+                                  minLength: {
+                                    value: 3,
+                                    message: 'To short'
+                                  }
+                                }}
+                                 errors={errors as Partial<Record<string, FieldError>>}
                                 />
                             })}
                             <Button sm type='button' variant='secondary' handleClick={appendInput}>

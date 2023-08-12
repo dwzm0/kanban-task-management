@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/restrict-template-expressions */
 /* eslint-disable @typescript-eslint/strict-boolean-expressions */
 import styled from 'styled-components'
-import { FlexCol } from 'src/globalStyle'
+import { FlexCol, TextM } from 'src/globalStyle'
 
 export const StyledInput = styled.div<{ redBorder?: boolean }>`
    ${FlexCol}
@@ -22,14 +22,12 @@ export const StyledInput = styled.div<{ redBorder?: boolean }>`
             outline: none;
         }
    }       
+   
 
-   > * {
-    &:nth-child(3) {
-        color: var(--red);
+`
+export const StyledErrorMsg = styled(TextM)`
+    color: var(--red);
         position: absolute;
         bottom: 12px;
         right: 15px;
-    }
-   }
-
 `

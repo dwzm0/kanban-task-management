@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/strict-boolean-expressions */
 import React from 'react'
-import { StyledInput } from './styled/Input.styled'
+import { StyledInput, StyledErrorMsg } from './styled/Input.styled'
 import { TextM } from 'src/globalStyle'
 import { type UseFormRegister } from 'react-hook-form/dist/types/form'
 import {
@@ -56,9 +56,9 @@ const Input = <TFormValues extends Record<string, unknown>>({
               errors={errors}
               name={name as any}
               render={({ message }) => (
-                <TextM>
+                <StyledErrorMsg>
                   {message}
-                </TextM>
+                </StyledErrorMsg>
               )}
       />}
 

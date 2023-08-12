@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import { createPortal } from 'react-dom'
 import { StyledModalContainer, StyledModal, TextM } from 'src/globalStyle'
 import { StyledInputGroupContainer } from '../../styled/InputGroupContainer.styled'
-import { useForm, type SubmitHandler, useFieldArray } from 'react-hook-form'
+import { useForm, type SubmitHandler, useFieldArray, type FieldError } from 'react-hook-form'
 import FormWrapper from '../../FormWrapper'
 
 import Input from '../../Input'
@@ -27,7 +27,7 @@ const EditTaskModal = ({ task, toggleEditTask }: EditTaskModalProps): JSX.Elemen
   const currColumn = selectDashboard?.columns?.find(column => column.tasks?.includes(task))
   const [currStatus, setCurrStatus] = useState<string>(task.status)
 
-  const { handleSubmit, register, control } = useForm<Record<string, unknown>>({
+  const { handleSubmit, register, control, formState: { errors } } = useForm<Record<string, unknown>>({
     defaultValues: {
       ...task
     }
@@ -64,6 +64,8 @@ const EditTaskModal = ({ task, toggleEditTask }: EditTaskModalProps): JSX.Elemen
 
                   <Input register={register} label='Title' name='title' type='text'
                         placeholder='e.g Take coffee break'
+                        errors={errors as Partial<Record<string, FieldError>>}
+                        rules={{ required: 'Can\'t be empty' }}
                   />
 
                   <TextArea register={register} label='Description' name='description'
