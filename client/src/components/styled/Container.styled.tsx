@@ -17,6 +17,13 @@ const StyledContainer = styled.div`
         "header header"
         "main main";
     }
+
+    @media(max-width: 720px) {
+        grid-template-areas:
+            "header header"
+            "main main";
+        grid-template-rows: min-content 1fr;    
+    }
 `
 
 export default StyledContainer

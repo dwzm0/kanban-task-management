@@ -93,6 +93,10 @@ export const StyledModal = styled.div`
     height: min-content;
     padding: 2rem;
     background-color: ${props => props.theme.modalBg};
+
+    @media(max-width: 720px) {
+      width: 343px;
+    }
 `
 export const lightTheme = {
   bodyColour: 'var(--white)',

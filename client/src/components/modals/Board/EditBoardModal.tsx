@@ -81,7 +81,7 @@ const EditBoardModal = ({ editBoardModal, handleClick }: CreateBoardProps): JSX.
                                 <TextM>+ Add New Column</TextM>
                             </Button>
                         </StyledInputGroupContainer>
-                    <Button sm type='submit' variant='primary'>
+                    <Button sm marginTop="1.5rem" type='submit' variant='primary'>
                         <TextM>Save Changes</TextM>
                     </Button>
                 </FormWrapper>

@@ -8,6 +8,7 @@ interface ButtonProps {
   handleClick?: () => void
   type?: 'submit' | 'button' | 'reset' | undefined
   sm?: boolean
+  marginTop?: string
 }
 
 const Button = ({
@@ -16,11 +17,12 @@ const Button = ({
   children,
   handleClick,
   type,
-  sm
+  sm,
+  marginTop
 }: ButtonProps): JSX.Element => {
   return (
     <StyledButton type={type} onClick={handleClick}
-    className={variant} disabled={disabled} sm={sm}>{children}</StyledButton>
+    className={variant} disabled={disabled} sm={sm} marginTop={marginTop}>{children}</StyledButton>
   )
 }
 

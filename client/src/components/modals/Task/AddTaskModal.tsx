@@ -107,7 +107,7 @@ const AddTaskModal = ({ toggleAddTaskModal }: AddTaskModalProps): JSX.Element =>
 
               </StyledInputGroupContainer>
 
-                <Button sm type='submit' variant='primary'>
+                <Button sm marginTop="1.5rem" type='submit' variant='primary'>
                           <TextM>Create Task</TextM>
                 </Button>
             </FormWrapper>

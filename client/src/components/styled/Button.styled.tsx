@@ -1,13 +1,14 @@
 /* eslint-disable @typescript-eslint/strict-boolean-expressions */
 import styled from 'styled-components'
 
-const StyledButton = styled.button<{ sm?: boolean }>`
+const StyledButton = styled.button<{ sm?: boolean, marginTop?: string }>`
     padding-block: ${props => props.sm ? '0.75rem' : '1rem'} ;
     padding-inline: 1.5rem;
     border-radius: 1.5rem;
     font-weight: bold;
     font-size: 0.8125rem;
     border: none;
+    margin-top: ${props => props.marginTop ? props.marginTop : ''} ;
 
     &:hover {
            cursor : pointer;

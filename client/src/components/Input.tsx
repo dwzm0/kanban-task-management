@@ -37,7 +37,6 @@ const Input = <TFormValues extends Record<string, unknown>>({
   rules
 }: FormInputProps<TFormValues>): JSX.Element => {
   const errorMessages = get(errors, name)
-  console.log(ErrorMessage)
   const hasError = !!(errors && errorMessages)
   return (
         <StyledInput redBorder={!!hasError}>

@@ -1,10 +1,11 @@
 /* eslint-disable @typescript-eslint/strict-boolean-expressions */
 /* eslint-disable @typescript-eslint/no-floating-promises */
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import GlobalStyle, { lightTheme, darkTheme } from './globalStyle'
 import Sidebar from './components/Sidebar'
 import Header from './components/Header'
 import Main from './components/Main'
+import MobileHeader from './components/MobileHeader'
 import StyledContainer from './components/styled/Container.styled'
 import { useAppDispatch, useAppSelector } from './hooks/useReduxHooks'
 import { initializeDashboards } from './reducers/dashboardReducer'
@@ -19,6 +20,22 @@ const App = (): JSX.Element => {
   const selectDashboards = useAppSelector((state) => state.dashboards)
   const selectCurrId = useAppSelector((state) => state.currId)
   const selectIsShownSidebar = useAppSelector((state) => state.isShownSidebar)
+  const [windowSize, setWindowSize] = useState([
+    window.innerWidth,
+    window.innerHeight
+  ])
+
+  useEffect(() => {
+    const handleWindowResize = () => {
+      setWindowSize([window.innerWidth, window.innerHeight])
+    }
+
+    window.addEventListener('resize', handleWindowResize)
+
+    return () => {
+      window.removeEventListener('resize', handleWindowResize)
+    }
+  }, [])
 
   useEffect(() => {
     dispatch(initializeDashboards())
@@ -38,7 +55,7 @@ const App = (): JSX.Element => {
         <GlobalStyle />
         <StyledContainer className={selectIsShownSidebar ? '' : 'hideSidebar'}>
           <Sidebar />
-          <Header />
+          {windowSize[0] >= 720 ? <Header /> : <MobileHeader />}
           <Main />
         </StyledContainer>
       </ThemeProvider>

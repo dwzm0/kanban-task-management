@@ -1,5 +1,5 @@
 import React from 'react'
-import { StyledEditMenuIcon } from '../styled/StyledIcons/EditMenuIcon'
+import { StyledEditMenuIcon } from '../styled/StyledIcons/EditMenuIcon.styled'
 import img from '../../assets/icon-vertical-ellipsis.svg'
 
 interface EditBoardMenuIconProps {

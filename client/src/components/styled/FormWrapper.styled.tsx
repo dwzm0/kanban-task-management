@@ -6,6 +6,7 @@ export const StyledFormWrapper = styled.form`
         border: none;
         ${FlexCol}
 
+
     legend {
         width: 100%;
         padding-bottom: 1.5rem;
@@ -16,5 +17,6 @@ export const StyledFormWrapper = styled.form`
         gap: 2rem;
         position: relative;
     }
-}
+    }
+
 `

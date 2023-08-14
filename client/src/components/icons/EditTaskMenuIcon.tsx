@@ -1,5 +1,5 @@
 import React from 'react'
-import { StyledEditMenuIcon } from '../styled/StyledIcons/EditMenuIcon'
+import { StyledEditMenuIcon } from '../styled/StyledIcons/EditMenuIcon.styled'
 import TaskMenuModal from '../modals/Task/TaskMenuModal'
 import img from '../../assets/icon-vertical-ellipsis.svg'
 import { type ITask } from 'src/types/types'

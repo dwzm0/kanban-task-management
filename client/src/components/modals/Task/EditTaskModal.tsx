@@ -90,7 +90,7 @@ const EditTaskModal = ({ task, toggleEditTask }: EditTaskModalProps): JSX.Elemen
                 <Select text='Status' currStatus={currStatus} setCurrStatus={setCurrStatus} cols={cols}/>
               </StyledInputGroupContainer>
 
-              <Button sm type='submit' variant='primary'>
+              <Button sm marginTop="1.5rem" type='submit' variant='primary'>
                           <TextM>Save Changes</TextM>
               </Button>
           </FormWrapper>

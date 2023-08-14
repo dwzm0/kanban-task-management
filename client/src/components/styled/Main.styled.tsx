@@ -3,6 +3,7 @@ import { FlexCol, FlexCenter, FlexRow } from '../../globalStyle'
 
 export const StyledMain = styled.div`
     grid-area: main;
+    overflow: auto;
     ${FlexRow}
     gap: 1.5rem;
     padding: 1.5rem;
