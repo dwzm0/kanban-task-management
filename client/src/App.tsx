@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/strict-boolean-expressions */
 /* eslint-disable @typescript-eslint/no-floating-promises */
-import React, { useEffect, useState } from 'react'
+import React, { useEffect } from 'react'
 import GlobalStyle, { lightTheme, darkTheme } from './globalStyle'
 import Sidebar from './components/Sidebar'
 import Header from './components/Header'
@@ -13,29 +13,15 @@ import { setCurrIdActionCreator } from './reducers/currIdReducer'
 import { ThemeProvider } from 'styled-components'
 import { ThemeCurrValueContext } from './contexts/themeContext'
 import { useDarkTheme } from './hooks/useDarkTheme'
+import { useUserWindowSize } from './hooks/useUserWindowSize'
 
 const App = (): JSX.Element => {
   const dispatch = useAppDispatch()
   const [theme, toggleTheme] = useDarkTheme()
+  const windowSize = useUserWindowSize()
   const selectDashboards = useAppSelector((state) => state.dashboards)
   const selectCurrId = useAppSelector((state) => state.currId)
   const selectIsShownSidebar = useAppSelector((state) => state.isShownSidebar)
-  const [windowSize, setWindowSize] = useState([
-    window.innerWidth,
-    window.innerHeight
-  ])
-
-  useEffect(() => {
-    const handleWindowResize = () => {
-      setWindowSize([window.innerWidth, window.innerHeight])
-    }
-
-    window.addEventListener('resize', handleWindowResize)
-
-    return () => {
-      window.removeEventListener('resize', handleWindowResize)
-    }
-  }, [])
 
   useEffect(() => {
     dispatch(initializeDashboards())
