@@ -24,7 +24,7 @@ const FormWrapper = forwardRef((
   ref): JSX.Element => {
   return (
         <StyledFormWrapper ref={ref as React.RefObject<HTMLFormElement>}
-                           onSubmit={ event => { props?.onSubmit?.(event) }}
+                           onSubmit={ (event: React.FormEvent<HTMLFormElement>) => { props?.onSubmit?.(event) }}
                            >
           <fieldset>
             <legend>

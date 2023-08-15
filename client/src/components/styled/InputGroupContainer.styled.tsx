@@ -11,4 +11,10 @@ export const StyledInputGroupContainer = styled.div`
             margin-bottom: .675rem;
         }
         }
+    
+    @media(max-width: 720px) {
+       align-items: flex-start;
+       width: 100%;
+       justify-content: flex-start;
+    }
 `

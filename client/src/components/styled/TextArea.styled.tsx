@@ -5,6 +5,12 @@ export const StyledTextArea = styled.div`
    ${FlexCol}
    gap: .75rem;
 
+
+   label {
+        width: 100%;
+    }
+
+
    textarea {
          resize: none;
          width: 100%;

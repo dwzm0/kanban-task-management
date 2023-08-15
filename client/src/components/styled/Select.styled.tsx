@@ -4,6 +4,7 @@ import { FlexCol } from 'src/globalStyle'
 export const StyledSelectContainer = styled.div`
     position: relative;
     padding-top: 0.5rem;
+    width: 100%;
 `
 
 export const StyledSelect = styled.div`
@@ -15,6 +16,10 @@ export const StyledSelect = styled.div`
     background-color: ${props => props.theme.selectBG};
     border-radius: .5rem;
     outline: none;
+
+    @media(max-width: 720px) {
+        width: 279px;
+    }
 
     &:hover{
         cursor: pointer;

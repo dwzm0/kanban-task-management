@@ -2,6 +2,7 @@
 import styled from 'styled-components'
 
 const StyledButton = styled.button<{ sm?: boolean, marginTop?: string }>`
+    width: 100%;
     padding-block: ${props => props.sm ? '0.75rem' : '1rem'} ;
     padding-inline: 1.5rem;
     border-radius: 1.5rem;

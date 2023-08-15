@@ -5,7 +5,7 @@ export const StyledFormWrapper = styled.form`
     fieldset {
         border: none;
         ${FlexCol}
-
+        
 
     legend {
         width: 100%;

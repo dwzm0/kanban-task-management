@@ -9,6 +9,10 @@ export const StyledInput = styled.div<{ redBorder?: boolean }>`
    width: 100%;
    position: relative;
 
+    label {
+        width: 100%;
+    }
+
    input {
         width: 100%;
         padding: .7rem;
@@ -27,7 +31,13 @@ export const StyledInput = styled.div<{ redBorder?: boolean }>`
 `
 export const StyledErrorMsg = styled(TextM)`
     color: var(--red);
-        position: absolute;
-        bottom: 12px;
-        right: 15px;
+    position: absolute;
+    bottom: 12px;
+    left: 275px;
+
+    @media(max-width: 720px) {
+        left: 170px;
+        bottom: 11px;
+        font-size: .56rem;
+    }
 `

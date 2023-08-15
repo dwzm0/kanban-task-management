@@ -45,6 +45,7 @@ export const TextM = styled.p`
   font-weight: bold;
   font-size: .75rem;
   line-height: .9375rem;
+  width: 100%;
 `
 export const FlexRowContainer = styled.div`
   display: flex;

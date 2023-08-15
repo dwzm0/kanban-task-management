@@ -14,6 +14,7 @@ import Select from '../../Select'
 import { useAppDispatch, useAppSelector } from 'src/hooks/useReduxHooks'
 import { crtTask, initializeDashboards } from 'src/reducers/dashboardReducer'
 import { type ITask } from 'src/types/types'
+import { useUserWindowSize } from 'src/hooks/useUserWindowSize'
 
 interface AddTaskModalProps {
   toggleAddTaskModal: () => void
@@ -21,6 +22,7 @@ interface AddTaskModalProps {
 
 const AddTaskModal = ({ toggleAddTaskModal }: AddTaskModalProps): JSX.Element => {
   const dispatch = useAppDispatch()
+  const windowSize = useUserWindowSize()
   const selectCurrId = useAppSelector((state) => state.currId)
   const selectDashboard = useAppSelector((state) => state.dashboards.filter((dashboard) => dashboard._id === selectCurrId)[0])
   const cols = selectDashboard?.columns?.map((cols) => cols.name)
@@ -83,7 +85,7 @@ const AddTaskModal = ({ toggleAddTaskModal }: AddTaskModalProps): JSX.Element =>
                 />
                 <TextArea register={register} label='Description' name='description'
                           placeholder={`e.g. It's always good to take a break. This 15 minute break will 
-                          recharge the batteries a little.`} rows={7} cols={30}
+                          recharge the batteries a little.`} rows={windowSize[0] >= 720 ? 7 : 5} cols={30}
                 />
 
                 <TextM>Subtasks</TextM>
