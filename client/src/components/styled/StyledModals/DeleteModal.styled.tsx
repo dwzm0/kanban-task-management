@@ -27,4 +27,8 @@ export const StyledDeleteModal = styled.div`
             }
         }
     }
+    
+    @media(max-width: 720px) {
+      width: 343px;
+    }
 `

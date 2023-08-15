@@ -28,15 +28,15 @@ const MobileHeader = (): JSX.Element => {
   return (
     <StyledMobileHeader>
 
-      <FlexRowContainer>
+      <FlexRowContainer gap="1rem">
          <MobileLogo />
-         <FlexRowContainer>
+         <FlexRowContainer gap="1rem">
             <HeadingM>{selectDashboardName}</HeadingM>
             <ChevronIconDown />
          </FlexRowContainer>
       </FlexRowContainer>
 
-      <FlexRowContainer>
+      <FlexRowContainer gap="1rem">
         <Button variant="primary" type='button' handleClick={toggleAddTaskModal}>
             <AddTaskMobileIcon />
         </Button>

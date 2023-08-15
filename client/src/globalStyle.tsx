@@ -47,9 +47,10 @@ export const TextM = styled.p`
   line-height: .9375rem;
   width: 100%;
 `
-export const FlexRowContainer = styled.div`
+export const FlexRowContainer = styled.div<{ gap?: string }>`
   display: flex;
   flex-direction: row;
+  gap: ${props => props.gap ? `${props.gap}` : ''};
 `
 export const FlexRowSB = styled.div`
   display: flex;
@@ -92,8 +93,9 @@ export const StyledModal = styled.div`
     ${FlexCol}
     width: 480px;
     height: min-content;
-    padding: 2rem;
+    padding: 1.5rem;
     background-color: ${props => props.theme.modalBg};
+ 
 
     @media(max-width: 720px) {
       width: 343px;

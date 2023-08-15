@@ -43,7 +43,7 @@ const AddNewColumnModal = ({ toggleColumnModal }: AddNewColumnModalProps) => {
 
                 </StyledInputGroupContainer>
 
-                    <Button sm type='submit' variant='primary'>
+                    <Button sm marginTop="1.5rem" type='submit' variant='primary'>
                         <TextM>Add new column</TextM>
                     </Button>
 

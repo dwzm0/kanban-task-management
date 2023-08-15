@@ -6,7 +6,7 @@ export const StyledMobileHeader = styled(FlexRowSB)`
     padding: 1rem;
 
     div {
-            gap: 1rem;
+      
             align-items: center;
         }
       

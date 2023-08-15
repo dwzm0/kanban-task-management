@@ -9,7 +9,7 @@ export const StyledFormWrapper = styled.form`
 
     legend {
         width: 100%;
-        padding-bottom: 1.5rem;
+        padding-bottom: 1rem;
         color: ${props => props.theme.modalHeader};
         ${FlexRow};
         justify-content: space-between;

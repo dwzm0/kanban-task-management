@@ -22,4 +22,9 @@ export const StyledBoardMenu = styled.div`
             color: var(--red); 
         }
     } 
+
+    @media(max-width: 720px) {
+        right: 15px;
+        top: 70px;
+    }
 `
