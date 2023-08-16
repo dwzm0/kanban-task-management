@@ -30,7 +30,6 @@ const CreateBoardModal = ({ addBoardModal, handleClick }: CreateBoardProps): JSX
           name: 'Doing'
         }
       ]
-
     }
   })
 

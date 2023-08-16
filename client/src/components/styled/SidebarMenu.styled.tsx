@@ -1,11 +1,10 @@
 /* eslint-disable @typescript-eslint/strict-boolean-expressions */
 /* eslint-disable @typescript-eslint/restrict-template-expressions */
 import { styled } from 'styled-components'
-import { FlexRow } from '../../globalStyle'
+import { FlexRow, FlexCol } from '../../globalStyle'
 
 export const StyledSidebarMenu = styled.div`
-    display: flex;
-    flex-direction: column;
+    ${FlexCol}
     height: 91%;
     color: var(--medium-grey);
 `

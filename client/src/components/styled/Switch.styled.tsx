@@ -2,7 +2,7 @@ import { styled } from 'styled-components'
 import { FlexCenter } from '../../globalStyle'
 
 export const StyledSwitch = styled.div`
-    max-width: 251px;
+    width: 100%;
     height: 48px;
     background-color: ${props => props.theme.switchBg};
     border-radius: .5rem;

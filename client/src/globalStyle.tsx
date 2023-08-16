@@ -125,7 +125,8 @@ export const lightTheme = {
   subTaskText: 'var(--black)',
   selectText: 'var(--black)',
   selectBG: 'var(--white)',
-  newColBarBg: 'var(--light-lines)'
+  newColBarBg: 'var(--light-lines)',
+  mobileMenuBg: 'var(--white)'
 }
 export const darkTheme = {
   bodyColour: 'var(--dark-grey)',
@@ -151,7 +152,8 @@ export const darkTheme = {
   subTaskText: 'var(--white)',
   selectText: 'var(--white)',
   selectBG: 'var(--very-dark-grey)',
-  newColBarBg: 'var(--dark-grey)'
+  newColBarBg: 'var(--dark-grey)',
+  mobileMenuBg: 'var(--dark-grey)'
 }
 
 export default GlobalStyle
