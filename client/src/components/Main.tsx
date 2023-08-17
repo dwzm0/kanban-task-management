@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { StyledMain, StyledMainEmpty } from './styled/Main.styled'
+import { StyledMain, StyledEmptyContainer, StyledEmpty } from './styled/Main.styled'
 import { HeadingL, HeadingM } from '../globalStyle'
 import Button from './Button'
 import Column from './Column'
@@ -24,13 +24,15 @@ const Main = (): JSX.Element => {
 
   if (selectColumns?.length === 0) {
     return (
-      <StyledMainEmpty>
-        <HeadingL>This board is empty. Create a new column to get started.</HeadingL>
-        <Button variant='primary' handleClick={toggleColumnModal}>
-          <HeadingM>+ Add New Column</HeadingM>
-        </Button>
+      <StyledEmpty>
+        <StyledEmptyContainer>
+          <HeadingL>This board is empty. Create a new column to get started.</HeadingL>
+          <Button variant='primary' handleClick={toggleColumnModal}>
+            <HeadingM>+ Add New Column</HeadingM>
+          </Button>
+        </StyledEmptyContainer>
         {columnModal ? <AddNewColumnModal toggleColumnModal={toggleColumnModal}/> : null}
-      </StyledMainEmpty>
+      </StyledEmpty>
     )
   }
 

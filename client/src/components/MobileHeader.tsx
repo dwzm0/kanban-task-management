@@ -31,8 +31,6 @@ const MobileHeader = (): JSX.Element => {
     setBoardMenu(!boardMenu)
   }
 
-  console.log(mobileMenu)
-
   return (
     <StyledMobileHeader>
 

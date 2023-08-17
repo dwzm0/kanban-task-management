@@ -12,7 +12,7 @@ import InputField from '../../InputField'
 import Select from '../../Select'
 import { type ITask } from 'src/types/types'
 import { useAppSelector, useAppDispatch } from 'src/hooks/useReduxHooks'
-import { initializeDashboards, updTask } from 'src/reducers/dashboardReducer'
+import { updTask } from 'src/reducers/dashboardReducer'
 
 interface EditTaskModalProps {
   task: ITask
@@ -41,7 +41,6 @@ const EditTaskModal = ({ task, toggleEditTask }: EditTaskModalProps): JSX.Elemen
     data.status = currStatus
     toggleEditTask()
     await dispatch(updTask(selectDashboard._id, currColumn!._id, data as unknown as ITask))
-    await dispatch(initializeDashboards())
   }
 
   const removeInput = (index: number) => {

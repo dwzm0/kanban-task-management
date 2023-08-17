@@ -9,10 +9,17 @@ export const StyledMain = styled.div`
     padding: 1.5rem;
     background-color: ${props => props.theme.mainColour};
 `
-export const StyledMainEmpty = styled.div`
+export const StyledEmpty = styled.div`
+    grid-area: main;
+    background-color: ${props => props.theme.mainColour};
+    ${FlexCol}
+    ${FlexCenter}
+`
+
+export const StyledEmptyContainer = styled.div`
     grid-area: main;
     ${FlexCol}
     ${FlexCenter}
     gap: 2rem;
-    background-color: ${props => props.theme.mainColour};
+    max-width: 493px;
 `

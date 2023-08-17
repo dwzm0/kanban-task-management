@@ -45,6 +45,8 @@ const ViewTaskModal = ({ task, toggleTaskModal }: ViewTaskModalProps): JSX.Eleme
 
   const closeAndSave = async (): Promise<void> => {
     const recheckedColumn = selectDashboard?.columns?.find(column => column.tasks?.includes(task))
+    console.log(recheckedColumn?._id)
+    console.log(currColumn!._id)
     if (recheckedColumn?._id === currColumn!._id) {
       formRef.current?.requestSubmit()
       toggleTaskModal()
