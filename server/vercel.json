@@ -23,5 +23,6 @@
             "src": "/(.+)",
             "dest": "public/$1"
         }
-    ]
+    ],
+    "rewrites": [{ "source": "/api/dashboards(.*)", "destination": "/api/dashboards" }]
 }
