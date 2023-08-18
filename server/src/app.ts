@@ -6,7 +6,7 @@ import createServer from './utils/server';
 const port = appConfig.get<number>("port");
 
 
-const app = createServer();
+export const app = createServer();
 
 // eslint-disable-next-line @typescript-eslint/no-misused-promises
 app.listen(port, async () => {

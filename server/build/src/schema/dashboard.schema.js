@@ -6,7 +6,7 @@ const createPayload = {
     body: (0, zod_1.object)({
         name: (0, zod_1.string)({
             required_error: "Name is required"
-        }),
+        }).min(3),
         columns: (0, zod_1.array)((0, zod_1.object)({ name: (0, zod_1.string)() })).optional(),
     })
 };
@@ -14,7 +14,7 @@ const updatePayload = {
     body: (0, zod_1.object)({
         name: (0, zod_1.string)({
             required_error: "Name is required"
-        }).optional(),
+        }).min(3).optional(),
         columns: (0, zod_1.array)((0, zod_1.object)({ name: (0, zod_1.string)() })).optional(),
     })
 };

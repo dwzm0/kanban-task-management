@@ -9,8 +9,9 @@ const createServer = () => {
     const app = express();
 
     app.use(cors());
+   
     app.use(express.json());
-
+    app.use(express.static('../../build'));
     routes(app);
 
     return app;
