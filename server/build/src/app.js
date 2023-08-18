@@ -12,14 +12,15 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
+exports.app = void 0;
 const config_1 = __importDefault(require("config"));
 const connect_1 = __importDefault(require("./utils/connect"));
 const logger_1 = __importDefault(require("./utils/logger"));
 const server_1 = __importDefault(require("./utils/server"));
 const port = config_1.default.get("port");
-const app = (0, server_1.default)();
+exports.app = (0, server_1.default)();
 // eslint-disable-next-line @typescript-eslint/no-misused-promises
-app.listen(port, () => __awaiter(void 0, void 0, void 0, function* () {
+exports.app.listen(port, () => __awaiter(void 0, void 0, void 0, function* () {
     logger_1.default.info(`Server running on port ${port}`);
     yield (0, connect_1.default)();
 }));
