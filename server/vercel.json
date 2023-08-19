@@ -1,10 +1,8 @@
 {
     "version": 2,
     "name": "kanban-task-management",
+    "buildCommand": "npm run tsc",
     "builds": [
       { "src": "build/src/app.js", "use": "@vercel/node" }
-    ],
-    "routes": [
-      { "src": "/(.*)", "dest": "build/src/app.js" }
     ]
-  }
+}
