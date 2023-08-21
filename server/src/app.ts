@@ -8,8 +8,10 @@ const port = appConfig.get<number>("port");
 
 export const app = createServer();
 
-app.listen(port, async () => {
-  logger.info(`Server running on port ${port}`);
+const PORT = process.env.PORT || port
+
+app.listen(PORT, async () => {
+  logger.info(`Server running on port ${PORT}`);
 
   await connect();
  
