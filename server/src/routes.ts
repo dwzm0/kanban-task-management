@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-misused-promises */
 import { Express } from "express";
 import {getDashboardsHander,
         getSingleDashboardHandler, 
