@@ -19,7 +19,8 @@ const logger_1 = __importDefault(require("./utils/logger"));
 const server_1 = __importDefault(require("./utils/server"));
 const port = config_1.default.get("port");
 exports.app = (0, server_1.default)();
-exports.app.listen(port, () => __awaiter(void 0, void 0, void 0, function* () {
-    logger_1.default.info(`Server running on port ${port}`);
+const PORT = process.env.PORT || port;
+exports.app.listen(PORT, () => __awaiter(void 0, void 0, void 0, function* () {
+    logger_1.default.info(`Server running on port ${PORT}`);
     yield (0, connect_1.default)();
 }));
