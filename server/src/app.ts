@@ -4,9 +4,9 @@ import logger from './utils/logger';
 import createServer from './utils/server';
 
 const port = appConfig.get<number>("port");
-process.env["NODE_CONFIG_DIR"] = "../config/";
 
-console.log(process.env["NODE_CONFIG_DIR"])
+console.log('NODE_ENV: ' + appConfig.util.getEnv('NODE_ENV'));
+console.log('NODE_CONFIG_DIR: ' + appConfig.util.getEnv('NODE_CONFIG_DIR'));
 
 export const app = createServer();
 
