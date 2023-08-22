@@ -1,4 +1,6 @@
 import dotenv from "dotenv";
+process.env["NODE_CONFIG_DIR"] = __dirname;
+
 dotenv.config();
 
 export default {
