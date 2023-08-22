@@ -18,7 +18,6 @@ const connect_1 = __importDefault(require("./utils/connect"));
 const logger_1 = __importDefault(require("./utils/logger"));
 const server_1 = __importDefault(require("./utils/server"));
 const port = config_1.default.get("port");
-process.env["NODE_CONFIG_DIR"] = "../config/";
 console.log('NODE_ENV: ' + config_1.default.util.getEnv('NODE_ENV'));
 console.log('NODE_CONFIG_DIR: ' + config_1.default.util.getEnv('NODE_CONFIG_DIR'));
 exports.app = (0, server_1.default)();
