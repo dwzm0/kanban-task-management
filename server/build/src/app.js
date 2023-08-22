@@ -18,6 +18,7 @@ const connect_1 = __importDefault(require("./utils/connect"));
 const logger_1 = __importDefault(require("./utils/logger"));
 const server_1 = __importDefault(require("./utils/server"));
 const port = config_1.default.get("port");
+process.env["NODE_CONFIG_DIR"] = __dirname + "../config";
 exports.app = (0, server_1.default)();
 const PORT = process.env.PORT || port;
 exports.app.listen(PORT, () => __awaiter(void 0, void 0, void 0, function* () {
