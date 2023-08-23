@@ -1,0 +1,4 @@
+{
+    "port": 3001,
+    "dbUri": "mongodb+srv://dwzm00:SmScqkQU5OAWfvwd@cluster0.ii6blwz.mongodb.net/Dashboard?retryWrites=true&w=majority"
+}
