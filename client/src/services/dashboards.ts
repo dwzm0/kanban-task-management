@@ -1,6 +1,6 @@
 import axios from 'axios'
 import { type ITask, type IBoard, type IBoardWithoutId } from '../types/types'
-const baseUrl = 'http://localhost:3001/api/dashboards'
+const baseUrl = 'https://taskmangserver.onrender.com/api/dashboards'
 
 const getAll = async () => {
   const resp = await axios.get(baseUrl)
